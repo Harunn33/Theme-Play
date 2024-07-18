@@ -44,6 +44,8 @@ dependencies:
   json_annotation: ^4.9.0
   # Connection Control
   connectivity_plus: ^6.0.3
+  # Svg
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:

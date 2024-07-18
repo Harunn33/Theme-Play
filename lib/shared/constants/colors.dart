@@ -4,6 +4,8 @@ final class AppColors {
   const AppColors._();
 
   static const AppColors instance = AppColors._();
+  // Primary Colors
+  final Color black = const Color(0xFF000000);
   // Background Colors
   final Color white = const Color(0xFFFFFFFF);
   // Accent Colors

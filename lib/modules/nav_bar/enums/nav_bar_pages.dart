@@ -1,0 +1,4 @@
+enum NavBarPages {
+  home,
+  account,
+}
