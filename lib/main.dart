@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:theme_play/base/connection/connection_binding.dart';
 import 'package:theme_play/init/di.dart';
 import 'package:theme_play/routes/app_pages.dart';
+import 'package:theme_play/shared/constants/strings.dart';
 import 'package:theme_play/shared/themes/themes.dart';
 
 Future<void> main() async {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, __) {
         return GetMaterialApp(
-          title: 'Theme Play',
+          title: AppStrings.instance.appName,
           debugShowCheckedModeBanner: false,
           theme: CustomTheme.instance.lightTheme,
           initialRoute: AppPages.instance.initial,

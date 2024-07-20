@@ -3,53 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/modules/splash/splash_controller.dart';
+import 'package:theme_play/shared/enums/index.dart';
 
 class Splash extends GetView<SplashController> {
   const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return BaseScaffold(
-      body: Column(
+      backgroundColor: controller.appConstants.colors.powderBlue,
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        fit: StackFit.expand,
         children: [
-          Expanded(
-            child: SizedBox(
-              width: 1.sw,
-              child: ColoredBox(
-                color: controller.appConstants.colors.mattPink,
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: 1.sw,
-              child: ColoredBox(
-                color: controller.appConstants.colors.powderBlue,
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: 1.sw,
-              child: ColoredBox(
-                color: controller.appConstants.colors.lemonChiffon,
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: 1.sw,
-              child: ColoredBox(
-                color: controller.appConstants.colors.toxicFrog,
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: 1.sw,
-              child: ColoredBox(
-                color: controller.appConstants.colors.thistle,
-              ),
+          AppImages.splash.png,
+          Positioned(
+            bottom: 30.h,
+            child: Text(
+              "v.${controller.appConstants.strings.appVersion}",
+              style: textTheme.labelSmall,
             ),
           ),
         ],

@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
@@ -27,7 +25,7 @@ class ConnectionController extends GetxController {
   }
 
   Future<void> getConnectivityType() async {
-    late List<ConnectivityResult> connectivityResult;
+    late ConnectivityResult connectivityResult;
     try {
       connectivityResult = await (_connectivity.checkConnectivity());
     } on PlatformException catch (e) {
@@ -38,17 +36,17 @@ class ConnectionController extends GetxController {
     return _updateState(connectivityResult);
   }
 
-  void _updateState(List<ConnectivityResult> resultList) async {
-    switch (resultList) {
-      case [ConnectivityResult.wifi]:
+  void _updateState(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
         connectionType = MConnectivityResult.wifi;
         Get.isDialogOpen ?? Get.back();
         break;
-      case [ConnectivityResult.mobile]:
+      case ConnectivityResult.mobile:
         connectionType = MConnectivityResult.mobile;
         Get.isDialogOpen ?? Get.back();
         break;
-      case [ConnectivityResult.none]:
+      case ConnectivityResult.none:
         connectionType = MConnectivityResult.none;
         Get.dialog(
           AlertDialog(

@@ -43,7 +43,7 @@ dependencies:
   freezed_annotation: ^2.4.3
   json_annotation: ^4.9.0
   # Connection Control
-  connectivity_plus: ^6.0.3
+  connectivity_plus: ^5.0.2
   # Svg
   flutter_svg: ^2.0.10+1
   # Supabase

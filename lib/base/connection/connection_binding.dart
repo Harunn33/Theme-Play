@@ -7,7 +7,6 @@ class ConnectionBinding implements Bindings {
     Get.put<ConnectionController>(
       ConnectionController(),
       permanent: true,
-      // fenix: true,
     );
   }
 }

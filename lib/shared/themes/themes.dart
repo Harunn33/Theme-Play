@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/fonts.dart';
 
@@ -19,6 +20,13 @@ final class CustomTheme {
       showUnselectedLabels: false,
       selectedLabelStyle: TextStyle(
         fontFamily: AppFonts.vagaRoundBold.value,
+      ),
+    ),
+    textTheme: TextTheme(
+      labelSmall: TextStyle(
+        fontFamily: AppFonts.vagaRoundMedium.value,
+        fontSize: 14.sp,
+        color: AppColors.instance.black,
       ),
     ),
   );

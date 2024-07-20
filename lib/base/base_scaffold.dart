@@ -9,11 +9,13 @@ class BaseScaffold extends GetView<ConnectionController> {
   final Widget body;
   final NavBarController? navBarController;
   final bool? resizeToAvoidBottomInset;
+  final Color? backgroundColor;
   const BaseScaffold({
     this.appBar,
     required this.body,
-    this.resizeToAvoidBottomInset,
     this.navBarController,
+    this.resizeToAvoidBottomInset,
+    this.backgroundColor,
     super.key,
   });
 
@@ -23,6 +25,7 @@ class BaseScaffold extends GetView<ConnectionController> {
       appBar: appBar,
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      backgroundColor: backgroundColor,
       bottomNavigationBar: navBarController != null
           ? CustomNavBar(controller: navBarController!)
           : null,
