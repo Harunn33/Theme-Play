@@ -46,6 +46,10 @@ dependencies:
   connectivity_plus: ^6.0.3
   # Svg
   flutter_svg: ^2.0.10+1
+  # Supabase
+  supabase_flutter: ^2.5.8
+  # Data Security
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +84,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/fonts/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -4,18 +4,23 @@ final class AppColors {
   const AppColors._();
 
   static const AppColors instance = AppColors._();
+
   // Primary Colors
-  final Color black = const Color(0xFF000000);
+  Color get black => const Color(0xFF000000);
   // Background Colors
-  final Color white = const Color(0xFFFFFFFF);
+  Color get white => const Color(0xFFFFFFFF);
   // Accent Colors
-  final Color mattPink = const Color(0xFFFFB6C1);
-  final Color powderBlue = const Color(0xFFB0E0E6);
+  Color get mattPink => const Color(0xFFFFB6C1);
+  Color get powderBlue => const Color(0xFFB0E0E6);
   // Secondary Colors
-  final Color lemonChiffon = const Color(0xFFFFFACD);
-  final Color toxicFrog = const Color(0xFF98FB98);
+  Color get lemonChiffon => const Color(0xFFFFFACD);
+  Color get toxicFrog => const Color(0xFF98FB98);
   // Action Colors
-  final Color thistle = const Color(0xFFD8BFD8);
+  Color get thistle => const Color(0xFFD8BFD8);
   // General Colors
-  final Color orochimaru = const Color(0xFFD9D9D9);
+  Color get orochimaru => const Color(0xFFD9D9D9);
+  // Snackbar Colors
+  Color get error => const Color(0xFFFF6F61);
+  Color get success => const Color(0xFF98FB98);
+  Color get info => const Color(0xFFB0E0E6);
 }
