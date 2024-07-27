@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/enums/app_icons.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
@@ -28,7 +29,7 @@ class CustomAccountTile extends StatelessWidget {
         color: AppColors.instance.black,
       ),
       title: Text(
-        title,
+        title.tr,
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context).textTheme.titleSmall,
       ),

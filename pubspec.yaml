@@ -54,6 +54,8 @@ dependencies:
   flutter_bounceable: ^1.1.0
   # OAuth
   google_sign_in: ^6.2.1
+  # Local Storage
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +90,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/fonts/
+    - assets/langs/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

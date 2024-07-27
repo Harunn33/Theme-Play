@@ -9,6 +9,14 @@ final class CustomTheme {
   static final CustomTheme instance = CustomTheme._();
 
   final ThemeData lightTheme = ThemeData(
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: AppColors.instance.powderBlue,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: AppColors.instance.black,
+      ),
+    ),
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       primary: AppColors.instance.powderBlue,

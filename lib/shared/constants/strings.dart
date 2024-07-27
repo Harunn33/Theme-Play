@@ -7,17 +7,19 @@ final class AppStrings {
   String get appName => "Theme Play";
   String get appDescription => "Design your app with ease";
   String get appVersion => "1.0.0";
+  String get english => "English";
+  String get turkish => "Türkçe";
 
   // Account page
-  String get general => "General";
-  String get changeLanguage => "Change Language";
-  String get signOut => "Sign Out";
+  String get general => "general";
+  String get changeLanguage => "changeLanguage";
+  String get signOut => "signOut";
 
   // Snacbar types
-  String get error => "Error";
-  String get success => "Success";
-  String get info => "Info";
+  String get error => "error";
+  String get success => "success";
+  String get info => "info";
 
-  String get home => "Home";
-  String get account => "Account";
+  String get home => "home";
+  String get account => "account";
 }

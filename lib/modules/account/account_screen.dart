@@ -17,28 +17,29 @@ class AccountScreen extends GetView<AccountController> {
         onSuccess: (user) {
           if (user == null) return const SizedBox.shrink();
           return Padding(
-            padding: controller.appPaddings.horizontal +
-                controller.appPaddings.vertical,
+            padding: controller.constants.paddings.horizontal +
+                controller.constants.paddings.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                12.verticalSpace,
                 CustomAccountHeader(user: user),
                 12.verticalSpace,
                 Text(
-                  controller.appStrings.general,
+                  controller.constants.strings.general.tr,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 4.verticalSpace,
                 CustomAccountTile(
                   onTap: controller.redirectionToChangeLanguage,
                   icon: AppIcons.icLanguage,
-                  title: controller.appStrings.changeLanguage,
+                  title: controller.constants.strings.changeLanguage,
                 ),
                 8.verticalSpace,
                 CustomAccountTile(
                   onTap: () => controller.signOut(),
                   icon: AppIcons.icSignOut,
-                  title: controller.appStrings.signOut,
+                  title: controller.constants.strings.signOut,
                 ),
               ],
             ),

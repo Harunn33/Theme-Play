@@ -1,17 +1,18 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:theme_play/modules/nav_bar/enums/nav_bar_pages.dart';
-import 'package:theme_play/shared/constants/colors.dart';
-import 'package:theme_play/shared/constants/strings.dart';
+import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/app_icons.dart';
 
 extension NavBarExt on NavBarPages {
+  static const ConstantsInstances _constants = ConstantsInstances.instance;
   String get title {
     switch (this) {
       case NavBarPages.home:
-        return AppStrings.instance.home;
+        return _constants.strings.home.tr;
       case NavBarPages.account:
-        return AppStrings.instance.account;
+        return _constants.strings.account.tr;
     }
   }
 
@@ -19,12 +20,12 @@ extension NavBarExt on NavBarPages {
     switch (this) {
       case NavBarPages.home:
         return AppIcons.icNavbarHome.svgWithAttiributes(
-          color: AppColors.instance.orochimaru,
+          color: _constants.colors.orochimaru,
           height: 20.r,
         );
       case NavBarPages.account:
         return AppIcons.icNavbarAccount.svgWithAttiributes(
-          color: AppColors.instance.orochimaru,
+          color: _constants.colors.orochimaru,
           height: 20.r,
         );
     }
@@ -34,12 +35,12 @@ extension NavBarExt on NavBarPages {
     switch (this) {
       case NavBarPages.home:
         return AppIcons.icNavbarHome.svgWithAttiributes(
-          color: AppColors.instance.mattPink,
+          color: _constants.colors.mattPink,
           height: 20.r,
         );
       case NavBarPages.account:
         return AppIcons.icNavbarAccount.svgWithAttiributes(
-          color: AppColors.instance.mattPink,
+          color: _constants.colors.mattPink,
           height: 20.r,
         );
     }

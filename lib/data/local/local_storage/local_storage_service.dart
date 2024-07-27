@@ -1,29 +1,42 @@
 import 'dart:async';
 
+import 'package:get_storage/get_storage.dart';
+
 part 'local_storage_service_impl.dart';
 
 class LocalStorageService implements ILocalStorageService {
-  @override
-  Future<void> clearAllData() {
-    // TODO: implement clearAllData
-    throw UnimplementedError();
+  static final GetStorage _storage = GetStorage();
+
+  Future<void> init() async {
+    await GetStorage.init();
+  }
+
+  static final LocalStorageService _instance = LocalStorageService._init();
+
+  LocalStorageService._init();
+
+  static LocalStorageService get instance {
+    return _instance;
   }
 
   @override
-  Future<void> removeData(String key) {
-    // TODO: implement removeData
-    throw UnimplementedError();
+  Future<void> saveData(String key, dynamic value) async {
+    _storage.write(key, value);
   }
 
   @override
-  FutureOr<T?> retrieveData<T>(String key) {
-    // TODO: implement retrieveData
-    throw UnimplementedError();
+  T? retrieveData<T>(String key) {
+    final data = _storage.read(key);
+    return data;
   }
 
   @override
-  Future<void> saveData(String key, value) {
-    // TODO: implement saveData
-    throw UnimplementedError();
+  Future<void> removeData(String key) async {
+    await _storage.remove(key);
+  }
+
+  @override
+  Future<void> clearAllData() async {
+    await _storage.erase();
   }
 }

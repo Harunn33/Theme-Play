@@ -3,14 +3,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/network/repository/auth/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/routes/app_pages.dart';
-import 'package:theme_play/shared/constants/colors.dart';
-import 'package:theme_play/shared/constants/paddings.dart';
-import 'package:theme_play/shared/constants/strings.dart';
+import 'package:theme_play/shared/constants/index.dart';
 
 class AccountController extends GetxController {
-  final AppColors appColors = AppColors.instance;
-  final AppPaddings appPaddings = AppPaddings.instance;
-  final AppStrings appStrings = AppStrings.instance;
+  final ConstantsInstances constants = ConstantsInstances.instance;
+  // final AppColors appColors = AppColors.instance;
+  // final AppPaddings appPaddings = AppPaddings.instance;
+  // final AppStrings appStrings = AppStrings.instance;
 
   Future<User?> getProfileInfo() async {
     final ProfileRepository profileRepository = ProfileRepository.instance;
