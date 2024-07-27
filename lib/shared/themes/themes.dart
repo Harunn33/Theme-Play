@@ -19,12 +19,22 @@ final class CustomTheme {
       backgroundColor: AppColors.instance.white,
       showUnselectedLabels: false,
       selectedLabelStyle: TextStyle(
-        fontFamily: AppFonts.vagaRoundBold.value,
+        fontFamily: AppFonts.nunitoBold.value,
       ),
     ),
     textTheme: TextTheme(
+      titleMedium: TextStyle(
+        fontFamily: AppFonts.nunitoBold.value,
+        fontSize: 18.sp,
+        color: AppColors.instance.black,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: AppFonts.nunitoSemiBold.value,
+        fontSize: 16.sp,
+        color: AppColors.instance.black,
+      ),
       labelSmall: TextStyle(
-        fontFamily: AppFonts.vagaRoundMedium.value,
+        fontFamily: AppFonts.nunitoMedium.value,
         fontSize: 14.sp,
         color: AppColors.instance.black,
       ),

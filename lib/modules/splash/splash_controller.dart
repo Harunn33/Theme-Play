@@ -1,9 +1,16 @@
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:theme_play/data/network/services/supabase_service.dart';
 import 'package:theme_play/routes/app_pages.dart';
+import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/index.dart';
+import 'package:theme_play/shared/constants/strings.dart';
 
 class SplashController extends GetxController {
-  final ConstantsInstances appConstants = ConstantsInstances.instance;
+  final ConstantsInstances _appConstants = ConstantsInstances.instance;
+
+  AppStrings get appStrings => _appConstants.strings;
+  AppColors get appColors => _appConstants.colors;
 
   @override
   void onReady() {
@@ -11,7 +18,11 @@ class SplashController extends GetxController {
     redirection();
   }
 
-  void redirection() {
-    Get.offNamed(Routes.signIn);
+  Future<void> redirection() async {
+    final SupabaseClient client = SupabaseService.client;
+    if (client.auth.currentSession == null) {
+      return Get.offAllNamed(Routes.signIn);
+    }
+    Get.offAllNamed(Routes.navBar);
   }
 }

@@ -34,6 +34,12 @@ abstract class ISupabaseService {
     required final String password,
   });
 
+  Future<void> signInWithProvider({
+    required final SignInType provider,
+  });
+
+  Future<Map<String, dynamic>> _signInWithGoogle();
+
   Future<void> signUp({
     required final String email,
     required final String password,

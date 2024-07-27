@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/index.dart';
+import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 
 part 'supabase_service_impl.dart';
@@ -148,5 +152,76 @@ final class SupabaseService implements ISupabaseService {
       SnackbarType.error.show(message: e.toString());
       throw Exception("Failed to reset password: $e");
     }
+  }
+
+  @override
+  Future<void> signInWithProvider({
+    required final SignInType provider,
+  }) async {
+    LoadingStatus.loading.showLoadingDialog();
+    final rawNonce = _client.auth.generateRawNonce();
+    String? accessToken;
+    String? idToken;
+    String? nonce = rawNonce;
+
+    if (provider == SignInType.google) {
+      final Map<String, dynamic> resp = await _signInWithGoogle();
+      idToken = resp['idToken'];
+      accessToken = resp['accessToken'];
+    }
+    //  else if (provider == SignInType.apple) {
+    //   final String? token = await _signInWithApple(rawNonce: nonce);
+    //   idToken = token;
+    // }
+
+    if (idToken == null) {
+      throw 'No ID Token found.';
+    }
+    try {
+      await _client.auth.signInWithIdToken(
+        provider: provider.getProvider,
+        idToken: idToken,
+        accessToken: accessToken,
+        nonce: rawNonce,
+      );
+      Get.offAllNamed(Routes.navBar);
+    } on AuthException catch (e) {
+      SnackbarType.error.show(message: e.message);
+      throw Exception("AuthException to sign in with provider: $e");
+    } catch (e) {
+      throw Exception("Failed to sign in with provider: $e");
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> _signInWithGoogle() async {
+    /// Web Client ID that you registered with Google Cloud.
+    final String? webClientId = dotenv.env["WEB_CLIENT_ID"];
+
+    /// iOS Client ID that you registered with Google Cloud.
+    // final String? iosClientId = dotenv.env["IOS_CLIENT_ID"];
+
+    // Google sign in on Android will work without providing the Android
+    // Client ID registered on Google Cloud.
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      // clientId: iosClientId,
+      serverClientId: webClientId,
+    );
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+
+    if (accessToken == null) {
+      throw 'No Access Token found.';
+    }
+
+    return {
+      'accessToken': accessToken,
+      'idToken': idToken,
+    };
   }
 }

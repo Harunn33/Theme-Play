@@ -10,4 +10,6 @@ abstract class Routes {
   static const navBar = "/navBar";
   static const home = "/home";
   static const account = "/account";
+  // ACCOUNT
+  static const changeLanguage = "/changeLanguage";
 }

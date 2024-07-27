@@ -50,6 +50,10 @@ dependencies:
   supabase_flutter: ^2.5.8
   # Data Security
   flutter_dotenv: ^5.1.0
+  # UI
+  flutter_bounceable: ^1.1.0
+  # OAuth
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +71,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/app_logo.png"
+  image_path: "assets/images/app_logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,12 +102,18 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Vaga Round Bold
+    - family: Nunito Bold
       fonts:
-        - asset: assets/fonts/QTVagaRound-Bold.otf
-    - family: Vaga Round Medium
+        - asset: assets/fonts/Nunito-Bold.ttf
+    - family: Nunito SemiBold
       fonts:
-        - asset: assets/fonts/QTVagaRound.otf
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+    - family: Nunito Medium
+      fonts:
+        - asset: assets/fonts/Nunito-Medium.ttf
+    - family: Nunito Regular
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

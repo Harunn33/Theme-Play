@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
   icNavbarHome("ic_nav_bar_home"),
-  icNavbarAccount("ic_nav_bar_account");
+  icNavbarAccount("ic_nav_bar_account"),
+  icLanguage("ic_language"),
+  icSignOut("ic_sign_out");
 
   final String value;
   const AppIcons(this.value);

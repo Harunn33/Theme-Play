@@ -12,16 +12,16 @@ class Splash extends GetView<SplashController> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return BaseScaffold(
-      backgroundColor: controller.appConstants.colors.powderBlue,
+      backgroundColor: controller.appColors.powderBlue,
       body: Stack(
         alignment: Alignment.bottomCenter,
         fit: StackFit.expand,
         children: [
-          AppImages.splash.png,
+          AppImages.appLogo.png,
           Positioned(
             bottom: 30.h,
             child: Text(
-              "v.${controller.appConstants.strings.appVersion}",
+              "v.${controller.appStrings.appVersion}",
               style: textTheme.labelSmall,
             ),
           ),

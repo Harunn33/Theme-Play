@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:theme_play/modules/account/index.dart';
+import 'package:theme_play/modules/change_language/index.dart';
 import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
 import 'package:theme_play/modules/sign_in/index.dart';
@@ -24,7 +25,7 @@ final class AppPages {
       page: () => const SignInScreen(),
       binding: SignInBinding(),
     ),
-    // Navbar
+    // Navbar Routes
     GetPage(
       name: Routes.navBar,
       page: () => const NavbarScreen(),
@@ -33,12 +34,15 @@ final class AppPages {
     GetPage(
       name: Routes.home,
       page: () => const HomeScreen(),
-      binding: HomeBinding(),
     ),
     GetPage(
       name: Routes.account,
       page: () => const AccountScreen(),
-      binding: AccountBinding(),
     ),
+    // Account Routes
+    GetPage(
+        name: Routes.changeLanguage,
+        page: () => const ChangeLanguageScreen(),
+        binding: ChangeLanguageBinding()),
   ];
 }

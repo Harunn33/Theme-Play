@@ -48,20 +48,20 @@ class ConnectionController extends GetxController {
         break;
       case ConnectivityResult.none:
         connectionType = MConnectivityResult.none;
-        Get.dialog(
-          AlertDialog(
-            title: const Text('No Internet Connection'),
-            content: const Text('Please check your internet connection'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
+        // Get.dialog(
+        //   AlertDialog(
+        //     title: const Text('No Internet Connection'),
+        //     content: const Text('Please check your internet connection'),
+        //     actions: <Widget>[
+        //       TextButton(
+        //         onPressed: () {
+        //           Get.back();
+        //         },
+        //         child: const Text('OK'),
+        //       ),
+        //     ],
+        //   ),
+        // );
         break;
       default:
         connectionType = MConnectivityResult.none;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum AppImages {
-  splash("splash");
+  appLogo("app_logo");
 
   final String value;
   const AppImages(this.value);

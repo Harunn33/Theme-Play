@@ -6,6 +6,10 @@ abstract class IAuthRepository {
     required final String password,
   });
 
+  Future<void> signInWithProvider({
+    required final SignInType provider,
+  });
+
   Future<void> signUp({
     required final String email,
     required final String password,

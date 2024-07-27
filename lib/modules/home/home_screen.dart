@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:get/get.dart';
+import 'package:theme_play/data/network/repository/auth/index.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -11,8 +13,14 @@ class HomeScreen extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: const Center(
-        child: Text('Home Screen'),
+      body: Bounceable(
+        onTap: () {
+          final AuthRepository authRepository = AuthRepository.instance;
+          authRepository.signOut();
+        },
+        child: const Center(
+          child: Text('Home Screen'),
+        ),
       ),
     );
   }

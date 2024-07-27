@@ -33,8 +33,9 @@ class CustomFutureBuilder<T> {
         },
       );
 
-  Widget get _defaultLoadingWidget =>
-      const Center(child: CircularProgressIndicator());
+  Widget get _defaultLoadingWidget => const Center(
+        child: CircularProgressIndicator(),
+      );
   Widget get _defaultNotFoundWidget => const Center(child: Text('Not Found'));
   Widget get _defaultErrorWidget => const Center(child: Text('Error'));
   Widget get _defaultEmptyWidget =>
