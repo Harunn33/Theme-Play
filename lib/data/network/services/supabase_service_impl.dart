@@ -28,6 +28,14 @@ abstract class ISupabaseService {
     required final String value,
   });
 
+  Future<String> fetchImagesFromStorage({
+    required final TableName bucketName,
+    required final String path,
+    final bool isUpload = false,
+    final Uint8List? data,
+    final String? imageExtension,
+  });
+
   // Auth
   Future<void> signIn({
     required final String email,
@@ -39,6 +47,8 @@ abstract class ISupabaseService {
   });
 
   Future<Map<String, dynamic>> _signInWithGoogle();
+
+  Future<void> _signOutWithGoogle();
 
   Future<void> signUp({
     required final String email,

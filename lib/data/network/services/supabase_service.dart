@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/index.dart';
+import 'package:theme_play/shared/enums/local_storage_keys.dart';
 import 'package:theme_play/shared/extensions/index.dart';
-import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 
 part 'supabase_service_impl.dart';
 
@@ -28,10 +30,6 @@ final class SupabaseService implements ISupabaseService {
         pkceAsyncStorage: SharedPreferencesGotrueAsyncStorage(),
       ),
     ).then((value) => _client = value.client);
-    client.auth.onAuthStateChange.listen((event) {
-      print("-----------------------------------------------------------");
-      print("Auth state changed: ${event.event}");
-    });
   }
 
   static SupabaseClient get client => _client;
@@ -95,12 +93,43 @@ final class SupabaseService implements ISupabaseService {
   }
 
   @override
+  Future<String> fetchImagesFromStorage({
+    required final TableName bucketName,
+    required final String path,
+    final bool isUpload = false,
+    final Uint8List? data,
+    final String? imageExtension,
+  }) async {
+    try {
+      if (isUpload) {
+        if (data == null) {
+          throw PlatformException(
+            code: 'no_data',
+            message: 'No data found to upload.',
+          );
+        }
+        await client.storage.from(bucketName.value).uploadBinary(
+              path,
+              data,
+              fileOptions: FileOptions(
+                upsert: true,
+                contentType: 'image/$imageExtension',
+              ),
+            );
+      }
+      return client.storage.from(bucketName.value).getPublicUrl(path);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
   Future<void> signIn({
     required final String email,
     required final String password,
   }) async {
     try {
-      await _client.auth.signInWithPassword(
+      await client.auth.signInWithPassword(
         password: password,
         email: email,
       );
@@ -118,7 +147,7 @@ final class SupabaseService implements ISupabaseService {
     required final String password,
   }) async {
     try {
-      await _client.auth.signUp(
+      await client.auth.signUp(
         password: password,
         email: email,
       );
@@ -133,7 +162,8 @@ final class SupabaseService implements ISupabaseService {
   @override
   Future<void> signOut() async {
     try {
-      await _client.auth.signOut();
+      await client.auth.signOut();
+      await _signOutWithGoogle();
     } on AuthApiException catch (e) {
       throw Exception("AuthApiException to sign out: $e");
     } catch (e) {
@@ -144,7 +174,7 @@ final class SupabaseService implements ISupabaseService {
   @override
   Future<void> forgotPassword(String email) async {
     try {
-      await _client.auth.resetPasswordForEmail(email);
+      await client.auth.resetPasswordForEmail(email);
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
       throw Exception("AuthException to sign up: $e");
@@ -178,7 +208,7 @@ final class SupabaseService implements ISupabaseService {
       throw 'No ID Token found.';
     }
     try {
-      await _client.auth.signInWithIdToken(
+      await client.auth.signInWithIdToken(
         provider: provider.getProvider,
         idToken: idToken,
         accessToken: accessToken,
@@ -218,10 +248,20 @@ final class SupabaseService implements ISupabaseService {
     if (accessToken == null) {
       throw 'No Access Token found.';
     }
+    LocalStorageService.instance.saveData(
+      LocalStorageKeys.profilePhoto.name,
+      googleUser.photoUrl,
+    );
 
     return {
       'accessToken': accessToken,
       'idToken': idToken,
     };
+  }
+
+  @override
+  Future<void> _signOutWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
   }
 }

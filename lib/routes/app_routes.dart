@@ -11,5 +11,6 @@ abstract class Routes {
   static const home = "/home";
   static const account = "/account";
   // ACCOUNT
+  static const editProfile = "/editProfile";
   static const changeLanguage = "/changeLanguage";
 }

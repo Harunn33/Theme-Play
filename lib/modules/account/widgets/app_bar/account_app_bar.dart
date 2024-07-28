@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:theme_play/shared/constants/index.dart';
 
 class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,7 +21,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Text(
-              appConstants.strings.appDescription,
+              appConstants.strings.appDescription.tr,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     fontSize: 11.sp,
                     color: appConstants.colors.black,

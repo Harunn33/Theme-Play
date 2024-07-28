@@ -23,7 +23,7 @@ final class CustomTheme {
     ),
     splashFactory: NoSplash.splashFactory,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedItemColor: AppColors.instance.mattPink,
+      selectedItemColor: AppColors.instance.powderBlue,
       backgroundColor: AppColors.instance.white,
       showUnselectedLabels: false,
       selectedLabelStyle: TextStyle(

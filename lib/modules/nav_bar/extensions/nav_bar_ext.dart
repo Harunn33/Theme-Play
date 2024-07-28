@@ -35,12 +35,12 @@ extension NavBarExt on NavBarPages {
     switch (this) {
       case NavBarPages.home:
         return AppIcons.icNavbarHome.svgWithAttiributes(
-          color: _constants.colors.mattPink,
+          color: _constants.colors.powderBlue,
           height: 20.r,
         );
       case NavBarPages.account:
         return AppIcons.icNavbarAccount.svgWithAttiributes(
-          color: _constants.colors.mattPink,
+          color: _constants.colors.powderBlue,
           height: 20.r,
         );
     }

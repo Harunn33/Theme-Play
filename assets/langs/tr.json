@@ -1,7 +1,12 @@
 {
+  "appDescription": "Uygulamanızı kolaylıkla tasarlayın",
+  "editProfile": "Profili Düzenle",
   "general": "Genel",
   "changeLanguage": "Dil Değiştir",
   "signOut": "Çıkış Yap",
+  "fullName": "Ad Soyad",
+  "email": "E-posta",
+  "save": "Kaydet",
   "error": "Hata",
   "success": "Başarı",
   "info": "Bilgi",

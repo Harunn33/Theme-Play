@@ -23,6 +23,7 @@ class SplashController extends GetxController {
     if (client.auth.currentSession == null) {
       return Get.offAllNamed(Routes.signIn);
     }
+    client.auth.startAutoRefresh();
     Get.offAllNamed(Routes.navBar);
   }
 }

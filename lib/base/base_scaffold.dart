@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/base/connection/connection_controller.dart';
 import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
-import 'package:theme_play/shared/widgets/nav_bar/custom_nav_bar.dart';
+import 'package:theme_play/shared/widgets/index.dart';
 
 class BaseScaffold extends GetView<ConnectionController> {
   final PreferredSizeWidget? appBar;

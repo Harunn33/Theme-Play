@@ -20,6 +20,7 @@ class CustomPrimaryButton extends StatelessWidget {
     return Bounceable(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
         padding: appPaddings.horizontal + appPaddings.vertical,
         decoration: BoxDecoration(
           boxShadow: [

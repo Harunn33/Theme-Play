@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:theme_play/modules/account/index.dart';
 import 'package:theme_play/modules/change_language/index.dart';
+import 'package:theme_play/modules/edit_profile/index.dart';
 import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
 import 'package:theme_play/modules/sign_in/index.dart';
@@ -41,8 +42,14 @@ final class AppPages {
     ),
     // Account Routes
     GetPage(
-        name: Routes.changeLanguage,
-        page: () => const ChangeLanguageScreen(),
-        binding: ChangeLanguageBinding()),
+      name: Routes.editProfile,
+      page: () => const EditProfileScreen(),
+      binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: Routes.changeLanguage,
+      page: () => const ChangeLanguageScreen(),
+      binding: ChangeLanguageBinding(),
+    ),
   ];
 }

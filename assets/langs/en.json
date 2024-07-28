@@ -1,7 +1,12 @@
 {
+  "appDescription": "Design your app with ease",
+  "editProfile": "Edit Profile",
   "general": "General",
   "changeLanguage": "Change Language",
   "signOut": "Sign Out",
+  "fullName": "Full Name",
+  "email": "Email",
+  "save": "Save",
   "error": "Error",
   "success": "Success",
   "info": "Info",

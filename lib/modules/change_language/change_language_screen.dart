@@ -5,6 +5,7 @@ import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/controllers/localization_controller.dart';
 import 'package:theme_play/modules/change_language/change_language_controller.dart';
 import 'package:theme_play/modules/change_language/widgets/index.dart';
+import 'package:theme_play/shared/widgets/index.dart';
 
 class ChangeLanguageScreen extends GetView<ChangeLanguageController> {
   const ChangeLanguageScreen({super.key});
@@ -12,11 +13,8 @@ class ChangeLanguageScreen extends GetView<ChangeLanguageController> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBar: AppBar(
-        title: Text(
-          controller.constants.strings.changeLanguage.tr,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+      appBar: GeneralAppBar(
+        title: controller.constants.strings.changeLanguage.tr,
       ),
       body: GetBuilder<LocalizationController>(
         builder: (localizationController) {

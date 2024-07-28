@@ -2,14 +2,27 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/network/repository/auth/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
+import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 
 class AccountController extends GetxController {
   final ConstantsInstances constants = ConstantsInstances.instance;
-  // final AppColors appColors = AppColors.instance;
-  // final AppPaddings appPaddings = AppPaddings.instance;
-  // final AppStrings appStrings = AppStrings.instance;
+
+  final RxString profilePhotoUrl = "".obs;
+
+  late final Rx<Future<User?>> profileInfoFuture = getProfileInfo().obs;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    profilePhotoUrl.value = await getProfilePhoto();
+  }
+
+  Future<String> getProfilePhoto() async {
+    final StorageRepository storageRepository = StorageRepository.instance;
+    return await storageRepository.getImages();
+  }
 
   Future<User?> getProfileInfo() async {
     final ProfileRepository profileRepository = ProfileRepository.instance;
@@ -19,6 +32,10 @@ class AccountController extends GetxController {
   Future<void> signOut() async {
     final AuthRepository authRepository = AuthRepository.instance;
     await authRepository.signOut();
+  }
+
+  void redirectionToEditProfile() {
+    Get.toNamed(Routes.editProfile);
   }
 
   void redirectionToChangeLanguage() {

@@ -13,38 +13,44 @@ class AccountScreen extends GetView<AccountController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AccountAppBar(),
-      body: controller.getProfileInfo().getData.toBuild(
-        onSuccess: (user) {
-          if (user == null) return const SizedBox.shrink();
-          return Padding(
-            padding: controller.constants.paddings.horizontal +
-                controller.constants.paddings.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                12.verticalSpace,
-                CustomAccountHeader(user: user),
-                12.verticalSpace,
-                Text(
-                  controller.constants.strings.general.tr,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                4.verticalSpace,
-                CustomAccountTile(
-                  onTap: controller.redirectionToChangeLanguage,
-                  icon: AppIcons.icLanguage,
-                  title: controller.constants.strings.changeLanguage,
-                ),
-                8.verticalSpace,
-                CustomAccountTile(
-                  onTap: () => controller.signOut(),
-                  icon: AppIcons.icSignOut,
-                  title: controller.constants.strings.signOut,
-                ),
-              ],
-            ),
-          );
-        },
+      body: Obx(
+        () => controller.profileInfoFuture.value.getData.toBuild(
+          onSuccess: (user) {
+            if (user == null) return const SizedBox.shrink();
+            return Padding(
+              padding: controller.constants.paddings.horizontal +
+                  controller.constants.paddings.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  12.verticalSpace,
+                  CustomAccountHeader(
+                    onTap: controller.redirectionToEditProfile,
+                    user: user,
+                    profilePhotoUrl: controller.profilePhotoUrl,
+                  ),
+                  12.verticalSpace,
+                  Text(
+                    controller.constants.strings.general.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  4.verticalSpace,
+                  CustomAccountTile(
+                    onTap: controller.redirectionToChangeLanguage,
+                    icon: AppIcons.icLanguage,
+                    title: controller.constants.strings.changeLanguage,
+                  ),
+                  8.verticalSpace,
+                  CustomAccountTile(
+                    onTap: () => controller.signOut(),
+                    icon: AppIcons.icSignOut,
+                    title: controller.constants.strings.signOut,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

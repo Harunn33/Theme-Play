@@ -56,6 +56,9 @@ dependencies:
   google_sign_in: ^6.2.1
   # Local Storage
   get_storage: ^2.1.1
+  # Image
+  image_picker: ^1.1.2
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
