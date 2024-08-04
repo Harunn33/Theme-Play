@@ -8,7 +8,7 @@ extension SnackbarExt on SnackbarType {
     required String message,
   }) {
     Get.snackbar(
-      title,
+      title.tr,
       message,
       icon: icon,
       backgroundColor: color,

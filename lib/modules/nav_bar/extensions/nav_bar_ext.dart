@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ extension NavBarExt on NavBarPages {
     }
   }
 
-  SvgPicture get inActiveIcon {
+  Widget get inActiveIcon {
     switch (this) {
       case NavBarPages.home:
         return AppIcons.icNavbarHome.svgWithAttiributes(
@@ -35,12 +36,12 @@ extension NavBarExt on NavBarPages {
     switch (this) {
       case NavBarPages.home:
         return AppIcons.icNavbarHome.svgWithAttiributes(
-          color: _constants.colors.powderBlue,
+          color: _constants.colors.black,
           height: 20.r,
         );
       case NavBarPages.account:
         return AppIcons.icNavbarAccount.svgWithAttiributes(
-          color: _constants.colors.powderBlue,
+          color: _constants.colors.black,
           height: 20.r,
         );
     }

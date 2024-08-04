@@ -26,6 +26,10 @@ final class AppStrings {
   String get success => "success";
   String get info => "info";
 
+  // Nav bar pages
   String get home => "home";
   String get account => "account";
+
+  // Create page
+  String get createPage => "createPage";
 }

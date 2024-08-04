@@ -10,13 +10,17 @@ class BaseScaffold extends GetView<ConnectionController> {
   final NavBarController? navBarController;
   final bool? resizeToAvoidBottomInset;
   final Color? backgroundColor;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
   const BaseScaffold({
+    super.key,
     this.appBar,
     required this.body,
     this.navBarController,
     this.resizeToAvoidBottomInset,
     this.backgroundColor,
-    super.key,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
   });
 
   @override
@@ -26,6 +30,8 @@ class BaseScaffold extends GetView<ConnectionController> {
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       backgroundColor: backgroundColor,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
       bottomNavigationBar: navBarController != null
           ? CustomNavBar(controller: navBarController!)
           : null,

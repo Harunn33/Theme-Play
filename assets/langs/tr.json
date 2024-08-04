@@ -11,5 +11,6 @@
   "success": "Başarı",
   "info": "Bilgi",
   "home": "Ana Sayfa",
-  "account": "Profil"
+  "account": "Profil",
+  "createPage": "Sayfa Oluştur"
 }

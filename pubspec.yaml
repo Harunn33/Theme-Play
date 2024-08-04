@@ -52,6 +52,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   # UI
   flutter_bounceable: ^1.1.0
+  popover: ^0.3.0+1
   # OAuth
   google_sign_in: ^6.2.1
   # Local Storage
@@ -59,6 +60,8 @@ dependencies:
   # Image
   image_picker: ^1.1.2
   cached_network_image: ^3.3.1
+  # Date format
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

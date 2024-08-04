@@ -19,9 +19,7 @@ class EditProfileController extends GetxController {
   final ConstantsInstances constants = ConstantsInstances.instance;
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController(
-    text: "John Doe",
-  );
+  final TextEditingController emailController = TextEditingController();
 
   final RxString profilePhotoUrl = "".obs;
 
@@ -48,6 +46,7 @@ class EditProfileController extends GetxController {
     if (user != null) {
       accountController.profileInfoFuture.value = Future.value(user);
     }
+    Get.back();
     return user;
   }
 

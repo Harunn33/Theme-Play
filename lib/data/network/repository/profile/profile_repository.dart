@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/network/services/supabase_service.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
@@ -19,6 +18,7 @@ final class ProfileRepository implements IProfileRepository {
       final UserResponse user = await _client.auth.getUser();
       return user.user;
     } on AuthException catch (e) {
+      _client.auth.refreshSession();
       throw "Get profile failed with error: ${e.message}";
     } catch (e) {
       throw "Get profile failed";
@@ -30,7 +30,6 @@ final class ProfileRepository implements IProfileRepository {
     LoadingStatus.loading.showLoadingDialog();
     try {
       final UserResponse user = await _client.auth.updateUser(userModel);
-      Get.back();
       return user.user;
     } on AuthException catch (e) {
       throw "Update profile failed with error: ${e.message}";

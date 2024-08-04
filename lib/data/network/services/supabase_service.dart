@@ -30,6 +30,13 @@ final class SupabaseService implements ISupabaseService {
         pkceAsyncStorage: SharedPreferencesGotrueAsyncStorage(),
       ),
     ).then((value) => _client = value.client);
+    client.auth.onAuthStateChange.listen((event) {
+      if (event.event == AuthChangeEvent.tokenRefreshed) {
+        SnackbarType.success.show(
+          message: "Token refreshed. 🎉",
+        );
+      }
+    });
   }
 
   static SupabaseClient get client => _client;

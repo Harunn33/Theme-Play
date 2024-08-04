@@ -6,6 +6,12 @@ extension AppRadiusExt on num {
         top: Radius.circular(toDouble().r),
         bottom: Radius.circular(toDouble().r),
       );
+  BorderRadius get radiusVerticalTop => BorderRadius.vertical(
+        top: Radius.circular(toDouble().r),
+      );
+  BorderRadius get radiusVerticalBottom => BorderRadius.vertical(
+        bottom: Radius.circular(toDouble().r),
+      );
   BorderRadius get radiusHorizontal => BorderRadius.horizontal(
         left: Radius.circular(toDouble().r),
         right: Radius.circular(toDouble().r),

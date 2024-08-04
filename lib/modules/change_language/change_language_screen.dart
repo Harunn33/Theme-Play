@@ -49,6 +49,7 @@ class ChangeLanguageScreen extends GetView<ChangeLanguageController> {
           );
         },
       ),
+      navBarController: controller.navBarController,
     );
   }
 }
