@@ -12,7 +12,7 @@ class CustomFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => NavBarHelpers.instance.onTapCreatePage(context),
+      onPressed: () => NavBarHelpers.instance.onTapFAB(context),
       child: AppIcons.icSpray.svgWithAttiributes(
         color: AppColors.instance.white,
         height: 30.h,

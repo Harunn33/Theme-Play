@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:theme_play/modules/account/index.dart';
 import 'package:theme_play/modules/change_language/index.dart';
+import 'package:theme_play/modules/creator/index.dart';
 import 'package:theme_play/modules/edit_profile/index.dart';
 import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
@@ -50,6 +51,12 @@ final class AppPages {
       name: Routes.changeLanguage,
       page: () => const ChangeLanguageScreen(),
       binding: ChangeLanguageBinding(),
+    ),
+    // Other Routes
+    GetPage(
+      name: Routes.creator,
+      page: () => const CreatorScreen(),
+      binding: CreatorBinding(),
     ),
   ];
 }

@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/network/repository/auth/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
-import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 
@@ -20,8 +19,8 @@ class AccountController extends GetxController {
   }
 
   Future<String> getProfilePhoto() async {
-    final StorageRepository storageRepository = StorageRepository.instance;
-    return await storageRepository.getImages();
+    final ProfileRepository profileRepository = ProfileRepository.instance;
+    return await profileRepository.getProfilePhoto();
   }
 
   Future<User?> getProfileInfo() async {

@@ -9,6 +9,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final double? height;
   final BoxShape shape;
   final String? errorDefaultImage;
+  final BoxFit? fit;
   const CustomCachedNetworkImage({
     super.key,
     required this.url,
@@ -16,6 +17,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.height,
     this.shape = BoxShape.circle,
     this.errorDefaultImage,
+    this.fit = BoxFit.cover,
   });
 
   @override
@@ -31,7 +33,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
             shape: shape,
             image: DecorationImage(
               image: imageProvider,
-              fit: BoxFit.cover,
+              fit: fit,
             ),
           ),
         );
@@ -60,7 +62,6 @@ class CustomCachedNetworkImage extends StatelessWidget {
         return Center(
           child: CircularProgressIndicator(
             color: AppColors.instance.powderBlue,
-            // value: progress.progress,
             strokeWidth: 2,
           ),
         );

@@ -35,7 +35,7 @@ class CustomHeaderProfilePhoto extends StatelessWidget {
             right: 0,
             top: 0,
             child: Bounceable(
-              onTap: () => controller.uploadImage(),
+              onTap: () => controller.uploadProfilePhoto(),
               child: Container(
                 padding: controller.constants.paddings.horizontal +
                     controller.constants.paddings.vertical,

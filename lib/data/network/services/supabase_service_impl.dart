@@ -29,7 +29,7 @@ abstract class ISupabaseService {
   });
 
   Future<String> fetchImagesFromStorage({
-    required final TableName bucketName,
+    required final BucketName bucketName,
     required final String path,
     final bool isUpload = false,
     final Uint8List? data,

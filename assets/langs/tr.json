@@ -12,5 +12,8 @@
   "info": "Bilgi",
   "home": "Ana Sayfa",
   "account": "Profil",
-  "createPage": "Sayfa Oluştur"
+  "designYourPage": "Sayfanızı Tasarlayın",
+  "selectCategory": "Bir kategori seç",
+  "enterYourPageName": "Sayfa adını giriniz",
+  "create": "Oluştur"
 }

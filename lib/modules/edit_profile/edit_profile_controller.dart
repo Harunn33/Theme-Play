@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
-import 'package:theme_play/data/network/repository/storage/index.dart';
 import 'package:theme_play/modules/account/account_controller.dart';
 import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
 import 'package:theme_play/shared/constants/index.dart';
+import 'package:theme_play/shared/extensions/index.dart';
 
 class EditProfileController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -47,12 +47,15 @@ class EditProfileController extends GetxController {
       accountController.profileInfoFuture.value = Future.value(user);
     }
     Get.back();
+    SnackbarType.success.show(
+      message: constants.strings.profileUpdated.tr,
+    );
     return user;
   }
 
-  Future<void> uploadImage() async {
-    final StorageRepository storageRepository = StorageRepository.instance;
-    final imageUrl = await storageRepository.uploadImage();
+  Future<void> uploadProfilePhoto() async {
+    final ProfileRepository profileRepository = ProfileRepository.instance;
+    final imageUrl = await profileRepository.uploadProfilePhoto();
     if (imageUrl.isNotEmpty) {
       profilePhotoUrl.value = imageUrl;
       accountController.profilePhotoUrl.value = imageUrl;

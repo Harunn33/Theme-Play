@@ -32,7 +32,10 @@ final class SupabaseService implements ISupabaseService {
       ),
     ).then((value) => _client = value.client);
     client.auth.onAuthStateChange.listen((event) {
-      if (event.event == AuthChangeEvent.tokenRefreshed) tokenRefreshed();
+      if (event.event == AuthChangeEvent.tokenRefreshed) {
+        SnackbarType.info.show(message: 'Token refreshed.');
+        // signOut();
+      }
     });
   }
 
@@ -106,7 +109,7 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<String> fetchImagesFromStorage({
-    required final TableName bucketName,
+    required final BucketName bucketName,
     required final String path,
     final bool isUpload = false,
     final Uint8List? data,

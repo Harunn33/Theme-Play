@@ -30,6 +30,13 @@ final class AppStrings {
   String get home => "home";
   String get account => "account";
 
-  // Create page
-  String get createPage => "createPage";
+  // Creator page
+  String get designYourPage => "designYourPage";
+  String get selectCategory => "selectCategory";
+  String get enterYourPageName => "enterYourPageName";
+  String get create => "create";
+
+  // Snackbar messages
+  String get profileUpdated => "profileUpdated";
+  String get themeCreated => "themeCreated";
 }

@@ -6,6 +6,7 @@ import 'package:theme_play/modules/account/account_screen.dart';
 import 'package:theme_play/modules/home/home_screen.dart';
 import 'package:theme_play/modules/nav_bar/enums/nav_bar_pages.dart';
 import 'package:theme_play/modules/nav_bar/extensions/nav_bar_ext.dart';
+import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 
 final class NavBarHelpers {
@@ -18,7 +19,7 @@ final class NavBarHelpers {
     const AccountScreen(),
   ];
 
-  void onTapCreatePage(BuildContext context) {
+  void onTapFAB(BuildContext context) {
     const ConstantsInstances constants = ConstantsInstances.instance;
     showPopover(
       context: context,
@@ -27,19 +28,22 @@ final class NavBarHelpers {
         children: [
           ListTile(
             leading: Icon(
-              Icons.add_box_outlined,
+              Icons.design_services_outlined,
               color: constants.colors.powderBlue,
             ),
             title: Text(
-              constants.strings.createPage.tr,
+              constants.strings.designYourPage.tr,
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            onTap: () => print('Item 1 was tapped!'),
+            onTap: () {
+              Get.back();
+              Get.toNamed(Routes.creator);
+            },
           ),
         ],
       ),
       direction: PopoverDirection.bottom,
-      width: .5.sw,
+      width: .6.sw,
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:theme_play/data/local/image_picker/image_picker_service.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/supabase_service.dart';
-import 'package:theme_play/shared/enums/table_name.dart';
+import 'package:theme_play/shared/enums/bucket_name.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
 part 'storage_repository_impl.dart';
@@ -18,31 +18,28 @@ final class StorageRepository implements IStorageRepository {
   final ProfileRepository profileRepository = ProfileRepository.instance;
 
   @override
-  Future<String> getImages() async {
-    final user = await profileRepository.getProfile();
-    if (user == null) return "";
-    final path = '${user.id}/profile';
+  Future<String> getImages({
+    required final String path,
+    required final BucketName bucketName,
+  }) async {
     String imageUrl = await _supabaseService.fetchImagesFromStorage(
-      bucketName: TableName.profilePhotos,
+      bucketName: bucketName,
       path: path,
     );
-    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
-      "t": DateTime.now().millisecondsSinceEpoch.toString(),
-    }).toString();
     return imageUrl;
   }
 
   @override
-  Future<String> uploadImage() async {
+  Future<String> uploadImage({
+    required final String path,
+    required final BucketName bucketName,
+  }) async {
     final image = await imagePickerService.pickImage();
     if (image == null) return "";
     LoadingStatus.loading.showLoadingDialog();
     final imageBytes = await image.readAsBytes();
-    final user = await profileRepository.getProfile();
-    if (user == null) return "";
-    final path = '${user.id}/profile';
     String imageUrl = await _supabaseService.fetchImagesFromStorage(
-      bucketName: TableName.profilePhotos,
+      bucketName: bucketName,
       path: path,
       isUpload: true,
       data: imageBytes,

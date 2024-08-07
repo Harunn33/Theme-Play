@@ -13,4 +13,6 @@ abstract class Routes {
   // ACCOUNT
   static const editProfile = "/editProfile";
   static const changeLanguage = "/changeLanguage";
+  // OTHER
+  static const creator = "/creator";
 }

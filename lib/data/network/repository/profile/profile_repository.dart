@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/shared/enums/bucket_name.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
 
 part 'profile_repository_impl.dart';
@@ -37,5 +39,35 @@ final class ProfileRepository implements IProfileRepository {
     } finally {
       LoadingStatus.loaded.showLoadingDialog();
     }
+  }
+
+  @override
+  Future<String> getProfilePhoto() async {
+    final StorageRepository storageRepository = StorageRepository.instance;
+    final user = await getProfile();
+    if (user == null) return "";
+    final path = '${user.id}/profile';
+
+    String imageUrl = await storageRepository.getImages(
+      path: path,
+      bucketName: BucketName.profilePhotos,
+    );
+
+    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
+      "t": DateTime.now().millisecondsSinceEpoch.toString(),
+    }).toString();
+    return imageUrl;
+  }
+
+  @override
+  Future<String> uploadProfilePhoto() async {
+    final StorageRepository storageRepository = StorageRepository.instance;
+    final user = await getProfile();
+    if (user == null) return "";
+    final path = '${user.id}/profile';
+    return await storageRepository.uploadImage(
+      path: path,
+      bucketName: BucketName.profilePhotos,
+    );
   }
 }

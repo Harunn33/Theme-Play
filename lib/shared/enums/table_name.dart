@@ -1,6 +1,6 @@
 enum TableName {
   themes("themes"),
-  profilePhotos("profile_photos");
+  userThemes("user_themes");
 
   final String value;
   const TableName(this.value);

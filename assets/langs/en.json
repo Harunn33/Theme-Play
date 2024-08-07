@@ -12,5 +12,10 @@
   "info": "Info",
   "home": "Home",
   "account": "Account",
-  "createPage": "Create Page"
+  "designYourPage": "Design Your Page",
+  "selectCategory": "Select a category",
+  "enterYourPageName": "Enter your page name",
+  "create": "Create",
+  "profileUpdated": "Profile updated successfully",
+  "themeCreated": "Theme created successfully"
 }

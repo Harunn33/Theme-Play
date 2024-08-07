@@ -21,6 +21,6 @@ final class AppColors {
   Color get orochimaru => const Color(0xFFD9D9D9);
   // Snackbar Colors
   Color get error => const Color(0xFFFF6F61);
-  Color get success => const Color(0xFF98FB98);
+  Color get success => const Color(0xFF4CAF50);
   Color get info => const Color(0xFFB0E0E6);
 }
