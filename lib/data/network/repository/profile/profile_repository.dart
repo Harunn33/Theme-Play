@@ -18,7 +18,6 @@ final class ProfileRepository implements IProfileRepository {
       final UserResponse user = await _client.auth.getUser();
       return user.user;
     } on AuthException catch (e) {
-      _client.auth.refreshSession();
       throw "Get profile failed with error: ${e.message}";
     } catch (e) {
       throw "Get profile failed";

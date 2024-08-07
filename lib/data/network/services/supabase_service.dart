@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/local/index.dart';
+import 'package:theme_play/modules/account/account_controller.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/enums/local_storage_keys.dart';
@@ -31,12 +32,16 @@ final class SupabaseService implements ISupabaseService {
       ),
     ).then((value) => _client = value.client);
     client.auth.onAuthStateChange.listen((event) {
-      if (event.event == AuthChangeEvent.tokenRefreshed) {
-        SnackbarType.success.show(
-          message: "Token refreshed. 🎉",
-        );
-      }
+      if (event.event == AuthChangeEvent.tokenRefreshed) tokenRefreshed();
     });
+  }
+
+  Future<void> tokenRefreshed() async {
+    final AccountController accountController = Get.find<AccountController>();
+    accountController.profileInfoFuture.value =
+        accountController.getProfileInfo();
+    accountController.profilePhotoUrl.value =
+        await accountController.getProfilePhoto();
   }
 
   static SupabaseClient get client => _client;
