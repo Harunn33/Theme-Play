@@ -15,7 +15,6 @@ class EditProfileScreen extends GetView<EditProfileController> {
     return BaseScaffold(
       appBar: GeneralAppBar(title: controller.constants.strings.editProfile.tr),
       resizeToAvoidBottomInset: false,
-      navBarController: controller.navBarController,
       body: Padding(
         padding: controller.constants.paddings.horizontal,
         child: Form(

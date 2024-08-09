@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/modules/account/account_controller.dart';
-import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
@@ -14,7 +13,6 @@ class EditProfileController extends GetxController {
   final LocalStorageService localStorageService = LocalStorageService.instance;
 
   final AccountController accountController = Get.find<AccountController>();
-  final NavBarController navBarController = Get.find<NavBarController>();
 
   final ConstantsInstances constants = ConstantsInstances.instance;
 

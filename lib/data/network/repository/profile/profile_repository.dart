@@ -17,8 +17,7 @@ final class ProfileRepository implements IProfileRepository {
   @override
   Future<User?> getProfile() async {
     try {
-      final UserResponse user = await _client.auth.getUser();
-      return user.user;
+      return _client.auth.currentUser;
     } on AuthException catch (e) {
       throw "Get profile failed with error: ${e.message}";
     } catch (e) {
