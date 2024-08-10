@@ -79,7 +79,6 @@ class CreatorScreen extends GetView<CreatorController> {
           },
         ),
       ),
-      navBarController: controller.navBarController,
     );
   }
 }

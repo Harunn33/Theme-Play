@@ -23,4 +23,9 @@ final class AppColors {
   Color get error => const Color(0xFFFF6F61);
   Color get success => const Color(0xFF4CAF50);
   Color get info => const Color(0xFFB0E0E6);
+
+  Color hexToColor(String hexCode) {
+    final hexColor = hexCode.replaceAll('#', '');
+    return Color(int.parse('FF$hexColor', radix: 16));
+  }
 }

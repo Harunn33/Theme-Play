@@ -25,6 +25,7 @@ mixin _$UserThemeModel {
   @JsonKey(name: "theme_id")
   String get themeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  ThemeStyleModel get style => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +42,10 @@ abstract class $UserThemeModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "created_by") String createdBy,
       @JsonKey(name: "theme_id") String themeId,
-      String name});
+      String name,
+      ThemeStyleModel style});
+
+  $ThemeStyleModelCopyWith<$Res> get style;
 }
 
 /// @nodoc
@@ -60,6 +64,7 @@ class _$UserThemeModelCopyWithImpl<$Res, $Val extends UserThemeModel>
     Object? createdBy = null,
     Object? themeId = null,
     Object? name = null,
+    Object? style = null,
   }) {
     return _then(_value.copyWith(
       createdBy: null == createdBy
@@ -74,7 +79,19 @@ class _$UserThemeModelCopyWithImpl<$Res, $Val extends UserThemeModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      style: null == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as ThemeStyleModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ThemeStyleModelCopyWith<$Res> get style {
+    return $ThemeStyleModelCopyWith<$Res>(_value.style, (value) {
+      return _then(_value.copyWith(style: value) as $Val);
+    });
   }
 }
 
@@ -89,7 +106,11 @@ abstract class _$$UserThemeModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "created_by") String createdBy,
       @JsonKey(name: "theme_id") String themeId,
-      String name});
+      String name,
+      ThemeStyleModel style});
+
+  @override
+  $ThemeStyleModelCopyWith<$Res> get style;
 }
 
 /// @nodoc
@@ -106,6 +127,7 @@ class __$$UserThemeModelImplCopyWithImpl<$Res>
     Object? createdBy = null,
     Object? themeId = null,
     Object? name = null,
+    Object? style = null,
   }) {
     return _then(_$UserThemeModelImpl(
       createdBy: null == createdBy
@@ -120,6 +142,10 @@ class __$$UserThemeModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      style: null == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as ThemeStyleModel,
     ));
   }
 }
@@ -130,7 +156,8 @@ class _$UserThemeModelImpl implements _UserThemeModel {
   const _$UserThemeModelImpl(
       {@JsonKey(name: "created_by") required this.createdBy,
       @JsonKey(name: "theme_id") required this.themeId,
-      required this.name});
+      required this.name,
+      required this.style});
 
   factory _$UserThemeModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserThemeModelImplFromJson(json);
@@ -143,10 +170,12 @@ class _$UserThemeModelImpl implements _UserThemeModel {
   final String themeId;
   @override
   final String name;
+  @override
+  final ThemeStyleModel style;
 
   @override
   String toString() {
-    return 'UserThemeModel(createdBy: $createdBy, themeId: $themeId, name: $name)';
+    return 'UserThemeModel(createdBy: $createdBy, themeId: $themeId, name: $name, style: $style)';
   }
 
   @override
@@ -157,12 +186,13 @@ class _$UserThemeModelImpl implements _UserThemeModel {
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.themeId, themeId) || other.themeId == themeId) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.style, style) || other.style == style));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, createdBy, themeId, name);
+  int get hashCode => Object.hash(runtimeType, createdBy, themeId, name, style);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +213,8 @@ abstract class _UserThemeModel implements UserThemeModel {
   const factory _UserThemeModel(
       {@JsonKey(name: "created_by") required final String createdBy,
       @JsonKey(name: "theme_id") required final String themeId,
-      required final String name}) = _$UserThemeModelImpl;
+      required final String name,
+      required final ThemeStyleModel style}) = _$UserThemeModelImpl;
 
   factory _UserThemeModel.fromJson(Map<String, dynamic> json) =
       _$UserThemeModelImpl.fromJson;
@@ -196,6 +227,8 @@ abstract class _UserThemeModel implements UserThemeModel {
   String get themeId;
   @override
   String get name;
+  @override
+  ThemeStyleModel get style;
   @override
   @JsonKey(ignore: true)
   _$$UserThemeModelImplCopyWith<_$UserThemeModelImpl> get copyWith =>

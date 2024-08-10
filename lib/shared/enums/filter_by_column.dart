@@ -1,5 +1,5 @@
 enum FilterByColumn {
-  id("id");
+  name("name");
 
   final String value;
   const FilterByColumn(this.value);

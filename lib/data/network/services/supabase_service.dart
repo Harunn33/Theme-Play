@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/local/index.dart';
-import 'package:theme_play/modules/account/account_controller.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/enums/local_storage_keys.dart';
@@ -40,15 +39,18 @@ final class SupabaseService implements ISupabaseService {
     });
   }
 
-  Future<void> tokenRefreshed() async {
-    final AccountController accountController = Get.find<AccountController>();
-    accountController.profileInfoFuture.value =
-        accountController.getProfileInfo();
-    accountController.profilePhotoUrl.value =
-        await accountController.getProfilePhoto();
-  }
-
   static SupabaseClient get client => _client;
+
+  @override
+  Future<SupabaseQueryBuilder> baseFetchData({
+    required final TableName tableName,
+  }) async {
+    try {
+      return client.from(tableName.value);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
   @override
   Future<PostgrestList> fetchData({
@@ -134,6 +136,25 @@ final class SupabaseService implements ISupabaseService {
             );
       }
       return client.storage.from(bucketName.value).getPublicUrl(path);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  @override
+  Future<PostgrestList> fetchDataWithSearch({
+    required TableName tableName,
+    required final FilterByColumn searchColumn,
+    required String searchValue,
+  }) async {
+    try {
+      final PostgrestList response =
+          await client.from(tableName.value).select("*").textSearch(
+                searchColumn.value,
+                "${searchValue.replaceAll(" ", "_")}:*",
+              );
+      return response;
     } catch (e) {
       throw Exception(e);
     }

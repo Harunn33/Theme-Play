@@ -7,6 +7,7 @@ import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
 import 'package:theme_play/modules/sign_in/index.dart';
 import 'package:theme_play/modules/splash/index.dart';
+import 'package:theme_play/modules/theme/index.dart';
 part 'app_routes.dart';
 
 final class AppPages {
@@ -57,6 +58,11 @@ final class AppPages {
       name: Routes.creator,
       page: () => const CreatorScreen(),
       binding: CreatorBinding(),
+    ),
+    GetPage(
+      name: Routes.theme,
+      page: () => const ThemeScreen(),
+      binding: ThemeBinding(),
     ),
   ];
 }

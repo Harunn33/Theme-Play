@@ -30,6 +30,10 @@ final class AppStrings {
   String get home => "home";
   String get account => "account";
 
+  // Home page
+  String get allCreatedThemes => "allCreatedThemes";
+  String get searchYourThemes => "searchYourThemes";
+
   // Creator page
   String get designYourPage => "designYourPage";
   String get selectCategory => "selectCategory";

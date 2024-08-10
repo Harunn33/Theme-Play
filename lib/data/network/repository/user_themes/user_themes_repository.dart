@@ -12,6 +12,26 @@ final class UserThemesRepository implements IUserThemesRepository {
   final SupabaseService _supabaseService = SupabaseService.instance;
 
   @override
+  Future<List<UserThemeModel>> getUserThemes() async {
+    final response = await _supabaseService.fetchData(
+      tableName: TableName.userThemes,
+    );
+    return response.map((e) => UserThemeModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<List<UserThemeModel>> searchUserThemes({
+    required final String query,
+  }) async {
+    final response = await _supabaseService.fetchDataWithSearch(
+      tableName: TableName.userThemes,
+      searchColumn: FilterByColumn.name,
+      searchValue: query,
+    );
+    return response.map((e) => UserThemeModel.fromJson(e)).toList();
+  }
+
+  @override
   Future<void> createUserTheme({
     required final String themeId,
     required final String name,

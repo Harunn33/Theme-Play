@@ -12,6 +12,7 @@ _$ThemeModelImpl _$$ThemeModelImplFromJson(Map<String, dynamic> json) =>
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
       type: Map<String, String>.from(json['type'] as Map),
+      style: ThemeStyleModel.fromJson(json['style'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ThemeModelImplToJson(_$ThemeModelImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$ThemeModelImplToJson(_$ThemeModelImpl instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'type': instance.type,
+      'style': instance.style,
     };

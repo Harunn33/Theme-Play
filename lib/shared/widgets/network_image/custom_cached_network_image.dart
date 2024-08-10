@@ -10,6 +10,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final BoxShape shape;
   final String? errorDefaultImage;
   final BoxFit? fit;
+  final BorderRadius? borderRadius;
   const CustomCachedNetworkImage({
     super.key,
     required this.url,
@@ -18,6 +19,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.shape = BoxShape.circle,
     this.errorDefaultImage,
     this.fit = BoxFit.cover,
+    this.borderRadius,
   });
 
   @override
@@ -30,6 +32,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
           width: width.w,
           height: height?.h,
           decoration: BoxDecoration(
+            borderRadius: borderRadius,
             shape: shape,
             image: DecorationImage(
               image: imageProvider,

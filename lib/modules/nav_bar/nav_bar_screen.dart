@@ -15,6 +15,7 @@ class NavbarScreen extends GetView<NavBarController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       appBar: appBar,
+      resizeToAvoidBottomInset: false,
       body: PopScope(
         onPopInvoked: (a) {},
         child: Obx(

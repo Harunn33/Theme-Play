@@ -5,14 +5,12 @@ import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
-import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
+import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
 
 class CreatorController extends GetxController {
-  final NavBarController navBarController = Get.find<NavBarController>();
-
   final LanguageHelpers languageHelpers = LanguageHelpers.instance;
 
   late final Future<List<ThemeModel>> futureThemes = getThemes();
@@ -49,6 +47,11 @@ class CreatorController extends GetxController {
     );
   }
 
+  void clearDataOnThePage() {
+    selectedThemeIndex.value = -1;
+    nameController.clear();
+  }
+
   Future<void> createUserTheme({
     required final List<ThemeModel> themeList,
   }) async {
@@ -66,6 +69,7 @@ class CreatorController extends GetxController {
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
     final UserThemeModel model = UserThemeModel(
       themeId: themeList[selectedThemeIndex.value].id,
+      style: themeList[selectedThemeIndex.value].style,
       name: nameController.text,
       createdBy: user.id,
     );
@@ -74,10 +78,16 @@ class CreatorController extends GetxController {
       name: model.name,
       userThemeModel: model,
     );
-    navBarController.onTapNavBarItem(0);
     LoadingStatus.loaded.showLoadingDialog();
     SnackbarType.success.show(
       message: constants.strings.themeCreated.tr,
+    );
+    clearDataOnThePage();
+    Get.toNamed(
+      Routes.theme,
+      arguments: {
+        "model": model,
+      },
     );
   }
 }

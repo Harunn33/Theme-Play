@@ -53,6 +53,7 @@ dependencies:
   # UI
   flutter_bounceable: ^1.1.0
   popover: ^0.3.0+1
+  carousel_slider: ^5.0.0
   # OAuth
   google_sign_in: ^6.2.1
   # Local Storage
@@ -62,6 +63,8 @@ dependencies:
   cached_network_image: ^3.3.1
   # Date format
   intl: ^0.19.0
+  # Cancelable Operation
+  async: ^2.11.0
 
 dev_dependencies:
   flutter_test:

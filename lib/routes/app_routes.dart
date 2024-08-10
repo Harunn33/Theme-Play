@@ -15,4 +15,5 @@ abstract class Routes {
   static const changeLanguage = "/changeLanguage";
   // OTHER
   static const creator = "/creator";
+  static const theme = "/theme";
 }
