@@ -9,6 +9,12 @@ part of 'theme_style_model.dart';
 _$ThemeStyleModelImpl _$$ThemeStyleModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ThemeStyleModelImpl(
+      title: BaseLocalizedTextModel.fromJson(
+          json['title'] as Map<String, dynamic>),
+      subTitle: BaseLocalizedTextModel.fromJson(
+          json['sub_title'] as Map<String, dynamic>),
+      mainMessage: BaseLocalizedTextModel.fromJson(
+          json['main_message'] as Map<String, dynamic>),
       bgColor: json['bg_color'] as String,
       titleStyle:
           TitleStyleModel.fromJson(json['title_style'] as Map<String, dynamic>),
@@ -23,6 +29,9 @@ _$ThemeStyleModelImpl _$$ThemeStyleModelImplFromJson(
 Map<String, dynamic> _$$ThemeStyleModelImplToJson(
         _$ThemeStyleModelImpl instance) =>
     <String, dynamic>{
+      'title': instance.title,
+      'sub_title': instance.subTitle,
+      'main_message': instance.mainMessage,
       'bg_color': instance.bgColor,
       'title_style': instance.titleStyle,
       'text_style': instance.textStyle,
@@ -30,11 +39,27 @@ Map<String, dynamic> _$$ThemeStyleModelImplToJson(
       'slider_style': instance.sliderStyle,
     };
 
+_$BaseLocalizedTextModelImpl _$$BaseLocalizedTextModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BaseLocalizedTextModelImpl(
+      en: json['en'] as String,
+      tr: json['tr'] as String,
+    );
+
+Map<String, dynamic> _$$BaseLocalizedTextModelImplToJson(
+        _$BaseLocalizedTextModelImpl instance) =>
+    <String, dynamic>{
+      'en': instance.en,
+      'tr': instance.tr,
+    };
+
 _$TitleStyleModelImpl _$$TitleStyleModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TitleStyleModelImpl(
       size: (json['size'] as num).toDouble(),
       color: json['color'] as String,
+      typewriterAnimationDuration:
+          (json['typewriter_animation_duration'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$TitleStyleModelImplToJson(
@@ -42,12 +67,15 @@ Map<String, dynamic> _$$TitleStyleModelImplToJson(
     <String, dynamic>{
       'size': instance.size,
       'color': instance.color,
+      'typewriter_animation_duration': instance.typewriterAnimationDuration,
     };
 
 _$TextStyleModelImpl _$$TextStyleModelImplFromJson(Map<String, dynamic> json) =>
     _$TextStyleModelImpl(
       size: (json['size'] as num).toDouble(),
       color: json['color'] as String,
+      typewriterAnimationDuration:
+          (json['typewriter_animation_duration'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$TextStyleModelImplToJson(
@@ -55,6 +83,7 @@ Map<String, dynamic> _$$TextStyleModelImplToJson(
     <String, dynamic>{
       'size': instance.size,
       'color': instance.color,
+      'typewriter_animation_duration': instance.typewriterAnimationDuration,
     };
 
 _$ButtonStyleModelImpl _$$ButtonStyleModelImplFromJson(

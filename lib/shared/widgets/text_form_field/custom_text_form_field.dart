@@ -8,7 +8,8 @@ class CustomTextFormField extends StatelessWidget {
   final String labelText;
   final bool readOnly;
   final String? Function(String?)? validator;
-  const CustomTextFormField({
+  final FocusNode focusNode = FocusNode();
+  CustomTextFormField({
     super.key,
     required this.textEditingController,
     required this.labelText,
@@ -22,7 +23,8 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       readOnly: readOnly,
       enabled: !readOnly,
-      onTapOutside: (event) => FocusScope.of(context).unfocus(),
+      focusNode: focusNode,
+      onTapOutside: (event) => focusNode.unfocus(),
       controller: textEditingController,
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: readOnly ? colors.orochimaru : null,

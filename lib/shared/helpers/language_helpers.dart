@@ -27,7 +27,7 @@ final class LanguageHelpers {
   String get currentCountryCode => _getCurrentCountryCode();
 
   String convertedCurrentLang({
-    required final Map<String, String> texts,
+    required final Map<String, dynamic> texts,
   }) {
     final String currentLanguage = _getCurrentLanguageCode();
     return texts[currentLanguage] ?? "";

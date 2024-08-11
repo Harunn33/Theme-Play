@@ -20,6 +20,11 @@ ThemeStyleModel _$ThemeStyleModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ThemeStyleModel {
+  BaseLocalizedTextModel get title => throw _privateConstructorUsedError;
+  @JsonKey(name: "sub_title")
+  BaseLocalizedTextModel get subTitle => throw _privateConstructorUsedError;
+  @JsonKey(name: "main_message")
+  BaseLocalizedTextModel get mainMessage => throw _privateConstructorUsedError;
   @JsonKey(name: "bg_color")
   String get bgColor => throw _privateConstructorUsedError;
   @JsonKey(name: "title_style")
@@ -44,12 +49,18 @@ abstract class $ThemeStyleModelCopyWith<$Res> {
       _$ThemeStyleModelCopyWithImpl<$Res, ThemeStyleModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "bg_color") String bgColor,
+      {BaseLocalizedTextModel title,
+      @JsonKey(name: "sub_title") BaseLocalizedTextModel subTitle,
+      @JsonKey(name: "main_message") BaseLocalizedTextModel mainMessage,
+      @JsonKey(name: "bg_color") String bgColor,
       @JsonKey(name: "title_style") TitleStyleModel titleStyle,
       @JsonKey(name: "text_style") TextStyleModel textStyle,
       @JsonKey(name: "button_style") ButtonStyleModel buttonStyle,
       @JsonKey(name: "slider_style") SliderStyleModel sliderStyle});
 
+  $BaseLocalizedTextModelCopyWith<$Res> get title;
+  $BaseLocalizedTextModelCopyWith<$Res> get subTitle;
+  $BaseLocalizedTextModelCopyWith<$Res> get mainMessage;
   $TitleStyleModelCopyWith<$Res> get titleStyle;
   $TextStyleModelCopyWith<$Res> get textStyle;
   $ButtonStyleModelCopyWith<$Res> get buttonStyle;
@@ -69,6 +80,9 @@ class _$ThemeStyleModelCopyWithImpl<$Res, $Val extends ThemeStyleModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? title = null,
+    Object? subTitle = null,
+    Object? mainMessage = null,
     Object? bgColor = null,
     Object? titleStyle = null,
     Object? textStyle = null,
@@ -76,6 +90,18 @@ class _$ThemeStyleModelCopyWithImpl<$Res, $Val extends ThemeStyleModel>
     Object? sliderStyle = null,
   }) {
     return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
+      subTitle: null == subTitle
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
+      mainMessage: null == mainMessage
+          ? _value.mainMessage
+          : mainMessage // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
       bgColor: null == bgColor
           ? _value.bgColor
           : bgColor // ignore: cast_nullable_to_non_nullable
@@ -97,6 +123,30 @@ class _$ThemeStyleModelCopyWithImpl<$Res, $Val extends ThemeStyleModel>
           : sliderStyle // ignore: cast_nullable_to_non_nullable
               as SliderStyleModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseLocalizedTextModelCopyWith<$Res> get title {
+    return $BaseLocalizedTextModelCopyWith<$Res>(_value.title, (value) {
+      return _then(_value.copyWith(title: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseLocalizedTextModelCopyWith<$Res> get subTitle {
+    return $BaseLocalizedTextModelCopyWith<$Res>(_value.subTitle, (value) {
+      return _then(_value.copyWith(subTitle: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BaseLocalizedTextModelCopyWith<$Res> get mainMessage {
+    return $BaseLocalizedTextModelCopyWith<$Res>(_value.mainMessage, (value) {
+      return _then(_value.copyWith(mainMessage: value) as $Val);
+    });
   }
 
   @override
@@ -141,12 +191,21 @@ abstract class _$$ThemeStyleModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "bg_color") String bgColor,
+      {BaseLocalizedTextModel title,
+      @JsonKey(name: "sub_title") BaseLocalizedTextModel subTitle,
+      @JsonKey(name: "main_message") BaseLocalizedTextModel mainMessage,
+      @JsonKey(name: "bg_color") String bgColor,
       @JsonKey(name: "title_style") TitleStyleModel titleStyle,
       @JsonKey(name: "text_style") TextStyleModel textStyle,
       @JsonKey(name: "button_style") ButtonStyleModel buttonStyle,
       @JsonKey(name: "slider_style") SliderStyleModel sliderStyle});
 
+  @override
+  $BaseLocalizedTextModelCopyWith<$Res> get title;
+  @override
+  $BaseLocalizedTextModelCopyWith<$Res> get subTitle;
+  @override
+  $BaseLocalizedTextModelCopyWith<$Res> get mainMessage;
   @override
   $TitleStyleModelCopyWith<$Res> get titleStyle;
   @override
@@ -168,6 +227,9 @@ class __$$ThemeStyleModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? title = null,
+    Object? subTitle = null,
+    Object? mainMessage = null,
     Object? bgColor = null,
     Object? titleStyle = null,
     Object? textStyle = null,
@@ -175,6 +237,18 @@ class __$$ThemeStyleModelImplCopyWithImpl<$Res>
     Object? sliderStyle = null,
   }) {
     return _then(_$ThemeStyleModelImpl(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
+      subTitle: null == subTitle
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
+      mainMessage: null == mainMessage
+          ? _value.mainMessage
+          : mainMessage // ignore: cast_nullable_to_non_nullable
+              as BaseLocalizedTextModel,
       bgColor: null == bgColor
           ? _value.bgColor
           : bgColor // ignore: cast_nullable_to_non_nullable
@@ -203,7 +277,10 @@ class __$$ThemeStyleModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ThemeStyleModelImpl implements _ThemeStyleModel {
   const _$ThemeStyleModelImpl(
-      {@JsonKey(name: "bg_color") required this.bgColor,
+      {required this.title,
+      @JsonKey(name: "sub_title") required this.subTitle,
+      @JsonKey(name: "main_message") required this.mainMessage,
+      @JsonKey(name: "bg_color") required this.bgColor,
       @JsonKey(name: "title_style") required this.titleStyle,
       @JsonKey(name: "text_style") required this.textStyle,
       @JsonKey(name: "button_style") required this.buttonStyle,
@@ -212,6 +289,14 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
   factory _$ThemeStyleModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ThemeStyleModelImplFromJson(json);
 
+  @override
+  final BaseLocalizedTextModel title;
+  @override
+  @JsonKey(name: "sub_title")
+  final BaseLocalizedTextModel subTitle;
+  @override
+  @JsonKey(name: "main_message")
+  final BaseLocalizedTextModel mainMessage;
   @override
   @JsonKey(name: "bg_color")
   final String bgColor;
@@ -230,7 +315,7 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
 
   @override
   String toString() {
-    return 'ThemeStyleModel(bgColor: $bgColor, titleStyle: $titleStyle, textStyle: $textStyle, buttonStyle: $buttonStyle, sliderStyle: $sliderStyle)';
+    return 'ThemeStyleModel(title: $title, subTitle: $subTitle, mainMessage: $mainMessage, bgColor: $bgColor, titleStyle: $titleStyle, textStyle: $textStyle, buttonStyle: $buttonStyle, sliderStyle: $sliderStyle)';
   }
 
   @override
@@ -238,6 +323,11 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ThemeStyleModelImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.subTitle, subTitle) ||
+                other.subTitle == subTitle) &&
+            (identical(other.mainMessage, mainMessage) ||
+                other.mainMessage == mainMessage) &&
             (identical(other.bgColor, bgColor) || other.bgColor == bgColor) &&
             (identical(other.titleStyle, titleStyle) ||
                 other.titleStyle == titleStyle) &&
@@ -251,8 +341,8 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, bgColor, titleStyle, textStyle, buttonStyle, sliderStyle);
+  int get hashCode => Object.hash(runtimeType, title, subTitle, mainMessage,
+      bgColor, titleStyle, textStyle, buttonStyle, sliderStyle);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +361,12 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
 
 abstract class _ThemeStyleModel implements ThemeStyleModel {
   const factory _ThemeStyleModel(
-      {@JsonKey(name: "bg_color") required final String bgColor,
+      {required final BaseLocalizedTextModel title,
+      @JsonKey(name: "sub_title")
+      required final BaseLocalizedTextModel subTitle,
+      @JsonKey(name: "main_message")
+      required final BaseLocalizedTextModel mainMessage,
+      @JsonKey(name: "bg_color") required final String bgColor,
       @JsonKey(name: "title_style") required final TitleStyleModel titleStyle,
       @JsonKey(name: "text_style") required final TextStyleModel textStyle,
       @JsonKey(name: "button_style")
@@ -282,6 +377,14 @@ abstract class _ThemeStyleModel implements ThemeStyleModel {
   factory _ThemeStyleModel.fromJson(Map<String, dynamic> json) =
       _$ThemeStyleModelImpl.fromJson;
 
+  @override
+  BaseLocalizedTextModel get title;
+  @override
+  @JsonKey(name: "sub_title")
+  BaseLocalizedTextModel get subTitle;
+  @override
+  @JsonKey(name: "main_message")
+  BaseLocalizedTextModel get mainMessage;
   @override
   @JsonKey(name: "bg_color")
   String get bgColor;
@@ -303,6 +406,166 @@ abstract class _ThemeStyleModel implements ThemeStyleModel {
       throw _privateConstructorUsedError;
 }
 
+BaseLocalizedTextModel _$BaseLocalizedTextModelFromJson(
+    Map<String, dynamic> json) {
+  return _BaseLocalizedTextModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BaseLocalizedTextModel {
+  String get en => throw _privateConstructorUsedError;
+  String get tr => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BaseLocalizedTextModelCopyWith<BaseLocalizedTextModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BaseLocalizedTextModelCopyWith<$Res> {
+  factory $BaseLocalizedTextModelCopyWith(BaseLocalizedTextModel value,
+          $Res Function(BaseLocalizedTextModel) then) =
+      _$BaseLocalizedTextModelCopyWithImpl<$Res, BaseLocalizedTextModel>;
+  @useResult
+  $Res call({String en, String tr});
+}
+
+/// @nodoc
+class _$BaseLocalizedTextModelCopyWithImpl<$Res,
+        $Val extends BaseLocalizedTextModel>
+    implements $BaseLocalizedTextModelCopyWith<$Res> {
+  _$BaseLocalizedTextModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = null,
+    Object? tr = null,
+  }) {
+    return _then(_value.copyWith(
+      en: null == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String,
+      tr: null == tr
+          ? _value.tr
+          : tr // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BaseLocalizedTextModelImplCopyWith<$Res>
+    implements $BaseLocalizedTextModelCopyWith<$Res> {
+  factory _$$BaseLocalizedTextModelImplCopyWith(
+          _$BaseLocalizedTextModelImpl value,
+          $Res Function(_$BaseLocalizedTextModelImpl) then) =
+      __$$BaseLocalizedTextModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String en, String tr});
+}
+
+/// @nodoc
+class __$$BaseLocalizedTextModelImplCopyWithImpl<$Res>
+    extends _$BaseLocalizedTextModelCopyWithImpl<$Res,
+        _$BaseLocalizedTextModelImpl>
+    implements _$$BaseLocalizedTextModelImplCopyWith<$Res> {
+  __$$BaseLocalizedTextModelImplCopyWithImpl(
+      _$BaseLocalizedTextModelImpl _value,
+      $Res Function(_$BaseLocalizedTextModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = null,
+    Object? tr = null,
+  }) {
+    return _then(_$BaseLocalizedTextModelImpl(
+      en: null == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String,
+      tr: null == tr
+          ? _value.tr
+          : tr // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BaseLocalizedTextModelImpl implements _BaseLocalizedTextModel {
+  const _$BaseLocalizedTextModelImpl({required this.en, required this.tr});
+
+  factory _$BaseLocalizedTextModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BaseLocalizedTextModelImplFromJson(json);
+
+  @override
+  final String en;
+  @override
+  final String tr;
+
+  @override
+  String toString() {
+    return 'BaseLocalizedTextModel(en: $en, tr: $tr)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BaseLocalizedTextModelImpl &&
+            (identical(other.en, en) || other.en == en) &&
+            (identical(other.tr, tr) || other.tr == tr));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, en, tr);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BaseLocalizedTextModelImplCopyWith<_$BaseLocalizedTextModelImpl>
+      get copyWith => __$$BaseLocalizedTextModelImplCopyWithImpl<
+          _$BaseLocalizedTextModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BaseLocalizedTextModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BaseLocalizedTextModel implements BaseLocalizedTextModel {
+  const factory _BaseLocalizedTextModel(
+      {required final String en,
+      required final String tr}) = _$BaseLocalizedTextModelImpl;
+
+  factory _BaseLocalizedTextModel.fromJson(Map<String, dynamic> json) =
+      _$BaseLocalizedTextModelImpl.fromJson;
+
+  @override
+  String get en;
+  @override
+  String get tr;
+  @override
+  @JsonKey(ignore: true)
+  _$$BaseLocalizedTextModelImplCopyWith<_$BaseLocalizedTextModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 TitleStyleModel _$TitleStyleModelFromJson(Map<String, dynamic> json) {
   return _TitleStyleModel.fromJson(json);
 }
@@ -311,6 +574,8 @@ TitleStyleModel _$TitleStyleModelFromJson(Map<String, dynamic> json) {
 mixin _$TitleStyleModel {
   double get size => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
+  @JsonKey(name: "typewriter_animation_duration")
+  double get typewriterAnimationDuration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -324,7 +589,11 @@ abstract class $TitleStyleModelCopyWith<$Res> {
           TitleStyleModel value, $Res Function(TitleStyleModel) then) =
       _$TitleStyleModelCopyWithImpl<$Res, TitleStyleModel>;
   @useResult
-  $Res call({double size, String color});
+  $Res call(
+      {double size,
+      String color,
+      @JsonKey(name: "typewriter_animation_duration")
+      double typewriterAnimationDuration});
 }
 
 /// @nodoc
@@ -342,6 +611,7 @@ class _$TitleStyleModelCopyWithImpl<$Res, $Val extends TitleStyleModel>
   $Res call({
     Object? size = null,
     Object? color = null,
+    Object? typewriterAnimationDuration = null,
   }) {
     return _then(_value.copyWith(
       size: null == size
@@ -352,6 +622,10 @@ class _$TitleStyleModelCopyWithImpl<$Res, $Val extends TitleStyleModel>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      typewriterAnimationDuration: null == typewriterAnimationDuration
+          ? _value.typewriterAnimationDuration
+          : typewriterAnimationDuration // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -364,7 +638,11 @@ abstract class _$$TitleStyleModelImplCopyWith<$Res>
       __$$TitleStyleModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double size, String color});
+  $Res call(
+      {double size,
+      String color,
+      @JsonKey(name: "typewriter_animation_duration")
+      double typewriterAnimationDuration});
 }
 
 /// @nodoc
@@ -380,6 +658,7 @@ class __$$TitleStyleModelImplCopyWithImpl<$Res>
   $Res call({
     Object? size = null,
     Object? color = null,
+    Object? typewriterAnimationDuration = null,
   }) {
     return _then(_$TitleStyleModelImpl(
       size: null == size
@@ -390,6 +669,10 @@ class __$$TitleStyleModelImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      typewriterAnimationDuration: null == typewriterAnimationDuration
+          ? _value.typewriterAnimationDuration
+          : typewriterAnimationDuration // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -397,7 +680,11 @@ class __$$TitleStyleModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TitleStyleModelImpl implements _TitleStyleModel {
-  const _$TitleStyleModelImpl({required this.size, required this.color});
+  const _$TitleStyleModelImpl(
+      {required this.size,
+      required this.color,
+      @JsonKey(name: "typewriter_animation_duration")
+      required this.typewriterAnimationDuration});
 
   factory _$TitleStyleModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TitleStyleModelImplFromJson(json);
@@ -406,10 +693,13 @@ class _$TitleStyleModelImpl implements _TitleStyleModel {
   final double size;
   @override
   final String color;
+  @override
+  @JsonKey(name: "typewriter_animation_duration")
+  final double typewriterAnimationDuration;
 
   @override
   String toString() {
-    return 'TitleStyleModel(size: $size, color: $color)';
+    return 'TitleStyleModel(size: $size, color: $color, typewriterAnimationDuration: $typewriterAnimationDuration)';
   }
 
   @override
@@ -418,12 +708,17 @@ class _$TitleStyleModelImpl implements _TitleStyleModel {
         (other.runtimeType == runtimeType &&
             other is _$TitleStyleModelImpl &&
             (identical(other.size, size) || other.size == size) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.typewriterAnimationDuration,
+                    typewriterAnimationDuration) ||
+                other.typewriterAnimationDuration ==
+                    typewriterAnimationDuration));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, size, color);
+  int get hashCode =>
+      Object.hash(runtimeType, size, color, typewriterAnimationDuration);
 
   @JsonKey(ignore: true)
   @override
@@ -442,8 +737,11 @@ class _$TitleStyleModelImpl implements _TitleStyleModel {
 
 abstract class _TitleStyleModel implements TitleStyleModel {
   const factory _TitleStyleModel(
-      {required final double size,
-      required final String color}) = _$TitleStyleModelImpl;
+          {required final double size,
+          required final String color,
+          @JsonKey(name: "typewriter_animation_duration")
+          required final double typewriterAnimationDuration}) =
+      _$TitleStyleModelImpl;
 
   factory _TitleStyleModel.fromJson(Map<String, dynamic> json) =
       _$TitleStyleModelImpl.fromJson;
@@ -452,6 +750,9 @@ abstract class _TitleStyleModel implements TitleStyleModel {
   double get size;
   @override
   String get color;
+  @override
+  @JsonKey(name: "typewriter_animation_duration")
+  double get typewriterAnimationDuration;
   @override
   @JsonKey(ignore: true)
   _$$TitleStyleModelImplCopyWith<_$TitleStyleModelImpl> get copyWith =>
@@ -466,6 +767,8 @@ TextStyleModel _$TextStyleModelFromJson(Map<String, dynamic> json) {
 mixin _$TextStyleModel {
   double get size => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
+  @JsonKey(name: "typewriter_animation_duration")
+  double get typewriterAnimationDuration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -479,7 +782,11 @@ abstract class $TextStyleModelCopyWith<$Res> {
           TextStyleModel value, $Res Function(TextStyleModel) then) =
       _$TextStyleModelCopyWithImpl<$Res, TextStyleModel>;
   @useResult
-  $Res call({double size, String color});
+  $Res call(
+      {double size,
+      String color,
+      @JsonKey(name: "typewriter_animation_duration")
+      double typewriterAnimationDuration});
 }
 
 /// @nodoc
@@ -497,6 +804,7 @@ class _$TextStyleModelCopyWithImpl<$Res, $Val extends TextStyleModel>
   $Res call({
     Object? size = null,
     Object? color = null,
+    Object? typewriterAnimationDuration = null,
   }) {
     return _then(_value.copyWith(
       size: null == size
@@ -507,6 +815,10 @@ class _$TextStyleModelCopyWithImpl<$Res, $Val extends TextStyleModel>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      typewriterAnimationDuration: null == typewriterAnimationDuration
+          ? _value.typewriterAnimationDuration
+          : typewriterAnimationDuration // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -519,7 +831,11 @@ abstract class _$$TextStyleModelImplCopyWith<$Res>
       __$$TextStyleModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double size, String color});
+  $Res call(
+      {double size,
+      String color,
+      @JsonKey(name: "typewriter_animation_duration")
+      double typewriterAnimationDuration});
 }
 
 /// @nodoc
@@ -535,6 +851,7 @@ class __$$TextStyleModelImplCopyWithImpl<$Res>
   $Res call({
     Object? size = null,
     Object? color = null,
+    Object? typewriterAnimationDuration = null,
   }) {
     return _then(_$TextStyleModelImpl(
       size: null == size
@@ -545,6 +862,10 @@ class __$$TextStyleModelImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
+      typewriterAnimationDuration: null == typewriterAnimationDuration
+          ? _value.typewriterAnimationDuration
+          : typewriterAnimationDuration // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -552,7 +873,11 @@ class __$$TextStyleModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TextStyleModelImpl implements _TextStyleModel {
-  const _$TextStyleModelImpl({required this.size, required this.color});
+  const _$TextStyleModelImpl(
+      {required this.size,
+      required this.color,
+      @JsonKey(name: "typewriter_animation_duration")
+      required this.typewriterAnimationDuration});
 
   factory _$TextStyleModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TextStyleModelImplFromJson(json);
@@ -561,10 +886,13 @@ class _$TextStyleModelImpl implements _TextStyleModel {
   final double size;
   @override
   final String color;
+  @override
+  @JsonKey(name: "typewriter_animation_duration")
+  final double typewriterAnimationDuration;
 
   @override
   String toString() {
-    return 'TextStyleModel(size: $size, color: $color)';
+    return 'TextStyleModel(size: $size, color: $color, typewriterAnimationDuration: $typewriterAnimationDuration)';
   }
 
   @override
@@ -573,12 +901,17 @@ class _$TextStyleModelImpl implements _TextStyleModel {
         (other.runtimeType == runtimeType &&
             other is _$TextStyleModelImpl &&
             (identical(other.size, size) || other.size == size) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.typewriterAnimationDuration,
+                    typewriterAnimationDuration) ||
+                other.typewriterAnimationDuration ==
+                    typewriterAnimationDuration));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, size, color);
+  int get hashCode =>
+      Object.hash(runtimeType, size, color, typewriterAnimationDuration);
 
   @JsonKey(ignore: true)
   @override
@@ -597,8 +930,11 @@ class _$TextStyleModelImpl implements _TextStyleModel {
 
 abstract class _TextStyleModel implements TextStyleModel {
   const factory _TextStyleModel(
-      {required final double size,
-      required final String color}) = _$TextStyleModelImpl;
+          {required final double size,
+          required final String color,
+          @JsonKey(name: "typewriter_animation_duration")
+          required final double typewriterAnimationDuration}) =
+      _$TextStyleModelImpl;
 
   factory _TextStyleModel.fromJson(Map<String, dynamic> json) =
       _$TextStyleModelImpl.fromJson;
@@ -607,6 +943,9 @@ abstract class _TextStyleModel implements TextStyleModel {
   double get size;
   @override
   String get color;
+  @override
+  @JsonKey(name: "typewriter_animation_duration")
+  double get typewriterAnimationDuration;
   @override
   @JsonKey(ignore: true)
   _$$TextStyleModelImplCopyWith<_$TextStyleModelImpl> get copyWith =>

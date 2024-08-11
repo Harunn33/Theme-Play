@@ -5,6 +5,7 @@ import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
+import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
@@ -78,16 +79,18 @@ class CreatorController extends GetxController {
       name: model.name,
       userThemeModel: model,
     );
+    final HomeController homeController = Get.find<HomeController>();
+    homeController.refreshPage();
     LoadingStatus.loaded.showLoadingDialog();
     SnackbarType.success.show(
       message: constants.strings.themeCreated.tr,
     );
-    clearDataOnThePage();
     Get.toNamed(
       Routes.theme,
       arguments: {
         "model": model,
       },
     );
+    clearDataOnThePage();
   }
 }

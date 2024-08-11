@@ -6,6 +6,10 @@ part 'theme_style_model.g.dart';
 @freezed
 class ThemeStyleModel with _$ThemeStyleModel {
   const factory ThemeStyleModel({
+    required final BaseLocalizedTextModel title,
+    @JsonKey(name: "sub_title") required final BaseLocalizedTextModel subTitle,
+    @JsonKey(name: "main_message")
+    required final BaseLocalizedTextModel mainMessage,
     @JsonKey(name: "bg_color") required final String bgColor,
     @JsonKey(name: "title_style") required final TitleStyleModel titleStyle,
     @JsonKey(name: "text_style") required final TextStyleModel textStyle,
@@ -18,10 +22,23 @@ class ThemeStyleModel with _$ThemeStyleModel {
 }
 
 @freezed
+class BaseLocalizedTextModel with _$BaseLocalizedTextModel {
+  const factory BaseLocalizedTextModel({
+    required final String en,
+    required final String tr,
+  }) = _BaseLocalizedTextModel;
+
+  factory BaseLocalizedTextModel.fromJson(Map<String, Object?> json) =>
+      _$BaseLocalizedTextModelFromJson(json);
+}
+
+@freezed
 class TitleStyleModel with _$TitleStyleModel {
   const factory TitleStyleModel({
     required final double size,
     required final String color,
+    @JsonKey(name: "typewriter_animation_duration")
+    required final double typewriterAnimationDuration,
   }) = _TitleStyleModel;
 
   factory TitleStyleModel.fromJson(Map<String, Object?> json) =>
@@ -33,6 +50,8 @@ class TextStyleModel with _$TextStyleModel {
   const factory TextStyleModel({
     required final double size,
     required final String color,
+    @JsonKey(name: "typewriter_animation_duration")
+    required final double typewriterAnimationDuration,
   }) = _TextStyleModel;
 
   factory TextStyleModel.fromJson(Map<String, Object?> json) =>

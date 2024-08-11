@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/constants/paddings.dart';
 import 'package:theme_play/shared/extensions/index.dart';
@@ -14,7 +15,8 @@ class AnimatedSearchBar extends StatelessWidget {
   final void Function(String)? onChanged;
   final VoidCallback? onTapSearchButton;
   final VoidCallback? onTapClearButton;
-  const AnimatedSearchBar({
+  final FocusNode focusNode = FocusNode();
+  AnimatedSearchBar({
     super.key,
     required this.isExpanded,
     required this.textEditingController,
@@ -32,30 +34,35 @@ class AnimatedSearchBar extends StatelessWidget {
         duration: 500.milliseconds,
         width: isExpanded.value ? 1.sw : 45.r,
         height: 45.r,
-        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: constants.colors.white,
           borderRadius: isExpanded.value ? 8.radiusAll : 30.radiusAll,
           boxShadow: [
             BoxShadow(
-              color: constants.colors.powderBlue,
-              blurRadius: 5,
+              color: AppColors.instance.powderBlue,
+              blurRadius: 10,
             ),
           ],
         ),
         child: Row(
           children: [
-            Padding(
-              padding: 2.5.padLeft,
-              child: Bounceable(
-                onTap: onTapSearchButton,
-                child: CircleAvatar(
-                  backgroundColor: constants.colors.powderBlue,
-                  child: Icon(
-                    Icons.search,
-                    size: 30.r,
-                    color: constants.colors.black,
+            Bounceable(
+              onTap: onTapSearchButton,
+              child: Container(
+                width: 45.r,
+                height: 45.r,
+                decoration: BoxDecoration(
+                  color: constants.colors.powderBlue,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: constants.colors.white,
+                    width: 2.w,
                   ),
+                ),
+                child: Icon(
+                  Icons.search,
+                  size: 30.r,
+                  color: constants.colors.black,
                 ),
               ),
             ),
@@ -64,8 +71,9 @@ class AnimatedSearchBar extends StatelessWidget {
                 opacity: isExpanded.value ? 1 : 0,
                 duration: 200.milliseconds,
                 child: TextFormField(
+                  focusNode: focusNode,
                   onChanged: onChanged,
-                  onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                  onTapOutside: (event) => focusNode.unfocus(),
                   controller: textEditingController,
                   style: Theme.of(context).textTheme.titleSmall,
                   decoration: InputDecoration(
@@ -74,7 +82,10 @@ class AnimatedSearchBar extends StatelessWidget {
                     suffixIcon: Visibility(
                       visible: isExpanded.value,
                       child: Bounceable(
-                        onTap: onTapClearButton,
+                        onTap: () {
+                          focusNode.unfocus();
+                          onTapClearButton?.call();
+                        },
                         child: Padding(
                           padding: 8.padAll,
                           child: AnimatedBuilder(

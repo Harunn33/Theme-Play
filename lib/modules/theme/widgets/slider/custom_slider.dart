@@ -31,7 +31,7 @@ class CustomSlider extends StatelessWidget {
         autoPlayInterval: sliderStyle.autoPlayInterval.seconds,
         autoPlayAnimationDuration: 500.milliseconds,
         enlargeCenterPage: true,
-        viewportFraction: .9,
+        viewportFraction: .93,
         scrollDirection: sliderStyle.scrollDirection != "h"
             ? Axis.vertical
             : Axis.horizontal,

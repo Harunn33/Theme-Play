@@ -42,7 +42,7 @@ class HomeScreen extends GetView<HomeController> {
                 6.verticalSpace,
                 AnimatedSearchBar(
                   onTapSearchButton: controller.toggleSearchBar,
-                  onTapClearButton: controller.toggleSearchBar,
+                  onTapClearButton: controller.clearSearchBar,
                   onChanged: controller.searchOnChanged,
                   isExpanded: controller.isSearchBarExpanded,
                   textEditingController: controller.searchController,

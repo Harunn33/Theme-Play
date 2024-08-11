@@ -9,6 +9,7 @@ final class AppStrings {
   String get appVersion => "1.0.0";
   String get english => "English";
   String get turkish => "Türkçe";
+  String get noResultFound => "noResultFound";
 
   // Account page
   String get editProfile => "editProfile";

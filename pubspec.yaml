@@ -65,6 +65,8 @@ dependencies:
   intl: ^0.19.0
   # Cancelable Operation
   async: ^2.11.0
+  # Animation
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

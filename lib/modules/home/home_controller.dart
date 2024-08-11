@@ -76,18 +76,19 @@ class HomeController extends GetxController
     return await userThemesRepository.searchUserThemes(query: query);
   }
 
-  void toggleSearchBar() {
-    FocusScope.of(Get.context!).unfocus();
+  void clearSearchBar() {
+    if (searchController.text.isEmpty) return toggleSearchBar();
+    searchController.clear();
+    futureUserThemes.value = getUserThemes();
+  }
 
+  void toggleSearchBar() {
     isSearchBarExpanded.toggle();
     if (isSearchBarExpanded.value) {
       animationController.forward();
       return;
     }
-    if (searchController.text.isNotEmpty) {
-      searchController.clear();
-      futureUserThemes.value = getUserThemes();
-    }
+    if (searchController.text.isNotEmpty) clearSearchBar();
     animationController.reverse();
   }
 }

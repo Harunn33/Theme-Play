@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:theme_play/shared/constants/colors.dart';
+import 'package:theme_play/shared/constants/strings.dart';
+import 'package:theme_play/shared/enums/app_images.dart';
 
 class CustomFutureBuilder<T> {
   CustomFutureBuilder(Future<T> future) : _future = future;
@@ -38,8 +43,22 @@ class CustomFutureBuilder<T> {
       );
   Widget get _defaultNotFoundWidget => const Center(child: Text('Not Found'));
   Widget get _defaultErrorWidget => const Center(child: Text('Error'));
-  Widget get _defaultEmptyWidget =>
-      const Center(child: Text('No Result Found'));
+  Widget get _defaultEmptyWidget => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppImages.paintRoller.pngWithAttiributes(
+              color: AppColors.instance.black,
+              height: 50.h,
+            ),
+            12.verticalSpace,
+            Text(
+              AppStrings.instance.noResultFound.tr,
+              style: Theme.of(Get.context!).textTheme.labelSmall,
+            ),
+          ],
+        ),
+      );
 }
 
 extension FutureExt<T> on Future<T> {
