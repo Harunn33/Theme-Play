@@ -10,6 +10,8 @@ final class AppStrings {
   String get english => "English";
   String get turkish => "Türkçe";
   String get noResultFound => "noResultFound";
+  String get yes => "yes";
+  String get no => "no";
 
   // Account page
   String get editProfile => "editProfile";
@@ -34,6 +36,16 @@ final class AppStrings {
   // Home page
   String get allCreatedThemes => "allCreatedThemes";
   String get searchYourThemes => "searchYourThemes";
+  String get editTheme => "editTheme";
+  String get deleteTheme => "deleteTheme";
+  String get deleteThemeDialogQuestion => "deleteThemeDialogQuestion";
+  String get filters => "filters";
+  String get removeFilters => "removeFilters";
+  String get filterByCategory => "filterByCategory";
+  String get birthday => "birthday";
+  String get anniversary => "anniversary";
+  String get lover => "lover";
+  String get filterThemes => "filterThemes";
 
   // Creator page
   String get designYourPage => "designYourPage";

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/index.dart';
-import 'package:theme_play/shared/constants/paddings.dart';
 import 'package:theme_play/shared/extensions/index.dart';
+import 'package:theme_play/shared/widgets/buttons/index.dart';
 
 class AnimatedSearchBar extends StatelessWidget {
   final RxBool isExpanded;
@@ -39,32 +38,16 @@ class AnimatedSearchBar extends StatelessWidget {
           borderRadius: isExpanded.value ? 8.radiusAll : 30.radiusAll,
           boxShadow: [
             BoxShadow(
-              color: AppColors.instance.powderBlue,
+              color: constants.colors.powderBlue,
               blurRadius: 10,
             ),
           ],
         ),
         child: Row(
           children: [
-            Bounceable(
+            CustomIconButton(
               onTap: onTapSearchButton,
-              child: Container(
-                width: 45.r,
-                height: 45.r,
-                decoration: BoxDecoration(
-                  color: constants.colors.powderBlue,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: constants.colors.white,
-                    width: 2.w,
-                  ),
-                ),
-                child: Icon(
-                  Icons.search,
-                  size: 30.r,
-                  color: constants.colors.black,
-                ),
-              ),
+              icon: Icons.search,
             ),
             Expanded(
               child: AnimatedOpacity(
@@ -77,7 +60,7 @@ class AnimatedSearchBar extends StatelessWidget {
                   controller: textEditingController,
                   style: Theme.of(context).textTheme.titleSmall,
                   decoration: InputDecoration(
-                    contentPadding: AppPaddings.instance.horizontal,
+                    contentPadding: constants.paddings.horizontal,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     suffixIcon: Visibility(
                       visible: isExpanded.value,

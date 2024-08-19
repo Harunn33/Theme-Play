@@ -142,7 +142,6 @@ final class SupabaseService implements ISupabaseService {
   }
 
   @override
-  @override
   Future<PostgrestList> fetchDataWithSearch({
     required TableName tableName,
     required final FilterByColumn searchColumn,
@@ -153,6 +152,24 @@ final class SupabaseService implements ISupabaseService {
           await client.from(tableName.value).select("*").textSearch(
                 searchColumn.value,
                 "${searchValue.replaceAll(" ", "_")}:*",
+              );
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<PostgrestList> fetchDataWithFilter({
+    required TableName tableName,
+    required final FilterByColumn filterColumn,
+    required String filterValue,
+  }) async {
+    try {
+      final PostgrestList response =
+          await client.from(tableName.value).select("*").eq(
+                filterColumn.value,
+                filterValue,
               );
       return response;
     } catch (e) {
@@ -226,10 +243,10 @@ final class SupabaseService implements ISupabaseService {
     required final SignInType provider,
   }) async {
     LoadingStatus.loading.showLoadingDialog();
-    final rawNonce = _client.auth.generateRawNonce();
+    // final rawNonce = _client.auth.generateRawNonce();
     String? accessToken;
     String? idToken;
-    String? nonce = rawNonce;
+    // String? nonce = rawNonce;
 
     if (provider == SignInType.google) {
       final Map<String, dynamic> resp = await _signInWithGoogle();
@@ -249,7 +266,7 @@ final class SupabaseService implements ISupabaseService {
         provider: provider.getProvider,
         idToken: idToken,
         accessToken: accessToken,
-        nonce: rawNonce,
+        // nonce: rawNonce,
       );
       Get.offAllNamed(Routes.navBar);
     } on AuthException catch (e) {
@@ -285,6 +302,7 @@ final class SupabaseService implements ISupabaseService {
     if (accessToken == null) {
       throw 'No Access Token found.';
     }
+
     LocalStorageService.instance.saveData(
       LocalStorageKeys.profilePhoto.name,
       googleUser.photoUrl,

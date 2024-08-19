@@ -75,8 +75,6 @@ class CreatorController extends GetxController {
       createdBy: user.id,
     );
     await userThemesRepository.createUserTheme(
-      themeId: model.themeId,
-      name: model.name,
       userThemeModel: model,
     );
     final HomeController homeController = Get.find<HomeController>();

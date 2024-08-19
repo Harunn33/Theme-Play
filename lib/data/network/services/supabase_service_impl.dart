@@ -47,6 +47,13 @@ abstract class ISupabaseService {
     required final String searchValue,
   });
 
+  /// Fetch data from a table with filter
+  Future<PostgrestList> fetchDataWithFilter({
+    required final TableName tableName,
+    required final FilterByColumn filterColumn,
+    required final String filterValue,
+  });
+
   // Auth
   Future<void> signIn({
     required final String email,

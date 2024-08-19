@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/app_bar/general_app_bar.dart';
+import 'package:theme_play/shared/widgets/index.dart';
 import 'package:theme_play/shared/widgets/search_bar/custom_animated_search_bar.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -35,18 +37,46 @@ class HomeScreen extends GetView<HomeController> {
             child: OverflowBar(
               alignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  controller.constants.strings.allCreatedThemes.tr,
-                  style: Theme.of(context).textTheme.titleMedium,
+                SizedBox(
+                  child: Text(
+                    controller.constants.strings.allCreatedThemes.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 6.verticalSpace,
-                AnimatedSearchBar(
-                  onTapSearchButton: controller.toggleSearchBar,
-                  onTapClearButton: controller.clearSearchBar,
-                  onChanged: controller.searchOnChanged,
-                  isExpanded: controller.isSearchBarExpanded,
-                  textEditingController: controller.searchController,
-                  animationController: controller.animationController,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: AnimatedSearchBar(
+                        onTapSearchButton: controller.toggleSearchBar,
+                        onTapClearButton: controller.clearSearchBar,
+                        onChanged: controller.searchOnChanged,
+                        isExpanded: controller.isSearchBarExpanded,
+                        textEditingController: controller.searchController,
+                        animationController: controller.animationController,
+                      ),
+                    ),
+                    4.horizontalSpace,
+                    Obx(
+                      () => Badge.count(
+                        largeSize: 18.r,
+                        textStyle:
+                            Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  fontSize: 12.sp,
+                                ),
+                        count: controller.filterBadgeCount.value,
+                        isLabelVisible: controller.isFilterSelected,
+                        child: CustomIconButton(
+                          onTap: () => controller.showFilters(
+                            context,
+                          ),
+                          hasDecoration: true,
+                          icon: Icons.filter_alt_outlined,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -64,7 +94,7 @@ class HomeScreen extends GetView<HomeController> {
                       }
                       return ListView.separated(
                         padding: controller.constants.paddings.vertical * 2,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (_, index) {
                           final userTheme = userThemeList[index];
                           return ListTile(
                             contentPadding:
@@ -80,6 +110,20 @@ class HomeScreen extends GetView<HomeController> {
                             title: Text(
                               userTheme.name,
                               style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            trailing: Builder(
+                              builder: (context) {
+                                return Bounceable(
+                                  onTap: () => controller.showThemeSettings(
+                                    context,
+                                    userTheme: userTheme,
+                                  ),
+                                  child: Icon(
+                                    Icons.more_vert_outlined,
+                                    color: controller.constants.colors.black,
+                                  ),
+                                );
+                              },
                             ),
                           );
                         },

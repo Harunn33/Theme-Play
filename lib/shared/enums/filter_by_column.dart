@@ -1,5 +1,7 @@
 enum FilterByColumn {
-  name("name");
+  name("name"),
+  id("id"),
+  themeId("theme_id");
 
   final String value;
   const FilterByColumn(this.value);

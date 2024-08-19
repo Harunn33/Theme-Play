@@ -5,9 +5,14 @@ abstract class IUserThemesRepository {
   Future<List<UserThemeModel>> searchUserThemes({
     required final String query,
   });
+  Future<List<UserThemeModel>> filterUserThemes({
+    required final String query,
+  });
   Future<void> createUserTheme({
-    required final String themeId,
-    required final String name,
     required final UserThemeModel userThemeModel,
+  });
+
+  Future<void> deleteUserTheme({
+    required final String themeId,
   });
 }

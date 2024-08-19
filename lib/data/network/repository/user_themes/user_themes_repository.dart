@@ -32,14 +32,35 @@ final class UserThemesRepository implements IUserThemesRepository {
   }
 
   @override
+  Future<List<UserThemeModel>> filterUserThemes({
+    required final String query,
+  }) async {
+    final response = await _supabaseService.fetchDataWithFilter(
+      tableName: TableName.userThemes,
+      filterColumn: FilterByColumn.themeId,
+      filterValue: query,
+    );
+    return response.map((e) => UserThemeModel.fromJson(e)).toList();
+  }
+
+  @override
   Future<void> createUserTheme({
-    required final String themeId,
-    required final String name,
     required final UserThemeModel userThemeModel,
   }) async {
     await _supabaseService.insertData(
       tableName: TableName.userThemes,
       data: userThemeModel.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteUserTheme({
+    required final String themeId,
+  }) async {
+    await _supabaseService.deleteData(
+      tableName: TableName.userThemes,
+      column: FilterByColumn.id,
+      value: themeId,
     );
   }
 }

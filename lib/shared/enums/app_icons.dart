@@ -5,7 +5,10 @@ enum AppIcons {
   icNavbarHome("ic_nav_bar_home"),
   icNavbarAccount("ic_nav_bar_account"),
   icLanguage("ic_language"),
-  icSignOut("ic_sign_out");
+  icSignOut("ic_sign_out"),
+  icEdit("ic_edit"),
+  icDelete("ic_delete"),
+  icDesign("ic_design");
 
   final String value;
   const AppIcons(this.value);
