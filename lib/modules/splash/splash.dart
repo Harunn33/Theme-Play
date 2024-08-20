@@ -13,19 +13,44 @@ class Splash extends GetView<SplashController> {
     final textTheme = Theme.of(context).textTheme;
     return BaseScaffold(
       backgroundColor: controller.appColors.powderBlue,
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        fit: StackFit.expand,
-        children: [
-          AppImages.appLogo.png,
-          Positioned(
-            bottom: 30.h,
-            child: Text(
-              "v.${controller.appStrings.appVersion}",
-              style: textTheme.labelSmall,
+      body: Obx(
+        () => Stack(
+          children: [
+            Column(
+              children: [
+                AnimatedContainer(
+                  duration: 1.seconds,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: 1.sh / controller.height.value,
+                ),
+                AnimatedOpacity(
+                  duration: 500.milliseconds,
+                  opacity: controller.textOpacity.value,
+                  child: Text(
+                    controller.appStrings.appName,
+                    style: textTheme.titleMedium?.copyWith(
+                      fontSize: controller.animation.value,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            Center(
+              child: AnimatedOpacity(
+                duration: 1.seconds,
+                curve: Curves.fastLinearToSlowEaseIn,
+                opacity: controller.containerOpacity.value,
+                child: AnimatedContainer(
+                  duration: 1.seconds,
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  height: 1.sw / controller.containerSize.value,
+                  width: 1.sw / controller.containerSize.value,
+                  child: AppImages.appLogo.png,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

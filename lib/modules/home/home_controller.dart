@@ -37,11 +37,12 @@ class HomeController extends GetxController
 
   bool get isFilterSelected => filterBadgeCount.value > 0;
 
-  late final Future<List<ThemeModel>> futureThemes = getThemes();
+  late final Future<List<ThemeModel>> futureThemes;
 
   @override
   void onInit() {
     super.onInit();
+    futureThemes = getThemes();
     _startSearchOperation();
     animationController = AnimationController(
       vsync: this,
@@ -311,6 +312,7 @@ class HomeController extends GetxController
   Future<List<UserThemeModel>> searchUserThemes(String query) async {
     final UserThemesRepository userThemesRepository =
         UserThemesRepository.instance;
+    clearFilters();
     return await userThemesRepository.searchUserThemes(query: query);
   }
 

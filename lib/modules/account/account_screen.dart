@@ -46,6 +46,15 @@ class AccountScreen extends GetView<AccountController> {
                     icon: AppIcons.icSignOut,
                     title: controller.constants.strings.signOut,
                   ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "v.${controller.constants.strings.appVersion}",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ),
+                  36.verticalSpace,
                 ],
               ),
             );
