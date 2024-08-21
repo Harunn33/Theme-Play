@@ -21,8 +21,8 @@ abstract class ISupabaseService {
   Future<void> updateData({
     required final TableName tableName,
     required final Map<String, dynamic> data,
-    required final FilterByColumn condition,
-    required final String conditionEquality,
+    required final FilterByColumn filterColumn,
+    required final String value,
   });
 
   /// Delete data from a table

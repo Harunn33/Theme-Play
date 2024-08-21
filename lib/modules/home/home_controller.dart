@@ -1,11 +1,14 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/models/popover/popover_model.dart';
 import 'package:theme_play/data/models/theme/theme_model.dart';
 import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
+import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
@@ -17,16 +20,20 @@ import 'package:theme_play/shared/extensions/show_popover_ext.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
-class HomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController with GetTickerProviderStateMixin {
   late CancelableOperation _searchOperation;
   final Duration _searchingDelay = 400.milliseconds;
   final ConstantsInstances constants = ConstantsInstances.instance;
+
+  late final TabController tabController;
 
   final NavBarHelpers navBarHelpers = NavBarHelpers.instance;
 
   late final Rx<Future<List<UserThemeModel>>> futureUserThemes =
       getUserThemes().obs;
+
+  late final Rx<Future<List<UserThemeModel>>> futureSharedUserThemes =
+      getSharedUserThemes().obs;
 
   final TextEditingController searchController = TextEditingController();
   late final AnimationController animationController;
@@ -42,11 +49,16 @@ class HomeController extends GetxController
   @override
   void onInit() {
     super.onInit();
+
     futureThemes = getThemes();
     _startSearchOperation();
     animationController = AnimationController(
       vsync: this,
       duration: 400.milliseconds,
+    );
+    tabController = TabController(
+      length: 2,
+      vsync: this,
     );
   }
 
@@ -77,8 +89,13 @@ class HomeController extends GetxController
     );
   }
 
-  void refreshPage() {
+  void refreshMyThemesTab() {
     futureUserThemes.value = getUserThemes();
+    if (isSearchBarExpanded.value) toggleSearchBar();
+  }
+
+  void refreshSharedThemesTab() {
+    futureSharedUserThemes.value = getSharedUserThemes();
     if (isSearchBarExpanded.value) toggleSearchBar();
   }
 
@@ -101,15 +118,32 @@ class HomeController extends GetxController
   void showThemeSettings(
     BuildContext context, {
     required final UserThemeModel userTheme,
+    final bool hasEditAccess = false,
   }) {
     context.showPopup(
       width: .45.sw,
       iconHeight: 18.h,
       children: [
         PopoverModel(
-          icon: AppIcons.icEdit,
-          title: constants.strings.editTheme.tr,
+          onTap: () async {
+            await Clipboard.setData(
+              ClipboardData(
+                text: userTheme.shareableCode,
+              ),
+            );
+            Get.back();
+            SnackbarType.success.show(
+              message: constants.strings.copied.tr,
+            );
+          },
+          icon: AppIcons.icCopy,
+          title: constants.strings.copyCode.tr,
         ),
+        if (hasEditAccess)
+          PopoverModel(
+            icon: AppIcons.icEdit,
+            title: constants.strings.editTheme.tr,
+          ),
         PopoverModel(
           icon: AppIcons.icDelete,
           title: constants.strings.deleteTheme.tr,
@@ -309,6 +343,17 @@ class HomeController extends GetxController
     return await userThemesRepository.getUserThemes();
   }
 
+  Future<List<UserThemeModel>> getSharedUserThemes() async {
+    final UserThemesRepository userThemesRepository =
+        UserThemesRepository.instance;
+    final sharedCodes = await getSharedCodesToUsers();
+    if (sharedCodes.isEmpty) return [];
+    final userThemes = await userThemesRepository.getUserThemesByShareableCode(
+      shareableCodes: sharedCodes.first.codes ?? [],
+    );
+    return userThemes;
+  }
+
   Future<List<UserThemeModel>> searchUserThemes(String query) async {
     final UserThemesRepository userThemesRepository =
         UserThemesRepository.instance;
@@ -327,6 +372,14 @@ class HomeController extends GetxController
         UserThemesRepository.instance;
     await userThemesRepository.deleteUserTheme(themeId: themeId);
     Get.back();
-    refreshPage();
+    refreshMyThemesTab();
+    refreshSharedThemesTab();
+  }
+
+  Future<List<SharedCodesToUserModel>> getSharedCodesToUsers() async {
+    final SharedCodesToUserRepository sharedCodesToUserRepository =
+        SharedCodesToUserRepository.instance;
+
+    return await sharedCodesToUserRepository.getSharedCodesToUsers();
   }
 }

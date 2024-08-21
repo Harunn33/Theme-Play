@@ -20,6 +20,23 @@ final class UserThemesRepository implements IUserThemesRepository {
   }
 
   @override
+  Future<List<UserThemeModel>> getUserThemesByShareableCode({
+    required final List<String> shareableCodes,
+  }) async {
+    final List<UserThemeModel> userThemes = <UserThemeModel>[];
+    for (var code in shareableCodes) {
+      final response = await _supabaseService.fetchDataWithFilter(
+        tableName: TableName.userThemes,
+        filterColumn: FilterByColumn.shareableCode,
+        filterValue: code,
+      );
+      userThemes
+          .addAll(response.map((e) => UserThemeModel.fromJson(e)).toList());
+    }
+    return userThemes;
+  }
+
+  @override
   Future<List<UserThemeModel>> searchUserThemes({
     required final String query,
   }) async {

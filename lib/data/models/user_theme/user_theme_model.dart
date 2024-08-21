@@ -8,6 +8,7 @@ part 'user_theme_model.g.dart';
 class UserThemeModel with _$UserThemeModel {
   const factory UserThemeModel({
     @JsonKey(includeToJson: false) final String? id,
+    @JsonKey(name: "shareable_code") required final String shareableCode,
     @JsonKey(name: "created_by") required final String createdBy,
     @JsonKey(name: "theme_id") required final String themeId,
     required final String name,

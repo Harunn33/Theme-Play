@@ -2,27 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/models/popover/popover_model.dart';
+import 'package:theme_play/data/network/repository/shared_codes_to_user/shared_codes_to_user_repository.dart';
 import 'package:theme_play/modules/account/account_screen.dart';
+import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/modules/home/home_screen.dart';
 import 'package:theme_play/modules/nav_bar/enums/nav_bar_pages.dart';
 import 'package:theme_play/modules/nav_bar/extensions/nav_bar_ext.dart';
+import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
+import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/extensions/show_popover_ext.dart';
+import 'package:theme_play/shared/widgets/index.dart';
 
 final class NavBarHelpers {
   NavBarHelpers._();
 
   static final NavBarHelpers instance = NavBarHelpers._();
 
+  final enterThemeCodeController = TextEditingController();
+
   final List<Widget> screens = [
     const HomeScreen(),
     const AccountScreen(),
   ];
-
+  final ConstantsInstances constants = ConstantsInstances.instance;
   void onTapFAB(BuildContext context) {
-    const ConstantsInstances constants = ConstantsInstances.instance;
     context.showPopup(
       width: .6.sw,
       children: [
@@ -34,8 +40,56 @@ final class NavBarHelpers {
             Get.toNamed(Routes.creator);
           },
         ),
+        PopoverModel(
+          icon: AppIcons.icDesign,
+          title: constants.strings.enterThemeCode.tr,
+          onTap: () {
+            Get.back();
+            enterThemeCodeController.clear();
+            context.showBottomSheet(
+              height: .2.sh,
+              child: Padding(
+                padding:
+                    constants.paddings.horizontal + constants.paddings.vertical,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomTextFormField(
+                      textEditingController: enterThemeCodeController,
+                      labelText: constants.strings.enterThemeCode.tr,
+                    ),
+                    CustomPrimaryButton(
+                      text: constants.strings.save.tr,
+                      onTap: () {
+                        addSharedCodes();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ],
     );
+  }
+
+  Future<void> addSharedCodes() async {
+    final SharedCodesToUserRepository sharedCodesToUserRepository =
+        SharedCodesToUserRepository.instance;
+    await sharedCodesToUserRepository.addSharedCodes(
+      shareableCode: enterThemeCodeController.text,
+    );
+    Get.back();
+    final HomeController homeController = Get.find<HomeController>();
+    final NavBarController navBarController = Get.find<NavBarController>();
+    homeController.refreshSharedThemesTab();
+    SnackbarType.success.show(
+      message: constants.strings.themeCreated.tr,
+    );
+    navBarController.onTapNavBarItem(0);
+    homeController.tabController.animateTo(1);
   }
 
   BottomNavigationBarItem build({required NavBarPages type}) {

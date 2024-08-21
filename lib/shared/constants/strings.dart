@@ -12,6 +12,8 @@ final class AppStrings {
   String get noResultFound => "noResultFound";
   String get yes => "yes";
   String get no => "no";
+  String get copyCode => "copyCode";
+  String get copied => "copied";
 
   // Account page
   String get editProfile => "editProfile";
@@ -46,6 +48,7 @@ final class AppStrings {
   String get anniversary => "anniversary";
   String get lover => "lover";
   String get filterThemes => "filterThemes";
+  String get enterThemeCode => "enterThemeCode";
 
   // Creator page
   String get designYourPage => "designYourPage";

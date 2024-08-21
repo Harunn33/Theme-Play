@@ -8,7 +8,8 @@ enum AppIcons {
   icSignOut("ic_sign_out"),
   icEdit("ic_edit"),
   icDelete("ic_delete"),
-  icDesign("ic_design");
+  icDesign("ic_design"),
+  icCopy("ic_copy");
 
   final String value;
   const AppIcons(this.value);

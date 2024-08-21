@@ -2,6 +2,9 @@ part of "user_themes_repository.dart";
 
 abstract class IUserThemesRepository {
   Future<List<UserThemeModel>> getUserThemes();
+  Future<List<UserThemeModel>> getUserThemesByShareableCode({
+    required final List<String> shareableCodes,
+  });
   Future<List<UserThemeModel>> searchUserThemes({
     required final String query,
   });

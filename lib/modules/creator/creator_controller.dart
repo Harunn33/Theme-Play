@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/models/theme/theme_model.dart';
@@ -69,6 +71,7 @@ class CreatorController extends GetxController {
     final user = await profileRepository.getProfile();
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
     final UserThemeModel model = UserThemeModel(
+      shareableCode: _generateRandomCode(11),
       themeId: themeList[selectedThemeIndex.value].id,
       style: themeList[selectedThemeIndex.value].style,
       name: nameController.text,
@@ -78,7 +81,7 @@ class CreatorController extends GetxController {
       userThemeModel: model,
     );
     final HomeController homeController = Get.find<HomeController>();
-    homeController.refreshPage();
+    homeController.refreshMyThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
     SnackbarType.success.show(
       message: constants.strings.themeCreated.tr,
@@ -90,5 +93,18 @@ class CreatorController extends GetxController {
       },
     );
     clearDataOnThePage();
+  }
+
+  /// Random id generator from created theme
+  String _generateRandomCode(int length) {
+    const String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final Random random = Random();
+    String code = '';
+
+    for (int i = 0; i < length; i++) {
+      code += chars[random.nextInt(chars.length)];
+    }
+
+    return code;
   }
 }

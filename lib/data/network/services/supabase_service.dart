@@ -30,8 +30,9 @@ final class SupabaseService implements ISupabaseService {
         pkceAsyncStorage: SharedPreferencesGotrueAsyncStorage(),
       ),
     ).then((value) => _client = value.client);
-    client.auth.onAuthStateChange.listen((event) {
+    client.auth.onAuthStateChange.listen((event) async {
       if (event.event == AuthChangeEvent.tokenRefreshed) {
+        await client.auth.refreshSession();
         SnackbarType.info.show(
             message:
                 'Token refreshed: ${_client.auth.currentUser?.userMetadata?["full_name"]}');
@@ -81,14 +82,14 @@ final class SupabaseService implements ISupabaseService {
   Future<void> updateData({
     required final TableName tableName,
     required final Map<String, dynamic> data,
-    required final FilterByColumn condition,
-    required final String conditionEquality,
+    required final FilterByColumn filterColumn,
+    required final String value,
   }) async {
     try {
-      await client
-          .from(tableName.value)
-          .update(data)
-          .eq(condition.value, conditionEquality);
+      await client.from(tableName.value).update(data).eq(
+            filterColumn.value,
+            value,
+          );
     } catch (e) {
       throw Exception(e);
     }
