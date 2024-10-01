@@ -31,6 +31,7 @@ class AccountController extends GetxController {
   Future<void> signOut() async {
     final AuthRepository authRepository = AuthRepository.instance;
     await authRepository.signOut();
+    Get.offAllNamed(Routes.signIn);
   }
 
   void redirectionToEditProfile() {

@@ -42,7 +42,7 @@ class AccountScreen extends GetView<AccountController> {
                   ),
                   8.verticalSpace,
                   CustomAccountTile(
-                    onTap: () => controller.signOut(),
+                    onTap: controller.signOut,
                     icon: AppIcons.icSignOut,
                     title: controller.constants.strings.signOut,
                   ),

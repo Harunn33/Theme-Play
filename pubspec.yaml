@@ -39,7 +39,6 @@ dependencies:
   # Responsive UI
   flutter_screenutil: ^5.9.3
   # Code Generation
-  freezed: ^2.5.2
   freezed_annotation: ^2.4.3
   json_annotation: ^4.9.0
   # Connection Control
@@ -80,6 +79,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.11
   json_serializable: ^6.8.0
+  freezed: ^2.5.2
   flutter_launcher_icons: ^0.13.1
 flutter_launcher_icons:
   android: "launcher_icon"

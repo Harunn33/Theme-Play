@@ -31,11 +31,8 @@ final class SupabaseService implements ISupabaseService {
       ),
     ).then((value) => _client = value.client);
     client.auth.onAuthStateChange.listen((event) async {
-      if (event.event == AuthChangeEvent.tokenRefreshed) {
-        await client.auth.refreshSession();
-        SnackbarType.info.show(
-            message:
-                'Token refreshed: ${_client.auth.currentUser?.userMetadata?["full_name"]}');
+      if (event.event == AuthChangeEvent.signedOut) {
+        Get.offAllNamed(Routes.signIn);
       }
     });
   }

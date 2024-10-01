@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:get/get.dart';
 import 'package:theme_play/data/network/services/supabase_service.dart';
-import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/sign_in_type.dart';
 
 part 'auth_repository_impl.dart';
@@ -38,7 +36,6 @@ final class AuthRepository implements IAuthRepository {
   @override
   Future<void> signOut() async {
     await _service.signOut();
-    Get.offAllNamed(Routes.splash);
   }
 
   @override
