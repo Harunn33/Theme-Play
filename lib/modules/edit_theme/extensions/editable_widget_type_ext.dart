@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theme_play/data/local/image_picker/image_picker_service.dart';
+import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/models/user_theme/index.dart';
 import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
@@ -20,15 +21,23 @@ import 'package:theme_play/shared/widgets/index.dart';
 extension EditableWidgetTypeExt on EditableWidgetType {
   static final RxList<XFile> _imagePaths = <XFile>[].obs;
 
-  Future<void> removeImages(XFile image) async {
+  Future<void> removeImages(
+    XFile image, {
+    required final UserThemeModel userThemeModel,
+  }) async {
     _imagePaths.remove(image);
-    final storageRepository = StorageRepository.instance;
-    LoadingStatus.loading.showLoadingDialog();
-    await storageRepository.removeImage(
-      imagePaths: [extractFilePath(image.path)],
-      bucketName: BucketName.userThemesSliderImages,
-    );
-    LoadingStatus.loaded.showLoadingDialog();
+    if (image.path.contains("https://")) {
+      final storageRepository = StorageRepository.instance;
+      LoadingStatus.loading.showLoadingDialog();
+      await storageRepository.removeImage(
+        imagePaths: [extractFilePath(image.path)],
+        bucketName: BucketName.userThemesSliderImages,
+      );
+      await saveSliderImages(
+        userThemeModel: userThemeModel,
+      );
+      LoadingStatus.loaded.showLoadingDialog();
+    }
   }
 
   Widget getBottomSheetByEditableWidgetType({
@@ -53,9 +62,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                 final userTheme = userThemeModel.copyWith(
                   name: nameController.text,
                 );
-                _onTapSaveButtonFromTextType(
+                await _onTapSaveButtonFromTextType(
                   userThemeModel: userTheme,
                 );
+                Get.back();
               },
               text: constants.strings.save.tr,
             ),
@@ -81,9 +91,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                     title: titleController.text,
                   ),
                 );
-                _onTapSaveButtonFromTextType(
+                await _onTapSaveButtonFromTextType(
                   userThemeModel: userTheme,
                 );
+                Get.back();
               },
               text: constants.strings.save.tr,
             ),
@@ -109,9 +120,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                     subtitle: subtitleController.text,
                   ),
                 );
-                _onTapSaveButtonFromTextType(
+                await _onTapSaveButtonFromTextType(
                   userThemeModel: userTheme,
                 );
+                Get.back();
               },
               text: constants.strings.save.tr,
             ),
@@ -138,9 +150,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                     mainMessage: mainMessageController.text,
                   ),
                 );
-                _onTapSaveButtonFromTextType(
+                await _onTapSaveButtonFromTextType(
                   userThemeModel: userTheme,
                 );
+                Get.back();
               },
               text: constants.strings.save.tr,
             ),
@@ -168,7 +181,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                           largeSize: 21.sp,
                           backgroundColor: constants.colors.error,
                           label: Bounceable(
-                            onTap: () => removeImages(image),
+                            onTap: () => removeImages(
+                              image,
+                              userThemeModel: userThemeModel,
+                            ),
                             child: Icon(
                               Icons.close,
                               color: constants.colors.white,
@@ -219,27 +235,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               12.verticalSpace,
               CustomPrimaryButton(
                 onTap: () async {
-                  final userThemesRepository = UserThemesRepository.instance;
-
-                  final uploadedImages =
-                      await userThemesRepository.uploadUserThemeSliderImages(
-                    themeId: userThemeModel.id ?? "",
-                    images: _imagePaths,
-                  );
-                  final userTheme = userThemeModel.copyWith(
-                    style: userThemeModel.style.copyWith(
-                      sliderStyle: userThemeModel.style.sliderStyle.copyWith(
-                        images: uploadedImages.isEmpty
-                            ? _imagePaths.map((image) => image.path).toList()
-                            : [
-                                ...uploadedImages.map((url) => url),
-                              ],
-                      ),
-                    ),
-                  );
-                  _onTapSaveButtonFromTextType(
-                    userThemeModel: userTheme,
-                  );
+                  await saveSliderImages(userThemeModel: userThemeModel);
                   Get.back();
                 },
                 text: constants.strings.save.tr,
@@ -253,13 +249,42 @@ extension EditableWidgetTypeExt on EditableWidgetType {
     return const SizedBox.shrink();
   }
 
+  Future<void> saveSliderImages({
+    required final UserThemeModel userThemeModel,
+  }) async {
+    final userThemesRepository = UserThemesRepository.instance;
+
+    final uploadedImages =
+        await userThemesRepository.uploadUserThemeSliderImages(
+      themeId: userThemeModel.id ?? "",
+      images: _imagePaths,
+    );
+
+    final userTheme = userThemeModel.copyWith(
+      style: userThemeModel.style.copyWith(
+        sliderStyle: userThemeModel.style.sliderStyle.copyWith(
+          images: uploadedImages.isEmpty
+              ? _imagePaths.map((image) => image.path).toList()
+              : [
+                  ..._imagePaths
+                      .where((image) => image.path.contains("https://"))
+                      .map((image) => image.path),
+                  ...uploadedImages.map((url) => url),
+                ],
+        ),
+      ),
+    );
+    await _onTapSaveButtonFromTextType(
+      userThemeModel: userTheme,
+    );
+  }
+
   Future<void> _onTapSaveButtonFromTextType({
     required final UserThemeModel userThemeModel,
   }) async {
     final editThemeController = Get.find<EditThemeController>();
     editThemeController.userThemeModel.value = userThemeModel;
     await editThemeController.editUserTheme();
-    Get.back();
   }
 
   void pickSliderImage() {

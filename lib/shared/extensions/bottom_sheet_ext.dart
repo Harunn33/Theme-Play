@@ -17,7 +17,10 @@ extension BottomSheetExt on BuildContext {
         child: Container(
           padding:
               AppPaddings.instance.horizontal + AppPaddings.instance.vertical,
-          child: child,
+          child: PopScope(
+            canPop: false,
+            child: child,
+          ),
         ),
       ),
       isScrollControlled: true,
