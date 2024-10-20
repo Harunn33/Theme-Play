@@ -29,12 +29,23 @@ class EditThemeScreen extends GetView<EditThemeController> {
             Padding(
               padding: controller.constants.paddings.horizontal,
               child: CustomEditableWidget(
+                isDismissible: false,
                 editableWidgetType: EditableWidgetType.headerSlider,
                 userThemeModel: controller.userThemeModel.value,
-                child: CustomSlider(
-                  sliderStyle:
-                      controller.userThemeModel.value.style.sliderStyle,
-                ),
+                child: controller
+                        .userThemeModel.value.style.sliderStyle.images.isEmpty
+                    ? Container(
+                        height: 200.h,
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 100.sp,
+                        ),
+                      )
+                    : CustomSlider(
+                        sliderStyle:
+                            controller.userThemeModel.value.style.sliderStyle,
+                      ),
               ),
             ),
             12.verticalSpace,
@@ -48,7 +59,6 @@ class EditThemeScreen extends GetView<EditThemeController> {
                     userThemeModel: controller.userThemeModel.value,
                     child: CustomTypewriterAnimatedText(
                       onTap: () => context.showBottomSheet(
-                        isDismissible: false,
                         child: EditableWidgetType.title
                             .getBottomSheetByEditableWidgetType(
                           userThemeModel: controller.userThemeModel.value,
@@ -74,7 +84,6 @@ class EditThemeScreen extends GetView<EditThemeController> {
                     userThemeModel: controller.userThemeModel.value,
                     child: CustomTypewriterAnimatedText(
                       onTap: () => context.showBottomSheet(
-                        isDismissible: false,
                         child: EditableWidgetType.subtitle
                             .getBottomSheetByEditableWidgetType(
                           userThemeModel: controller.userThemeModel.value,
@@ -99,6 +108,12 @@ class EditThemeScreen extends GetView<EditThemeController> {
                     editableWidgetType: EditableWidgetType.mainMessage,
                     userThemeModel: controller.userThemeModel.value,
                     child: CustomTypewriterAnimatedText(
+                      onTap: () => context.showBottomSheet(
+                        child: EditableWidgetType.mainMessage
+                            .getBottomSheetByEditableWidgetType(
+                          userThemeModel: controller.userThemeModel.value,
+                        ),
+                      ),
                       speed: controller.userThemeModel.value.style.textStyle
                           .typewriterAnimationDuration.milliseconds,
                       text: controller.userThemeModel.value.style.mainMessage,

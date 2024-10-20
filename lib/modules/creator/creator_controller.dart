@@ -70,7 +70,7 @@ class CreatorController extends GetxController {
     final ProfileRepository profileRepository = ProfileRepository.instance;
     final user = await profileRepository.getProfile();
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
-    final UserThemeModel model = UserThemeModel(
+    UserThemeModel model = UserThemeModel(
       shareableCode: _generateRandomCode(11),
       themeId: themeList[selectedThemeIndex.value].id,
       style: themeList[selectedThemeIndex.value].style,
@@ -80,6 +80,8 @@ class CreatorController extends GetxController {
     await userThemesRepository.createUserTheme(
       userThemeModel: model,
     );
+    final userThemes = await userThemesRepository.getUserThemes();
+    model = userThemes.last;
     final HomeController homeController = Get.find<HomeController>();
     homeController.refreshMyThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
@@ -89,7 +91,7 @@ class CreatorController extends GetxController {
     Get.toNamed(
       Routes.theme,
       arguments: {
-        "model": model,
+        "model": model.obs,
       },
     );
     clearDataOnThePage();

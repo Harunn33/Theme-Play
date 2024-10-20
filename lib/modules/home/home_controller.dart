@@ -85,7 +85,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     Get.toNamed(
       Routes.theme,
       arguments: {
-        "model": userTheme,
+        "model": userTheme.obs,
       },
     );
   }

@@ -74,6 +74,11 @@ final class NavBarHelpers {
   }
 
   Future<void> addSharedCodes() async {
+    if (enterThemeCodeController.text.isEmpty) {
+      return SnackbarType.error.show(
+        message: constants.strings.enterThemeCode.tr.capitalizeFirst.toString(),
+      );
+    }
     final HomeController homeController = Get.find<HomeController>();
     final SharedCodesToUserRepository sharedCodesToUserRepository =
         SharedCodesToUserRepository.instance;

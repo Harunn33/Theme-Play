@@ -18,13 +18,14 @@ extension BottomSheetExt on BuildContext {
           padding:
               AppPaddings.instance.horizontal + AppPaddings.instance.vertical,
           child: PopScope(
-            canPop: false,
+            canPop: isDismissible,
             child: child,
           ),
         ),
       ),
       isScrollControlled: true,
       isDismissible: isDismissible,
+      enableDrag: isDismissible,
     );
   }
 }

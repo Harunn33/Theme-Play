@@ -14,18 +14,20 @@ class CustomEditableWidget extends StatelessWidget {
   final Widget child;
   final UserThemeModel userThemeModel;
   final EditableWidgetType editableWidgetType;
+  final bool isDismissible;
   const CustomEditableWidget({
     super.key,
     required this.child,
     required this.userThemeModel,
     this.editableWidgetType = EditableWidgetType.name,
+    this.isDismissible = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Bounceable(
       onTap: () => context.showBottomSheet(
-        isDismissible: false,
+        isDismissible: isDismissible,
         child: editableWidgetType.getBottomSheetByEditableWidgetType(
           userThemeModel: userThemeModel,
         ),

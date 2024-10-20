@@ -52,6 +52,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            12.verticalSpace,
             CustomTextFormField(
               textEditingController: nameController,
               labelText: constants.strings.themeName.tr,
@@ -69,6 +70,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               },
               text: constants.strings.save.tr,
             ),
+            12.verticalSpace,
           ],
         );
       case EditableWidgetType.title:
@@ -78,6 +80,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            12.verticalSpace,
             CustomTextFormField(
               maxLines: 2,
               textEditingController: titleController,
@@ -98,6 +101,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               },
               text: constants.strings.save.tr,
             ),
+            12.verticalSpace,
           ],
         );
       case EditableWidgetType.subtitle:
@@ -107,6 +111,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            12.verticalSpace,
             CustomTextFormField(
               maxLines: 5,
               textEditingController: subtitleController,
@@ -127,6 +132,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               },
               text: constants.strings.save.tr,
             ),
+            12.verticalSpace,
           ],
         );
       case EditableWidgetType.mainMessage:
