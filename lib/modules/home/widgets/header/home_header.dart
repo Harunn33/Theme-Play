@@ -28,48 +28,56 @@ class HomeHeader extends StatelessWidget {
           ),
         ],
       ),
-      child: OverflowBar(
-        alignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            controller.constants.strings.allCreatedThemes.tr,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          6.verticalSpace,
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: AnimatedSearchBar(
-                  onTapSearchButton: controller.toggleSearchBar,
-                  onTapClearButton: controller.clearSearchBar,
-                  onChanged: controller.searchOnChanged,
-                  isExpanded: controller.isSearchBarExpanded,
-                  textEditingController: controller.searchController,
-                  animationController: controller.animationController,
-                ),
-              ),
-              4.horizontalSpace,
-              Obx(
-                () => Badge.count(
-                  largeSize: 18.r,
-                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontSize: 12.sp,
-                      ),
-                  count: controller.filterBadgeCount.value,
-                  isLabelVisible: controller.isFilterSelected,
-                  child: CustomIconButton(
-                    onTap: () => controller.showFilters(
-                      context,
+      child: Obx(
+        () => OverflowBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              controller.selectedTabIndex.value == 0
+                  ? controller.constants.strings.allCreatedThemes.tr
+                  : controller.constants.strings.sharedThemesWithMe.tr,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            6.verticalSpace,
+            Visibility(
+              visible: controller.selectedTabIndex.value == 0,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: AnimatedSearchBar(
+                      onTapSearchButton: controller.toggleSearchBar,
+                      onTapClearButton: controller.clearSearchBar,
+                      onChanged: controller.searchOnChanged,
+                      isExpanded: controller.isSearchBarExpanded,
+                      textEditingController: controller.searchController,
+                      animationController: controller.animationController,
                     ),
-                    hasDecoration: true,
-                    icon: Icons.filter_alt_outlined,
                   ),
-                ),
+                  4.horizontalSpace,
+                  Obx(
+                    () => Badge.count(
+                      largeSize: 18.r,
+                      textStyle:
+                          Theme.of(context).textTheme.labelSmall?.copyWith(
+                                fontSize: 12.sp,
+                              ),
+                      count: controller.filterBadgeCount.value,
+                      isLabelVisible: controller.isFilterSelected,
+                      child: CustomIconButton(
+                        onTap: () => controller.showFilters(
+                          context,
+                        ),
+                        hasDecoration: true,
+                        icon: Icons.filter_alt_outlined,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

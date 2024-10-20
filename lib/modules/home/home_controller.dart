@@ -5,9 +5,6 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/models/index.dart';
-import 'package:theme_play/data/models/popover/popover_model.dart';
-import 'package:theme_play/data/models/theme/theme_model.dart';
-import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
 import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
@@ -41,6 +38,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   final RxString selectedFilterItem = "".obs;
   final RxInt filterBadgeCount = 0.obs;
+  final RxInt selectedTabIndex = 0.obs;
 
   bool get isFilterSelected => filterBadgeCount.value > 0;
 
@@ -60,6 +58,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       length: 2,
       vsync: this,
     );
+    tabController.addListener(() {
+      selectedTabIndex.value = tabController.index;
+    });
   }
 
   void _startSearchOperation() {
@@ -282,46 +283,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                   ),
                   32.verticalSpace,
                   Obx(
-                    () => AnimatedCrossFade(
-                      firstChild: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: CustomSecondaryButton(
-                              onTap: clearFilters,
-                              text: constants.strings.removeFilters.tr,
-                              textColor: constants.colors.black,
-                              bgColor: constants.colors.orochimaru,
-                              borderRadius: 8,
+                    () => filterBadgeCount.value == 0
+                        ? const SizedBox.shrink()
+                        : AnimatedSlide(
+                            offset: const Offset(0, 0),
+                            duration: 3.seconds,
+                            child: SizedBox(
+                              width: 1.sw,
+                              child: CustomSecondaryButton(
+                                onTap: clearFilters,
+                                text: constants.strings.removeFilters.tr,
+                                textColor: constants.colors.black,
+                                bgColor: constants.colors.orochimaru,
+                                borderRadius: 8,
+                              ),
                             ),
                           ),
-                          16.horizontalSpace,
-                          Expanded(
-                            child: CustomSecondaryButton(
-                              onTap: Get.back,
-                              text: constants.strings.filterThemes.tr,
-                              textColor: constants.colors.black,
-                              bgColor: constants.colors.powderBlue,
-                              borderRadius: 8,
-                            ),
-                          ),
-                        ],
-                      ),
-                      secondChild: SizedBox(
-                        width: 1.sw,
-                        child: CustomSecondaryButton(
-                          onTap: Get.back,
-                          text: constants.strings.filterThemes.tr,
-                          textColor: constants.colors.black,
-                          bgColor: constants.colors.powderBlue,
-                          borderRadius: 8,
-                        ),
-                      ),
-                      crossFadeState: filterBadgeCount.value != 0
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      duration: 300.milliseconds,
-                    ),
                   ),
                 ],
               ),
@@ -347,9 +324,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     final UserThemesRepository userThemesRepository =
         UserThemesRepository.instance;
     final sharedCodes = await getSharedCodesToUsers();
-    if (sharedCodes.isEmpty) return [];
+    if (sharedCodes == null) return [];
     final userThemes = await userThemesRepository.getUserThemesByShareableCode(
-      shareableCodes: sharedCodes.first.codes ?? [],
+      shareableCodes: sharedCodes.codes ?? [],
     );
     return userThemes;
   }
@@ -370,13 +347,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Future<void> deleteUserTheme(String themeId) async {
     final UserThemesRepository userThemesRepository =
         UserThemesRepository.instance;
+    LoadingStatus.loading.showLoadingDialog();
     await userThemesRepository.deleteUserTheme(themeId: themeId);
     Get.back();
     refreshMyThemesTab();
     refreshSharedThemesTab();
+    LoadingStatus.loaded.showLoadingDialog();
   }
 
-  Future<List<SharedCodesToUserModel>> getSharedCodesToUsers() async {
+  Future<SharedCodesToUserModel?> getSharedCodesToUsers() async {
     final SharedCodesToUserRepository sharedCodesToUserRepository =
         SharedCodesToUserRepository.instance;
 

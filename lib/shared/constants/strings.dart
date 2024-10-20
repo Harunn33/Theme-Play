@@ -37,6 +37,7 @@ final class AppStrings {
 
   // Home page
   String get allCreatedThemes => "allCreatedThemes";
+  String get sharedThemesWithMe => "sharedThemesWithMe";
   String get searchYourThemes => "searchYourThemes";
   String get editTheme => "editTheme";
   String get deleteTheme => "deleteTheme";
@@ -49,6 +50,9 @@ final class AppStrings {
   String get lover => "lover";
   String get filterThemes => "filterThemes";
   String get enterThemeCode => "enterThemeCode";
+
+  // Home page error messages
+  String get youCantShareYourOwnTheme => "youCantShareYourOwnTheme";
 
   // Creator page
   String get designYourPage => "designYourPage";

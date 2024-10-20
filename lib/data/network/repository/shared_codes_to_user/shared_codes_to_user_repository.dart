@@ -24,7 +24,7 @@ final class SharedCodesToUserRepository
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
     List<String> shareableCodes = <String>[];
     final sharedCodesToUsers = await getSharedCodesToUsers();
-    if (sharedCodesToUsers.isEmpty) {
+    if (sharedCodesToUsers == null) {
       final SharedCodesToUserModel sharedCodesToUserModel =
           SharedCodesToUserModel(
         createdAt: DateTime.now().toIso8601String(),
@@ -38,7 +38,7 @@ final class SharedCodesToUserRepository
       LoadingStatus.loaded.showLoadingDialog();
       return;
     }
-    shareableCodes = List<String>.from(sharedCodesToUsers.first.codes ?? []);
+    shareableCodes = List<String>.from(sharedCodesToUsers.codes ?? []);
     shareableCodes.add(shareableCode);
     await _supabaseService.updateData(
       tableName: TableName.sharedCodesToUser,
@@ -52,14 +52,11 @@ final class SharedCodesToUserRepository
   }
 
   @override
-  Future<List<SharedCodesToUserModel>> getSharedCodesToUsers() async {
+  Future<SharedCodesToUserModel?> getSharedCodesToUsers() async {
     final response = await _supabaseService.fetchData(
       tableName: TableName.sharedCodesToUser,
     );
-    return response
-        .map(
-          (user) => SharedCodesToUserModel.fromJson(user),
-        )
-        .toList();
+    if (response.isEmpty) return null;
+    return SharedCodesToUserModel.fromJson(response.first);
   }
 }

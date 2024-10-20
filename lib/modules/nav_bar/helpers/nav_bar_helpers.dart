@@ -61,9 +61,7 @@ final class NavBarHelpers {
                     ),
                     CustomPrimaryButton(
                       text: constants.strings.save.tr,
-                      onTap: () {
-                        addSharedCodes();
-                      },
+                      onTap: () => addSharedCodes(),
                     ),
                   ],
                 ),
@@ -76,13 +74,23 @@ final class NavBarHelpers {
   }
 
   Future<void> addSharedCodes() async {
+    final HomeController homeController = Get.find<HomeController>();
     final SharedCodesToUserRepository sharedCodesToUserRepository =
         SharedCodesToUserRepository.instance;
+    final myUserThemes = await homeController.getUserThemes();
+    final hasContainsMyUserTheme = myUserThemes
+        .map((userTheme) =>
+            userTheme.shareableCode == enterThemeCodeController.text)
+        .toList();
+    if (hasContainsMyUserTheme.contains(true)) {
+      return SnackbarType.error.show(
+        message: constants.strings.youCantShareYourOwnTheme.tr,
+      );
+    }
     await sharedCodesToUserRepository.addSharedCodes(
       shareableCode: enterThemeCodeController.text,
     );
     Get.back();
-    final HomeController homeController = Get.find<HomeController>();
     final NavBarController navBarController = Get.find<NavBarController>();
     homeController.refreshSharedThemesTab();
     SnackbarType.success.show(

@@ -5,5 +5,5 @@ abstract class ISharedCodesToUserRepository {
     required final String shareableCode,
   });
 
-  Future<List<SharedCodesToUserModel>> getSharedCodesToUsers();
+  Future<SharedCodesToUserModel?> getSharedCodesToUsers();
 }

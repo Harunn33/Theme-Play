@@ -37,9 +37,10 @@ class LocalizationController extends GetxController implements GetxService {
 
   void loadCurrentLanguage() async {
     _locale = Locale(
-        LanguageHelpers.instance.currentLanguageCode,
-        localStorage.retrieveData(LocalStorageKeys.countryCode.name) ??
-            AppLangs.languages.first.countryCode);
+      LanguageHelpers.instance.currentLanguageCode,
+      localStorage.retrieveData(LocalStorageKeys.countryCode.name) ??
+          LanguageHelpers.instance.currentCountryCode,
+    );
 
     for (var i = 0; i < AppLangs.languages.length; i++) {
       if (AppLangs.languages[i].languageCode == _locale.languageCode) {

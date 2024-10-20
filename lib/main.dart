@@ -20,32 +20,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, __) {
-        return GetBuilder<LocalizationController>(
-          builder: (localizationController) {
-            return GetMaterialApp(
-              title: AppStrings.instance.appName,
-              translations: AppTranslations(
-                languages: DependencyInjection.languages,
-              ),
-              fallbackLocale: Locale(
-                AppLangs.languages.first.languageCode,
-                AppLangs.languages.first.countryCode,
-              ),
-              locale: localizationController.locale,
-              debugShowCheckedModeBanner: false,
-              theme: CustomTheme.instance.lightTheme,
-              initialRoute: AppPages.instance.initial,
-              getPages: AppPages.instance.routes,
-              initialBinding: ConnectionBinding(),
-            );
-          },
-        );
-      },
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      final Size designSize = Size(constraints.maxWidth, constraints.maxHeight);
+      return ScreenUtilInit(
+        designSize: designSize,
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, __) {
+          return GetBuilder<LocalizationController>(
+            builder: (localizationController) {
+              return GetMaterialApp(
+                title: AppStrings.instance.appName,
+                translations: AppTranslations(
+                  languages: DependencyInjection.languages,
+                ),
+                fallbackLocale: Locale(
+                  AppLangs.languages.first.languageCode,
+                  AppLangs.languages.first.countryCode,
+                ),
+                locale: localizationController.locale,
+                debugShowCheckedModeBanner: false,
+                theme: CustomTheme.instance.lightTheme,
+                initialRoute: AppPages.instance.initial,
+                getPages: AppPages.instance.routes,
+                initialBinding: ConnectionBinding(),
+              );
+            },
+          );
+        },
+      );
+    });
   }
 }
