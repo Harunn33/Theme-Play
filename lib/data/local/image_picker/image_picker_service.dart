@@ -13,8 +13,17 @@ final class ImagePickerService implements IImagePickerService {
 
   @override
   Future<XFile?> pickImage() async {
-    final image = await _picker.pickImage(source: ImageSource.gallery);
+    final image = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
     if (image == null) return null;
+    return image;
+  }
+
+  @override
+  Future<List<XFile>> pickMultiImages() async {
+    final image = await _picker.pickMultiImage();
+    if (image.isEmpty) return [];
     return image;
   }
 }

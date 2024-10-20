@@ -36,6 +36,10 @@
   "selectCategory": "Select a category",
   "enterYourPageName": "Enter your page name",
   "create": "Create",
+  "themeName": "Theme Name",
+  "title": "Title",
+  "subtitle": "Subtitle",
+  "mainMessage": "Content",
   "profileUpdated": "Profile updated successfully",
   "themeCreated": "Theme created successfully"
 }

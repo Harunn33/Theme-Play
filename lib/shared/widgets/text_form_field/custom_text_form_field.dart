@@ -9,12 +9,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final String? Function(String?)? validator;
   final FocusNode focusNode = FocusNode();
+  final int? maxLines;
   CustomTextFormField({
     super.key,
     required this.textEditingController,
     required this.labelText,
     this.readOnly = false,
     this.validator,
+    this.maxLines = 1,
   });
 
   @override
@@ -26,6 +28,8 @@ class CustomTextFormField extends StatelessWidget {
       focusNode: focusNode,
       onTapOutside: (event) => focusNode.unfocus(),
       controller: textEditingController,
+      maxLines: maxLines,
+      minLines: 1,
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: readOnly ? colors.orochimaru : null,
           ),

@@ -35,5 +35,11 @@
   "designYourPage": "Sayfanızı Tasarlayın",
   "selectCategory": "Bir kategori seç",
   "enterYourPageName": "Sayfa adını giriniz",
-  "create": "Oluştur"
+  "create": "Oluştur",
+  "themeName": "Tema Adı",
+  "title": "Başlık",
+  "subtitle": "Altyazı",
+  "mainMessage": "İçerik",
+  "profileUpdated": "Profil başarıyla güncellendi",
+  "themeCreated": "Tema başarıyla oluşturuldu"
 }

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/index.dart';

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/sign_in_type.dart';
 
 part 'auth_repository_impl.dart';

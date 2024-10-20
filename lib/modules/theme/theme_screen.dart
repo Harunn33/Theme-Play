@@ -1,10 +1,9 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/modules/theme/theme_controller.dart';
-import 'package:theme_play/modules/theme/widgets/index.dart';
+import 'package:theme_play/shared/widgets/index.dart';
 
 class ThemeScreen extends GetView<ThemeController> {
   const ThemeScreen({super.key});
@@ -13,7 +12,7 @@ class ThemeScreen extends GetView<ThemeController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       appBar: CustomThemeAppBar(
-        controller: controller,
+        userThemeModel: controller.userThemeModel,
       ),
       backgroundColor: controller.constants.colors.hexToColor(
         controller.userThemeModel.style.bgColor,
@@ -21,6 +20,7 @@ class ThemeScreen extends GetView<ThemeController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          12.verticalSpace,
           Padding(
             padding:
                 controller.userThemeModel.style.sliderStyle.scrollDirection ==
@@ -40,9 +40,7 @@ class ThemeScreen extends GetView<ThemeController> {
                 CustomTypewriterAnimatedText(
                   speed: controller.userThemeModel.style.titleStyle
                       .typewriterAnimationDuration.milliseconds,
-                  text: controller.languageHelpers.convertedCurrentLang(
-                    texts: controller.userThemeModel.style.title.toJson(),
-                  ),
+                  text: controller.userThemeModel.style.title,
                   textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: controller.constants.colors.hexToColor(
                           controller.userThemeModel.style.titleStyle.color,
@@ -55,9 +53,7 @@ class ThemeScreen extends GetView<ThemeController> {
                 CustomTypewriterAnimatedText(
                   speed: controller.userThemeModel.style.textStyle
                       .typewriterAnimationDuration.milliseconds,
-                  text: controller.languageHelpers.convertedCurrentLang(
-                    texts: controller.userThemeModel.style.subTitle.toJson(),
-                  ),
+                  text: controller.userThemeModel.style.subtitle,
                   textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: controller.constants.colors.hexToColor(
                           controller.userThemeModel.style.textStyle.color,
@@ -70,9 +66,7 @@ class ThemeScreen extends GetView<ThemeController> {
                 CustomTypewriterAnimatedText(
                   speed: controller.userThemeModel.style.textStyle
                       .typewriterAnimationDuration.milliseconds,
-                  text: controller.languageHelpers.convertedCurrentLang(
-                    texts: controller.userThemeModel.style.mainMessage.toJson(),
-                  ),
+                  text: controller.userThemeModel.style.mainMessage,
                   textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: controller.constants.colors.hexToColor(
                           controller.userThemeModel.style.textStyle.color,
@@ -86,32 +80,6 @@ class ThemeScreen extends GetView<ThemeController> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class CustomTypewriterAnimatedText extends StatelessWidget {
-  final String text;
-  final TextStyle? textStyle;
-  final Duration speed;
-  const CustomTypewriterAnimatedText({
-    super.key,
-    required this.text,
-    required this.textStyle,
-    this.speed = const Duration(milliseconds: 30),
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedTextKit(
-      totalRepeatCount: 1,
-      animatedTexts: [
-        TypewriterAnimatedText(
-          text,
-          speed: speed,
-          textStyle: textStyle,
-        ),
-      ],
     );
   }
 }

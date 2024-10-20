@@ -72,6 +72,8 @@ final class SupabaseService implements ISupabaseService {
       await client.from(tableName.value).insert(data);
     } catch (e) {
       throw Exception(e);
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
     }
   }
 
@@ -89,6 +91,8 @@ final class SupabaseService implements ISupabaseService {
           );
     } catch (e) {
       throw Exception(e);
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
     }
   }
 
@@ -105,6 +109,8 @@ final class SupabaseService implements ISupabaseService {
           );
     } catch (e) {
       throw Exception(e);
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
     }
   }
 
@@ -134,6 +140,18 @@ final class SupabaseService implements ISupabaseService {
             );
       }
       return client.storage.from(bucketName.value).getPublicUrl(path);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<void> removeImageFromStorage({
+    required final BucketName bucketName,
+    required final List<String> imagePaths,
+  }) async {
+    try {
+      await client.storage.from(bucketName.value).remove(imagePaths);
     } catch (e) {
       throw Exception(e);
     }

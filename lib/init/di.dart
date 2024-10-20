@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/local/index.dart';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/constants/dep.dart' as dep;
 
 final class DependencyInjection {

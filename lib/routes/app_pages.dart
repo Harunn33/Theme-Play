@@ -3,6 +3,7 @@ import 'package:theme_play/modules/account/index.dart';
 import 'package:theme_play/modules/change_language/index.dart';
 import 'package:theme_play/modules/creator/index.dart';
 import 'package:theme_play/modules/edit_profile/index.dart';
+import 'package:theme_play/modules/edit_theme/index.dart';
 import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
 import 'package:theme_play/modules/sign_in/index.dart';
@@ -63,6 +64,11 @@ final class AppPages {
       name: Routes.theme,
       page: () => const ThemeScreen(),
       binding: ThemeBinding(),
+    ),
+    GetPage(
+      name: Routes.editTheme,
+      page: () => const EditThemeScreen(),
+      binding: EditThemeBinding(),
     ),
   ];
 }

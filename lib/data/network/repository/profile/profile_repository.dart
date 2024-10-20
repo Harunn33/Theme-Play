@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/bucket_name.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
 

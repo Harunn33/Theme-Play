@@ -47,7 +47,6 @@ final class NavBarHelpers {
             Get.back();
             enterThemeCodeController.clear();
             context.showBottomSheet(
-              height: .2.sh,
               child: Padding(
                 padding:
                     constants.paddings.horizontal + constants.paddings.vertical,
@@ -59,6 +58,7 @@ final class NavBarHelpers {
                       textEditingController: enterThemeCodeController,
                       labelText: constants.strings.enterThemeCode.tr,
                     ),
+                    24.verticalSpace,
                     CustomPrimaryButton(
                       text: constants.strings.save.tr,
                       onTap: () => addSharedCodes(),

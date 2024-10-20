@@ -1,6 +1,6 @@
 import 'package:theme_play/data/models/theme/theme_model.dart';
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
 
 part 'themes_repository_impl.dart';

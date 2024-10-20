@@ -90,6 +90,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
+  void _navigateToEditThemeScreen(UserThemeModel userTheme) {
+    Get.back();
+    Get.toNamed(
+      Routes.editTheme,
+      arguments: {
+        "model": userTheme.obs,
+      },
+    );
+  }
+
   void refreshMyThemesTab() {
     futureUserThemes.value = getUserThemes();
     if (isSearchBarExpanded.value) toggleSearchBar();
@@ -142,6 +152,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         ),
         if (hasEditAccess)
           PopoverModel(
+            onTap: () => _navigateToEditThemeScreen(userTheme),
             icon: AppIcons.icEdit,
             title: constants.strings.editTheme.tr,
           ),
@@ -210,7 +221,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       selectedFilterItem.value = constants.strings.allCreatedThemes.tr;
     }
     context.showBottomSheet(
-      height: .5.sh,
       child: Padding(
         padding: constants.paddings.horizontal + constants.paddings.vertical,
         child: Column(

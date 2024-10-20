@@ -1,6 +1,7 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:theme_play/data/local/image_picker/image_picker_service.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
-import 'package:theme_play/data/network/services/supabase_service.dart';
+import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/bucket_name.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
@@ -30,6 +31,17 @@ final class StorageRepository implements IStorageRepository {
   }
 
   @override
+  Future<void> removeImage({
+    required final List<String> imagePaths,
+    required final BucketName bucketName,
+  }) async {
+    await _supabaseService.removeImageFromStorage(
+      imagePaths: imagePaths,
+      bucketName: bucketName,
+    );
+  }
+
+  @override
   Future<String> uploadImage({
     required final String path,
     required final BucketName bucketName,
@@ -49,6 +61,27 @@ final class StorageRepository implements IStorageRepository {
       "t": DateTime.now().millisecondsSinceEpoch.toString(),
     }).toString();
     LoadingStatus.loaded.showLoadingDialog();
+    return imageUrl;
+  }
+
+  @override
+  Future<String> uploadMultiImages({
+    required final XFile image,
+    required final String path,
+    required final BucketName bucketName,
+  }) async {
+    final imageBytes = await image.readAsBytes();
+    String imageUrl = await _supabaseService.fetchImagesFromStorage(
+      bucketName: bucketName,
+      path: path,
+      isUpload: true,
+      data: imageBytes,
+      imageExtension: image.path.split('.').last.toLowerCase(),
+    );
+    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
+      "t": DateTime.now().millisecondsSinceEpoch.toString(),
+    }).toString();
+
     return imageUrl;
   }
 }

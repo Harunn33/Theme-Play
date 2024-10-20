@@ -60,6 +60,12 @@ final class AppStrings {
   String get enterYourPageName => "enterYourPageName";
   String get create => "create";
 
+  // Edit theme page
+  String get themeName => "themeName";
+  String get title => "title";
+  String get subtitle => "subtitle";
+  String get mainMessage => "mainMessage";
+
   // Snackbar messages
   String get profileUpdated => "profileUpdated";
   String get themeCreated => "themeCreated";

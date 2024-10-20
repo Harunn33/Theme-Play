@@ -5,9 +5,9 @@ import 'package:theme_play/shared/constants/langs.dart';
 import 'package:theme_play/shared/enums/local_storage_keys.dart';
 
 final class LanguageHelpers {
-  LanguageHelpers._();
+  const LanguageHelpers._();
 
-  static final LanguageHelpers instance = LanguageHelpers._();
+  static const LanguageHelpers instance = LanguageHelpers._();
 
   static final LocalStorageService _localStorageService =
       LocalStorageService.instance;
@@ -57,7 +57,7 @@ final class LanguageHelpers {
   String convertedCurrentLang({
     required final Map<String, dynamic> texts,
   }) {
-    final String currentLanguage = _getCurrentLanguageCode();
+    final currentLanguage = _getCurrentLanguageCode();
     return texts[currentLanguage] ?? "";
   }
 }

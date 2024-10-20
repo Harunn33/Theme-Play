@@ -40,6 +40,11 @@ abstract class ISupabaseService {
     final String? imageExtension,
   });
 
+  Future<void> removeImageFromStorage({
+    required final BucketName bucketName,
+    required final List<String> imagePaths,
+  });
+
   /// Fetch data from a table with search
   Future<PostgrestList> fetchDataWithSearch({
     required final TableName tableName,
