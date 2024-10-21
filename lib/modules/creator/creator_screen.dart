@@ -5,9 +5,10 @@ import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/modules/creator/creator_controller.dart';
 import 'package:theme_play/modules/creator/widgets/custom_category_list.dart';
 import 'package:theme_play/shared/extensions/index.dart';
+import 'package:theme_play/shared/mixins/validators.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
-class CreatorScreen extends GetView<CreatorController> {
+class CreatorScreen extends GetView<CreatorController> with ValidatorsMixin {
   const CreatorScreen({super.key});
 
   @override
@@ -54,13 +55,7 @@ class CreatorScreen extends GetView<CreatorController> {
                             textEditingController: controller.nameController,
                             labelText: controller
                                 .constants.strings.enterYourPageName.tr,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return controller
-                                    .constants.strings.enterYourPageName.tr;
-                              }
-                              return null;
-                            },
+                            validator: validator,
                           ),
                           CustomPrimaryButton(
                             onTap: () => controller.createUserTheme(

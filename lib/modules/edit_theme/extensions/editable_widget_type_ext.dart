@@ -59,6 +59,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             ),
             12.verticalSpace,
             CustomPrimaryButton(
+              bgColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
+              textColor: constants.colors.white,
               onTap: () async {
                 final userTheme = userThemeModel.copyWith(
                   name: nameController.text,
@@ -88,6 +92,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             ),
             12.verticalSpace,
             CustomPrimaryButton(
+              bgColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
+              textColor: constants.colors.white,
               onTap: () async {
                 final userTheme = userThemeModel.copyWith(
                   style: userThemeModel.style.copyWith(
@@ -119,6 +127,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             ),
             12.verticalSpace,
             CustomPrimaryButton(
+              bgColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
+              textColor: constants.colors.white,
               onTap: () async {
                 final userTheme = userThemeModel.copyWith(
                   style: userThemeModel.style.copyWith(
@@ -150,6 +162,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             ),
             12.verticalSpace,
             CustomPrimaryButton(
+              bgColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
+              textColor: constants.colors.white,
               onTap: () async {
                 final userTheme = userThemeModel.copyWith(
                   style: userThemeModel.style.copyWith(
@@ -240,6 +256,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               ),
               12.verticalSpace,
               CustomPrimaryButton(
+                bgColor: constants.colors.hexToColor(
+                  userThemeModel.style.titleStyle.color,
+                ),
+                textColor: constants.colors.white,
                 onTap: () async {
                   await saveSliderImages(userThemeModel: userThemeModel);
                   Get.back();

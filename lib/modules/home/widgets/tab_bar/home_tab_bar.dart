@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 
 class HomeTabBar extends StatelessWidget {
@@ -25,12 +26,12 @@ class HomeTabBar extends StatelessWidget {
         controller: controller.tabController,
         dividerHeight: 0,
         indicatorSize: TabBarIndicatorSize.tab,
-        tabs: const [
+        tabs: [
           Tab(
-            text: "My",
+            text: controller.constants.strings.my.tr,
           ),
           Tab(
-            text: "Shared to me",
+            text: controller.constants.strings.sharedToMe.tr,
           ),
         ],
       ),

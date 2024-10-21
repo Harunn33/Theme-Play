@@ -4,6 +4,7 @@ import 'package:theme_play/data/network/repository/storage/storage_repository.da
 import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/bucket_name.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
+import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 
 part 'profile_repository_impl.dart';
 
@@ -32,6 +33,7 @@ final class ProfileRepository implements IProfileRepository {
       final UserResponse user = await _client.auth.updateUser(userModel);
       return user.user;
     } on AuthException catch (e) {
+      SnackbarType.error.show(message: e.message);
       throw "Update profile failed with error: ${e.message}";
     } catch (e) {
       throw "Update profile failed";

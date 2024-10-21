@@ -5,9 +5,11 @@ import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/modules/edit_profile/edit_profile_controller.dart';
 import 'package:theme_play/modules/edit_profile/widgets/custom_header_profile_photo.dart';
 import 'package:theme_play/shared/extensions/index.dart';
+import 'package:theme_play/shared/mixins/index.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
-class EditProfileScreen extends GetView<EditProfileController> {
+class EditProfileScreen extends GetView<EditProfileController>
+    with ValidatorsMixin {
   const EditProfileScreen({super.key});
 
   @override
@@ -35,6 +37,7 @@ class EditProfileScreen extends GetView<EditProfileController> {
                     children: [
                       24.verticalSpace,
                       CustomTextFormField(
+                        validator: validator,
                         textEditingController: controller.nameController,
                         labelText: controller.constants.strings.fullName,
                       ),

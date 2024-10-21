@@ -14,6 +14,7 @@ final class AppStrings {
   String get no => "no";
   String get copyCode => "copyCode";
   String get copied => "copied";
+  String get fieldIsRequired => "fieldIsRequired";
 
   // Account page
   String get editProfile => "editProfile";
@@ -39,6 +40,8 @@ final class AppStrings {
   String get allCreatedThemes => "allCreatedThemes";
   String get sharedThemesWithMe => "sharedThemesWithMe";
   String get searchYourThemes => "searchYourThemes";
+  String get my => "my";
+  String get sharedToMe => "sharedToMe";
   String get editTheme => "editTheme";
   String get deleteTheme => "deleteTheme";
   String get deleteThemeDialogQuestion => "deleteThemeDialogQuestion";
@@ -50,6 +53,7 @@ final class AppStrings {
   String get lover => "lover";
   String get filterThemes => "filterThemes";
   String get enterThemeCode => "enterThemeCode";
+  String get codeMustBeAtLeast11 => "codeMustBeAtLeast11";
 
   // Home page error messages
   String get youCantShareYourOwnTheme => "youCantShareYourOwnTheme";

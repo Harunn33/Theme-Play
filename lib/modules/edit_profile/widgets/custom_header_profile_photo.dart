@@ -41,11 +41,10 @@ class CustomHeaderProfilePhoto extends StatelessWidget {
                     controller.constants.paddings.vertical,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: controller.constants.colors.thistle,
+                  color: controller.constants.colors.powderBlue,
                 ),
                 child: Icon(
                   Icons.edit,
-                  color: controller.constants.colors.white,
                   size: 20.r,
                 ),
               ),

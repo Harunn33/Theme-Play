@@ -14,14 +14,16 @@ import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/extensions/show_popover_ext.dart';
+import 'package:theme_play/shared/mixins/validators.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
-final class NavBarHelpers {
+final class NavBarHelpers with ValidatorsMixin {
   NavBarHelpers._();
 
   static final NavBarHelpers instance = NavBarHelpers._();
 
   final enterThemeCodeController = TextEditingController();
+  final GlobalKey<FormState> addSharedCodesFormKey = GlobalKey<FormState>();
 
   final List<Widget> screens = [
     const HomeScreen(),
@@ -50,20 +52,26 @@ final class NavBarHelpers {
               child: Padding(
                 padding:
                     constants.paddings.horizontal + constants.paddings.vertical,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomTextFormField(
-                      textEditingController: enterThemeCodeController,
-                      labelText: constants.strings.enterThemeCode.tr,
-                    ),
-                    24.verticalSpace,
-                    CustomPrimaryButton(
-                      text: constants.strings.save.tr,
-                      onTap: () => addSharedCodes(),
-                    ),
-                  ],
+                child: Form(
+                  key: addSharedCodesFormKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomTextFormField(
+                        maxLength: 11,
+                        textCapitalization: TextCapitalization.characters,
+                        textEditingController: enterThemeCodeController,
+                        labelText: constants.strings.enterThemeCode.tr,
+                        validator: enterThemeCodeValidator,
+                      ),
+                      24.verticalSpace,
+                      CustomPrimaryButton(
+                        text: constants.strings.save.tr,
+                        onTap: () => addSharedCodes(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -74,11 +82,7 @@ final class NavBarHelpers {
   }
 
   Future<void> addSharedCodes() async {
-    if (enterThemeCodeController.text.isEmpty) {
-      return SnackbarType.error.show(
-        message: constants.strings.enterThemeCode.tr.capitalizeFirst.toString(),
-      );
-    }
+    if (!addSharedCodesFormKey.currentState!.validate()) return;
     final HomeController homeController = Get.find<HomeController>();
     final SharedCodesToUserRepository sharedCodesToUserRepository =
         SharedCodesToUserRepository.instance;

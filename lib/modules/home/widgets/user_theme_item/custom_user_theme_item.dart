@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
@@ -17,33 +18,44 @@ class CustomUserThemeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: controller.constants.paddings.horizontal,
-      shape: RoundedRectangleBorder(
-        borderRadius: 8.radiusAll,
-      ),
+    return Bounceable(
       onTap: () => controller.navigateToThemeScreen(userTheme),
-      tileColor: controller.constants.colors.hexToColor(
-        userTheme.style.bgColor,
-      ),
-      title: Text(
-        userTheme.name,
-        style: Theme.of(context).textTheme.titleSmall,
-      ),
-      trailing: Builder(
-        builder: (context) {
-          return Bounceable(
-            onTap: () => controller.showThemeSettings(
-              context,
-              userTheme: userTheme,
-              hasEditAccess: hasEditAccess,
+      child: Container(
+        padding: controller.constants.paddings.horizontal +
+            controller.constants.paddings.vertical * 2,
+        decoration: BoxDecoration(
+          color: controller.constants.colors.hexToColor(
+            userTheme.style.bgColor,
+          ),
+          borderRadius: 8.radiusAll,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                userTheme.name,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
             ),
-            child: Icon(
-              Icons.more_vert_outlined,
-              color: controller.constants.colors.black,
+            8.horizontalSpace,
+            Builder(
+              builder: (ctx) {
+                return Bounceable(
+                  onTap: () => controller.showThemeSettings(
+                    ctx,
+                    userTheme: userTheme,
+                    hasEditAccess: hasEditAccess,
+                  ),
+                  child: Icon(
+                    Icons.more_vert_outlined,
+                    color: controller.constants.colors.black,
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

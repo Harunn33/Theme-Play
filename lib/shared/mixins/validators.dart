@@ -1,31 +1,19 @@
 import 'package:get/get.dart';
+import 'package:theme_play/shared/constants/strings.dart';
 
 mixin ValidatorsMixin {
   String? validator(String? value) {
+    const AppStrings strings = AppStrings.instance;
     if (value == null) return null;
-    if (value.isEmpty) return "This field is required";
+    if (value.isEmpty) return strings.fieldIsRequired.tr;
     return null;
   }
 
-  String? emailValidator(String? value) {
-    String? requiredValidation = validator(value);
-    if (requiredValidation != null) return requiredValidation;
-    if (!value!.isEmail) return "Invalid email address";
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    String? requiredValidation = validator(value);
-    if (requiredValidation != null) return requiredValidation;
-    return null;
-  }
-
-  String? rePasswordValidator(String? value, String? password) {
-    String? requiredValidation = validator(value);
-    if (requiredValidation != null) return requiredValidation;
-    if (value != password) {
-      return "Password does not match";
-    }
+  String? enterThemeCodeValidator(String? value) {
+    const AppStrings strings = AppStrings.instance;
+    if (value == null) return null;
+    if (value.isEmpty) return strings.fieldIsRequired.tr;
+    if (value.length < 11) return strings.codeMustBeAtLeast11.tr;
     return null;
   }
 }

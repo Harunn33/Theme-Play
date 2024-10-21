@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final FocusNode focusNode = FocusNode();
   final int? maxLines;
+  final int? maxLength;
+  final TextCapitalization textCapitalization;
   CustomTextFormField({
     super.key,
     required this.textEditingController,
@@ -17,6 +19,8 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.validator,
     this.maxLines = 1,
+    this.maxLength,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   @override
@@ -29,6 +33,8 @@ class CustomTextFormField extends StatelessWidget {
       onTapOutside: (event) => focusNode.unfocus(),
       controller: textEditingController,
       maxLines: maxLines,
+      maxLength: maxLength,
+      textCapitalization: textCapitalization,
       minLines: 1,
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: readOnly ? colors.orochimaru : null,
