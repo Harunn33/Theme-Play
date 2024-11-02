@@ -45,5 +45,14 @@
   "subtitle": "Altyazı",
   "mainMessage": "İçerik",
   "profileUpdated": "Profil başarıyla güncellendi",
-  "themeCreated": "Tema başarıyla oluşturuldu"
+  "themeCreated": "Tema başarıyla oluşturuldu",
+  "homeShowcaseSearchMessage": "Kendi temalarınızı arayın",
+  "homeShowcaseFilterMessage": "Temaları kategoriye göre filtreleyin",
+  "homeShowcaseCreateThemeMessage": "Kendi temanızı oluşturun",
+  "homeShowcaseEnterCodeSharedThemeWithYouMessage": "Sizinle paylaşılan temanın kodunu girin",
+  "homeShowcaseMyThemesMessage": "Sizin oluşturduğunuz temalar",
+  "homeShowcaseSharedThemesMessage": "Sizinle paylaşılan temalar",
+  "homeShowcaseCopyCodeMessage": "Temanıza ait olan benzersiz koda buradan ulaşabilirsiniz",
+  "homeShowcaseEditThemeMessage": "Oluşturduğunuz temayı buradan düzenleyebilirsiniz",
+  "homeShowcaseDeleteThemeMessage": "Oluşturduğunuz temayı buradan silebilirsiniz"
 }

@@ -13,7 +13,6 @@ import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
-import 'package:theme_play/shared/extensions/show_popover_ext.dart';
 import 'package:theme_play/shared/mixins/validators.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
@@ -30,54 +29,71 @@ final class NavBarHelpers with ValidatorsMixin {
     const AccountScreen(),
   ];
   final ConstantsInstances constants = ConstantsInstances.instance;
-  void onTapFAB(BuildContext context) {
+
+  final GlobalKey createThemeShowcaseKey = GlobalKey();
+  final GlobalKey enterThemeCodeShowcaseKey = GlobalKey();
+
+  Future<void> onTapFAB(BuildContext context) async {
     context.showPopup(
       width: .6.sw,
+      isShowcase: true,
+      showcaseItems: [
+        ShowcaseItem.createThemeButton,
+        ShowcaseItem.enterThemeButton,
+      ],
       children: [
         PopoverModel(
           icon: AppIcons.icDesign,
           title: constants.strings.designYourPage.tr,
-          onTap: () {
-            Get.back();
-            Get.toNamed(Routes.creator);
-          },
+          showcaseDesc: constants.strings.homeShowcaseCreateThemeMessage.tr,
+          showcaseKey: createThemeShowcaseKey,
+          onTap: navigateToCreatorPage,
         ),
         PopoverModel(
           icon: AppIcons.icDesign,
           title: constants.strings.enterThemeCode.tr,
-          onTap: () {
-            Get.back();
-            enterThemeCodeController.clear();
-            context.showBottomSheet(
-              child: Padding(
-                padding:
-                    constants.paddings.horizontal + constants.paddings.vertical,
-                child: Form(
-                  key: addSharedCodesFormKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomTextFormField(
-                        maxLength: 11,
-                        textCapitalization: TextCapitalization.characters,
-                        textEditingController: enterThemeCodeController,
-                        labelText: constants.strings.enterThemeCode.tr,
-                        validator: enterThemeCodeValidator,
-                      ),
-                      24.verticalSpace,
-                      CustomPrimaryButton(
-                        text: constants.strings.save.tr,
-                        onTap: () => addSharedCodes(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+          showcaseDesc: constants
+              .strings.homeShowcaseEnterCodeSharedThemeWithYouMessage.tr,
+          showcaseKey: enterThemeCodeShowcaseKey,
+          onTap: () => onTapEnterThemeCode(context),
         ),
       ],
+    );
+  }
+
+  void navigateToCreatorPage() {
+    Get.back();
+    Get.toNamed(Routes.creator);
+  }
+
+  void onTapEnterThemeCode(BuildContext context) {
+    Get.back();
+    enterThemeCodeController.clear();
+    context.showBottomSheet(
+      child: Padding(
+        padding: constants.paddings.horizontal + constants.paddings.vertical,
+        child: Form(
+          key: addSharedCodesFormKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomTextFormField(
+                maxLength: 11,
+                textCapitalization: TextCapitalization.characters,
+                textEditingController: enterThemeCodeController,
+                labelText: constants.strings.enterThemeCode.tr,
+                validator: enterThemeCodeValidator,
+              ),
+              24.verticalSpace,
+              CustomPrimaryButton(
+                text: constants.strings.save.tr,
+                onTap: () => addSharedCodes(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

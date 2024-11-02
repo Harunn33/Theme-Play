@@ -45,5 +45,14 @@
   "subtitle": "Subtitle",
   "mainMessage": "Content",
   "profileUpdated": "Profile updated successfully",
-  "themeCreated": "Theme created successfully"
+  "themeCreated": "Theme created successfully",
+  "homeShowcaseSearchMessage": "Search for your own themes",
+  "homeShowcaseFilterMessage": "Filter themes by category",
+  "homeShowcaseCreateThemeMessage": "Create your own theme",
+  "homeShowcaseEnterCodeSharedThemeWithYouMessage": "Enter the code of the theme shared with you",
+  "homeShowcaseMyThemesMessage": "Self-created themes",
+  "homeShowcaseSharedThemesMessage": "Themes shared with you",
+  "homeShowcaseCopyCodeMessage": "You can find the unique code for your theme here",
+  "homeShowcaseEditThemeMessage": "You can edit the theme you created here",
+  "homeShowcaseDeleteThemeMessage": "You can delete the theme you created here"
 }

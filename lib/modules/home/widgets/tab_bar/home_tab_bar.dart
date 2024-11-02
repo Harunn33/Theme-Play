@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 
 class HomeTabBar extends StatelessWidget {
@@ -22,18 +23,33 @@ class HomeTabBar extends StatelessWidget {
           ),
         ],
       ),
-      child: TabBar(
-        controller: controller.tabController,
-        dividerHeight: 0,
-        indicatorSize: TabBarIndicatorSize.tab,
-        tabs: [
-          Tab(
-            text: controller.constants.strings.my.tr,
-          ),
-          Tab(
-            text: controller.constants.strings.sharedToMe.tr,
-          ),
-        ],
+      child: ShowCaseWidget(
+        builder: (showcaseContext) {
+          controller.showcaseTabContext = showcaseContext;
+          return TabBar(
+            controller: controller.tabController,
+            dividerHeight: 0,
+            indicatorSize: TabBarIndicatorSize.tab,
+            tabs: [
+              Showcase(
+                key: controller.myThemeShowcaseKey,
+                description:
+                    controller.constants.strings.homeShowcaseMyThemesMessage.tr,
+                child: Tab(
+                  text: controller.constants.strings.my.tr,
+                ),
+              ),
+              Showcase(
+                key: controller.themeSharedWithMeShowcaseKey,
+                description: controller
+                    .constants.strings.homeShowcaseSharedThemesMessage.tr,
+                child: Tab(
+                  text: controller.constants.strings.sharedToMe.tr,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

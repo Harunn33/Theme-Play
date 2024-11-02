@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
@@ -12,8 +15,8 @@ import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/app_icons.dart';
+import 'package:theme_play/shared/enums/showcase_item.dart';
 import 'package:theme_play/shared/extensions/index.dart';
-import 'package:theme_play/shared/extensions/show_popover_ext.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
@@ -44,10 +47,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   late final Future<List<ThemeModel>> futureThemes;
 
+  BuildContext showcaseHeaderContext = Get.context!;
+  BuildContext showcaseTabContext = Get.context!;
+  final GlobalKey searchBarShowcaseKey = GlobalKey();
+  final GlobalKey filterButtonShowcaseKey = GlobalKey();
+  final GlobalKey myThemeShowcaseKey = GlobalKey();
+  final GlobalKey themeSharedWithMeShowcaseKey = GlobalKey();
+  final GlobalKey copyThemeCodeShowcaseKey = GlobalKey();
+  final GlobalKey editThemeShowcaseKey = GlobalKey();
+  final GlobalKey deleteThemeShowcaseKey = GlobalKey();
+
   @override
   void onInit() {
     super.onInit();
-
     futureThemes = getThemes();
     _startSearchOperation();
     animationController = AnimationController(
@@ -61,6 +73,56 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     tabController.addListener(() {
       selectedTabIndex.value = tabController.index;
     });
+  }
+
+  @override
+  void onClose() {
+    tabController.dispose();
+    animationController.dispose();
+    searchController.dispose();
+    super.onClose();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    initializeShowcase();
+  }
+
+  void initializeShowcase() {
+    final showcaseService = ShowcaseService.instance;
+    showcaseService.show(
+      showcaseHeaderContext,
+      widgetIds: [
+        searchBarShowcaseKey,
+        filterButtonShowcaseKey,
+      ],
+      showcaseItems: [
+        ShowcaseItem.homeSearchBar,
+        ShowcaseItem.homeFilterButton,
+      ],
+    );
+    Timer.periodic(
+      300.milliseconds,
+      (timer) {
+        final isCompletedHeaderShowcase =
+            showcaseService.isShowcaseCompleted(showcaseHeaderContext);
+        if (isCompletedHeaderShowcase) {
+          showcaseService.show(
+            showcaseTabContext,
+            widgetIds: [
+              myThemeShowcaseKey,
+              themeSharedWithMeShowcaseKey,
+            ],
+            showcaseItems: [
+              ShowcaseItem.homeMyThemesTab,
+              ShowcaseItem.homeSharedThemesTab,
+            ],
+          );
+          timer.cancel();
+        }
+      },
+    );
   }
 
   void _startSearchOperation() {
@@ -134,78 +196,99 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     context.showPopup(
       width: .45.sw,
       iconHeight: 18.h,
+      isShowcase: true,
+      showcaseItems: [
+        ShowcaseItem.homeCopyThemeCode,
+        ShowcaseItem.homeEditThemeButton,
+        ShowcaseItem.homeDeleteThemeButton,
+      ],
       children: [
         PopoverModel(
-          onTap: () async {
-            await Clipboard.setData(
-              ClipboardData(
-                text: userTheme.shareableCode,
-              ),
-            );
-            Get.back();
-            SnackbarType.success.show(
-              message: constants.strings.copied.tr,
-            );
-          },
+          onTap: () => copyThemeCode(userTheme),
           icon: AppIcons.icCopy,
           title: constants.strings.copyCode.tr,
+          showcaseDesc: constants.strings.homeShowcaseCopyCodeMessage.tr,
+          showcaseKey: copyThemeCodeShowcaseKey,
         ),
         if (hasEditAccess)
           PopoverModel(
             onTap: () => _navigateToEditThemeScreen(userTheme),
             icon: AppIcons.icEdit,
             title: constants.strings.editTheme.tr,
+            showcaseDesc: constants.strings.homeShowcaseEditThemeMessage.tr,
+            showcaseKey: editThemeShowcaseKey,
           ),
         PopoverModel(
           icon: AppIcons.icDelete,
           title: constants.strings.deleteTheme.tr,
-          onTap: () {
-            Get.back();
-            context.showDialog(
-              child: Padding(
-                padding:
-                    constants.paddings.horizontal + constants.paddings.vertical,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      constants.strings.deleteTheme.tr,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    16.verticalSpace,
-                    Text(
-                      constants.strings.deleteThemeDialogQuestion.tr,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                    32.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CustomSecondaryButton(
-                          text: constants.strings.no.tr,
-                          bgColor: constants.colors.orochimaru,
-                          borderRadius: 8,
-                          textColor: constants.colors.black,
-                          onTap: () => Get.back(),
-                        ),
-                        16.horizontalSpace,
-                        CustomSecondaryButton(
-                          text: constants.strings.yes.tr,
-                          bgColor: constants.colors.powderBlue,
-                          borderRadius: 8,
-                          textColor: constants.colors.black,
-                          onTap: () => deleteUserTheme(userTheme.id!),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
+          showcaseDesc: constants.strings.homeShowcaseDeleteThemeMessage.tr,
+          showcaseKey: deleteThemeShowcaseKey,
+          onTap: () => onTapDeleteTheme(
+            context,
+            userTheme: userTheme,
+          ),
         ),
       ],
+    );
+  }
+
+  Future<void> copyThemeCode(UserThemeModel userTheme) async {
+    await Clipboard.setData(
+      ClipboardData(
+        text: userTheme.shareableCode,
+      ),
+    );
+    Get.back();
+    SnackbarType.success.show(
+      message: constants.strings.copied.tr,
+    );
+  }
+
+  void onTapDeleteTheme(
+    BuildContext context, {
+    required final UserThemeModel userTheme,
+  }) {
+    Get.back();
+    context.showDialog(
+      child: Padding(
+        padding: constants.paddings.horizontal + constants.paddings.vertical,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              constants.strings.deleteTheme.tr,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            16.verticalSpace,
+            Text(
+              constants.strings.deleteThemeDialogQuestion.tr,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            32.verticalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomSecondaryButton(
+                  text: constants.strings.no.tr,
+                  bgColor: constants.colors.orochimaru,
+                  borderRadius: 8,
+                  textColor: constants.colors.black,
+                  onTap: () => Get.back(),
+                ),
+                16.horizontalSpace,
+                CustomSecondaryButton(
+                  text: constants.strings.yes.tr,
+                  bgColor: constants.colors.powderBlue,
+                  borderRadius: 8,
+                  textColor: constants.colors.black,
+                  onTap: () => deleteUserTheme(userTheme.id!),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 

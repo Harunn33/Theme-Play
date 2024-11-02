@@ -54,6 +54,18 @@ final class AppStrings {
   String get filterThemes => "filterThemes";
   String get enterThemeCode => "enterThemeCode";
   String get codeMustBeAtLeast11 => "codeMustBeAtLeast11";
+  // Home page showcase messages
+  String get homeShowcaseSearchMessage => "homeShowcaseSearchMessage";
+  String get homeShowcaseFilterMessage => "homeShowcaseFilterMessage";
+  String get homeShowcaseCreateThemeMessage => "homeShowcaseCreateThemeMessage";
+  String get homeShowcaseEnterCodeSharedThemeWithYouMessage =>
+      "homeShowcaseEnterCodeSharedThemeWithYouMessage";
+  String get homeShowcaseMyThemesMessage => "homeShowcaseMyThemesMessage";
+  String get homeShowcaseSharedThemesMessage =>
+      "homeShowcaseSharedThemesMessage";
+  String get homeShowcaseCopyCodeMessage => "homeShowcaseCopyCodeMessage";
+  String get homeShowcaseEditThemeMessage => "homeShowcaseEditThemeMessage";
+  String get homeShowcaseDeleteThemeMessage => "homeShowcaseDeleteThemeMessage";
 
   // Home page error messages
   String get youCantShareYourOwnTheme => "youCantShareYourOwnTheme";
