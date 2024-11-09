@@ -56,6 +56,9 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             CustomTextFormField(
               textEditingController: nameController,
               labelText: constants.strings.themeName.tr,
+              focusedBorderColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
             ),
             12.verticalSpace,
             CustomPrimaryButton(
@@ -89,6 +92,9 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               maxLines: 2,
               textEditingController: titleController,
               labelText: constants.strings.title.tr,
+              focusedBorderColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
             ),
             12.verticalSpace,
             CustomPrimaryButton(
@@ -124,6 +130,9 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               maxLines: 5,
               textEditingController: subtitleController,
               labelText: constants.strings.subtitle.tr,
+              focusedBorderColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
             ),
             12.verticalSpace,
             CustomPrimaryButton(
@@ -159,6 +168,9 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               maxLines: 10,
               textEditingController: mainMessageController,
               labelText: constants.strings.mainMessage.tr,
+              focusedBorderColor: constants.colors.hexToColor(
+                userThemeModel.style.titleStyle.color,
+              ),
             ),
             12.verticalSpace,
             CustomPrimaryButton(
@@ -330,7 +342,6 @@ extension EditableWidgetTypeExt on EditableWidgetType {
           snackPosition: SnackPosition.BOTTOM,
         );
       }
-      print("Image paths: $_imagePaths");
     });
   }
 

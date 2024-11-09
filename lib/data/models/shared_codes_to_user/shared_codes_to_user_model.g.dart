@@ -11,15 +11,18 @@ _$SharedCodesToUserModelImpl _$$SharedCodesToUserModelImplFromJson(
     _$SharedCodesToUserModelImpl(
       id: json['id'] as String?,
       createdAt: json['created_at'] as String,
-      createdBy: json['created_by'] as String,
-      codes:
-          (json['codes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      sharingUser: json['sharing_user'] as String,
+      sharedUser: json['shared_user'] as String,
+      themeShareCode: json['theme_share_code'] as String,
+      themeEditAccess: json['theme_edit_access'] as bool,
     );
 
 Map<String, dynamic> _$$SharedCodesToUserModelImplToJson(
         _$SharedCodesToUserModelImpl instance) =>
     <String, dynamic>{
       'created_at': instance.createdAt,
-      'created_by': instance.createdBy,
-      'codes': instance.codes,
+      'sharing_user': instance.sharingUser,
+      'shared_user': instance.sharedUser,
+      'theme_share_code': instance.themeShareCode,
+      'theme_edit_access': instance.themeEditAccess,
     };

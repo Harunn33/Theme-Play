@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final int? maxLength;
   final TextCapitalization textCapitalization;
+  final Color? focusedBorderColor;
   CustomTextFormField({
     super.key,
     required this.textEditingController,
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines = 1,
     this.maxLength,
     this.textCapitalization = TextCapitalization.none,
+    this.focusedBorderColor,
   });
 
   @override
@@ -39,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
       style: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: readOnly ? colors.orochimaru : null,
           ),
+      cursorColor: focusedBorderColor ?? colors.powderBlue,
       decoration: InputDecoration(
         label: Text(
           labelText.tr,
@@ -48,6 +51,12 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: 8.radiusAll,
           borderSide: BorderSide(
             color: colors.orochimaru,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: 8.radiusAll,
+          borderSide: BorderSide(
+            color: focusedBorderColor ?? colors.orochimaru,
           ),
         ),
         enabledBorder: OutlineInputBorder(

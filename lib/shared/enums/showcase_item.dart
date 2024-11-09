@@ -3,9 +3,8 @@ enum ShowcaseItem {
   homeFilterButton,
   homeMyThemesTab,
   homeSharedThemesTab,
-  homeCopyThemeCode,
+  homeShareThemeCode,
   homeEditThemeButton,
   homeDeleteThemeButton,
   createThemeButton,
-  enterThemeButton,
 }

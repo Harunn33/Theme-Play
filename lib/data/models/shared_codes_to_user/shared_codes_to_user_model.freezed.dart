@@ -25,9 +25,14 @@ mixin _$SharedCodesToUserModel {
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   String get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "created_by")
-  String get createdBy => throw _privateConstructorUsedError;
-  List<String>? get codes => throw _privateConstructorUsedError;
+  @JsonKey(name: "sharing_user")
+  String get sharingUser => throw _privateConstructorUsedError;
+  @JsonKey(name: "shared_user")
+  String get sharedUser => throw _privateConstructorUsedError;
+  @JsonKey(name: "theme_share_code")
+  String get themeShareCode => throw _privateConstructorUsedError;
+  @JsonKey(name: "theme_edit_access")
+  bool get themeEditAccess => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,8 +49,10 @@ abstract class $SharedCodesToUserModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(includeToJson: false) String? id,
       @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "created_by") String createdBy,
-      List<String>? codes});
+      @JsonKey(name: "sharing_user") String sharingUser,
+      @JsonKey(name: "shared_user") String sharedUser,
+      @JsonKey(name: "theme_share_code") String themeShareCode,
+      @JsonKey(name: "theme_edit_access") bool themeEditAccess});
 }
 
 /// @nodoc
@@ -64,8 +71,10 @@ class _$SharedCodesToUserModelCopyWithImpl<$Res,
   $Res call({
     Object? id = freezed,
     Object? createdAt = null,
-    Object? createdBy = null,
-    Object? codes = freezed,
+    Object? sharingUser = null,
+    Object? sharedUser = null,
+    Object? themeShareCode = null,
+    Object? themeEditAccess = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -76,14 +85,22 @@ class _$SharedCodesToUserModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      sharingUser: null == sharingUser
+          ? _value.sharingUser
+          : sharingUser // ignore: cast_nullable_to_non_nullable
               as String,
-      codes: freezed == codes
-          ? _value.codes
-          : codes // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      sharedUser: null == sharedUser
+          ? _value.sharedUser
+          : sharedUser // ignore: cast_nullable_to_non_nullable
+              as String,
+      themeShareCode: null == themeShareCode
+          ? _value.themeShareCode
+          : themeShareCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      themeEditAccess: null == themeEditAccess
+          ? _value.themeEditAccess
+          : themeEditAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -100,8 +117,10 @@ abstract class _$$SharedCodesToUserModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(includeToJson: false) String? id,
       @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "created_by") String createdBy,
-      List<String>? codes});
+      @JsonKey(name: "sharing_user") String sharingUser,
+      @JsonKey(name: "shared_user") String sharedUser,
+      @JsonKey(name: "theme_share_code") String themeShareCode,
+      @JsonKey(name: "theme_edit_access") bool themeEditAccess});
 }
 
 /// @nodoc
@@ -119,8 +138,10 @@ class __$$SharedCodesToUserModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? createdAt = null,
-    Object? createdBy = null,
-    Object? codes = freezed,
+    Object? sharingUser = null,
+    Object? sharedUser = null,
+    Object? themeShareCode = null,
+    Object? themeEditAccess = null,
   }) {
     return _then(_$SharedCodesToUserModelImpl(
       id: freezed == id
@@ -131,14 +152,22 @@ class __$$SharedCodesToUserModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      sharingUser: null == sharingUser
+          ? _value.sharingUser
+          : sharingUser // ignore: cast_nullable_to_non_nullable
               as String,
-      codes: freezed == codes
-          ? _value._codes
-          : codes // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      sharedUser: null == sharedUser
+          ? _value.sharedUser
+          : sharedUser // ignore: cast_nullable_to_non_nullable
+              as String,
+      themeShareCode: null == themeShareCode
+          ? _value.themeShareCode
+          : themeShareCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      themeEditAccess: null == themeEditAccess
+          ? _value.themeEditAccess
+          : themeEditAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -149,9 +178,10 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
   const _$SharedCodesToUserModelImpl(
       {@JsonKey(includeToJson: false) this.id,
       @JsonKey(name: "created_at") required this.createdAt,
-      @JsonKey(name: "created_by") required this.createdBy,
-      final List<String>? codes})
-      : _codes = codes;
+      @JsonKey(name: "sharing_user") required this.sharingUser,
+      @JsonKey(name: "shared_user") required this.sharedUser,
+      @JsonKey(name: "theme_share_code") required this.themeShareCode,
+      @JsonKey(name: "theme_edit_access") required this.themeEditAccess});
 
   factory _$SharedCodesToUserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SharedCodesToUserModelImplFromJson(json);
@@ -163,21 +193,21 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
   @JsonKey(name: "created_at")
   final String createdAt;
   @override
-  @JsonKey(name: "created_by")
-  final String createdBy;
-  final List<String>? _codes;
+  @JsonKey(name: "sharing_user")
+  final String sharingUser;
   @override
-  List<String>? get codes {
-    final value = _codes;
-    if (value == null) return null;
-    if (_codes is EqualUnmodifiableListView) return _codes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  @JsonKey(name: "shared_user")
+  final String sharedUser;
+  @override
+  @JsonKey(name: "theme_share_code")
+  final String themeShareCode;
+  @override
+  @JsonKey(name: "theme_edit_access")
+  final bool themeEditAccess;
 
   @override
   String toString() {
-    return 'SharedCodesToUserModel(id: $id, createdAt: $createdAt, createdBy: $createdBy, codes: $codes)';
+    return 'SharedCodesToUserModel(id: $id, createdAt: $createdAt, sharingUser: $sharingUser, sharedUser: $sharedUser, themeShareCode: $themeShareCode, themeEditAccess: $themeEditAccess)';
   }
 
   @override
@@ -188,15 +218,20 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            const DeepCollectionEquality().equals(other._codes, _codes));
+            (identical(other.sharingUser, sharingUser) ||
+                other.sharingUser == sharingUser) &&
+            (identical(other.sharedUser, sharedUser) ||
+                other.sharedUser == sharedUser) &&
+            (identical(other.themeShareCode, themeShareCode) ||
+                other.themeShareCode == themeShareCode) &&
+            (identical(other.themeEditAccess, themeEditAccess) ||
+                other.themeEditAccess == themeEditAccess));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, createdBy,
-      const DeepCollectionEquality().hash(_codes));
+  int get hashCode => Object.hash(runtimeType, id, createdAt, sharingUser,
+      sharedUser, themeShareCode, themeEditAccess);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +252,11 @@ abstract class _SharedCodesToUserModel implements SharedCodesToUserModel {
   const factory _SharedCodesToUserModel(
       {@JsonKey(includeToJson: false) final String? id,
       @JsonKey(name: "created_at") required final String createdAt,
-      @JsonKey(name: "created_by") required final String createdBy,
-      final List<String>? codes}) = _$SharedCodesToUserModelImpl;
+      @JsonKey(name: "sharing_user") required final String sharingUser,
+      @JsonKey(name: "shared_user") required final String sharedUser,
+      @JsonKey(name: "theme_share_code") required final String themeShareCode,
+      @JsonKey(name: "theme_edit_access")
+      required final bool themeEditAccess}) = _$SharedCodesToUserModelImpl;
 
   factory _SharedCodesToUserModel.fromJson(Map<String, dynamic> json) =
       _$SharedCodesToUserModelImpl.fromJson;
@@ -230,10 +268,17 @@ abstract class _SharedCodesToUserModel implements SharedCodesToUserModel {
   @JsonKey(name: "created_at")
   String get createdAt;
   @override
-  @JsonKey(name: "created_by")
-  String get createdBy;
+  @JsonKey(name: "sharing_user")
+  String get sharingUser;
   @override
-  List<String>? get codes;
+  @JsonKey(name: "shared_user")
+  String get sharedUser;
+  @override
+  @JsonKey(name: "theme_share_code")
+  String get themeShareCode;
+  @override
+  @JsonKey(name: "theme_edit_access")
+  bool get themeEditAccess;
   @override
   @JsonKey(ignore: true)
   _$$SharedCodesToUserModelImplCopyWith<_$SharedCodesToUserModelImpl>

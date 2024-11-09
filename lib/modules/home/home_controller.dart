@@ -1,20 +1,21 @@
 import 'dart:async';
-
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/models/index.dart';
+import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
+import 'package:theme_play/modules/theme/helpers/theme_screen_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/app_icons.dart';
+import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/enums/showcase_item.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
@@ -53,9 +54,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final GlobalKey filterButtonShowcaseKey = GlobalKey();
   final GlobalKey myThemeShowcaseKey = GlobalKey();
   final GlobalKey themeSharedWithMeShowcaseKey = GlobalKey();
-  final GlobalKey copyThemeCodeShowcaseKey = GlobalKey();
+  final GlobalKey shareThemeCodeShowcaseKey = GlobalKey();
   final GlobalKey editThemeShowcaseKey = GlobalKey();
   final GlobalKey deleteThemeShowcaseKey = GlobalKey();
+
+  final userIdTextEditingController = TextEditingController();
+  final GlobalKey<FormState> shareThemeFormKey = GlobalKey<FormState>();
+  final RxBool isEditAccess = false.obs;
+
+  final RxList<bool> hasEditAccessList = <bool>[].obs;
 
   @override
   void onInit() {
@@ -143,17 +150,28 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     });
   }
 
-  void navigateToThemeScreen(UserThemeModel userTheme) {
+  void navigateToThemeScreen({
+    required final UserThemeModel userTheme,
+    required final bool hasEditAccess,
+  }) {
     Get.toNamed(
       Routes.theme,
       arguments: {
         "model": userTheme.obs,
+        "has_edit_access": hasEditAccess,
       },
     );
   }
 
-  void _navigateToEditThemeScreen(UserThemeModel userTheme) {
+  void _navigateToEditThemeScreen(
+    BuildContext context, {
+    required final UserThemeModel userTheme,
+    required final bool hasEditAccess,
+  }) {
     Get.back();
+    if (!hasEditAccess) {
+      return ThemeScreenHelpers.instance.editThemeAccessControlDialog(context);
+    }
     Get.toNamed(
       Routes.editTheme,
       arguments: {
@@ -165,6 +183,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void refreshMyThemesTab() {
     futureUserThemes.value = getUserThemes();
     if (isSearchBarExpanded.value) toggleSearchBar();
+    filterBadgeCount.value = 0;
+    selectedFilterItem.value = constants.strings.allCreatedThemes.tr;
   }
 
   void refreshSharedThemesTab() {
@@ -192,32 +212,40 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     BuildContext context, {
     required final UserThemeModel userTheme,
     final bool hasEditAccess = false,
+    final bool hasShareTheme = false,
   }) {
     context.showPopup(
       width: .45.sw,
       iconHeight: 18.h,
       isShowcase: true,
       showcaseItems: [
-        ShowcaseItem.homeCopyThemeCode,
+        ShowcaseItem.homeShareThemeCode,
         ShowcaseItem.homeEditThemeButton,
         ShowcaseItem.homeDeleteThemeButton,
       ],
       children: [
-        PopoverModel(
-          onTap: () => copyThemeCode(userTheme),
-          icon: AppIcons.icCopy,
-          title: constants.strings.copyCode.tr,
-          showcaseDesc: constants.strings.homeShowcaseCopyCodeMessage.tr,
-          showcaseKey: copyThemeCodeShowcaseKey,
-        ),
-        if (hasEditAccess)
+        if (hasShareTheme)
           PopoverModel(
-            onTap: () => _navigateToEditThemeScreen(userTheme),
-            icon: AppIcons.icEdit,
-            title: constants.strings.editTheme.tr,
-            showcaseDesc: constants.strings.homeShowcaseEditThemeMessage.tr,
-            showcaseKey: editThemeShowcaseKey,
+            onTap: () => shareTheme(
+              context,
+              shareableCode: userTheme.shareableCode,
+            ),
+            icon: AppIcons.icShare,
+            title: constants.strings.shareTheme.tr,
+            showcaseDesc: constants.strings.homeShowcaseShareThemeMessage.tr,
+            showcaseKey: shareThemeCodeShowcaseKey,
           ),
+        PopoverModel(
+          onTap: () => _navigateToEditThemeScreen(
+            context,
+            userTheme: userTheme,
+            hasEditAccess: hasEditAccess,
+          ),
+          icon: AppIcons.icEdit,
+          title: constants.strings.editTheme.tr,
+          showcaseDesc: constants.strings.homeShowcaseEditThemeMessage.tr,
+          showcaseKey: editThemeShowcaseKey,
+        ),
         PopoverModel(
           icon: AppIcons.icDelete,
           title: constants.strings.deleteTheme.tr,
@@ -232,15 +260,102 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
-  Future<void> copyThemeCode(UserThemeModel userTheme) async {
-    await Clipboard.setData(
-      ClipboardData(
-        text: userTheme.shareableCode,
+  void shareTheme(
+    BuildContext context, {
+    required final String shareableCode,
+  }) {
+    Get.back();
+    userIdTextEditingController.clear();
+    isEditAccess.value = false;
+    context.showBottomSheet(
+      child: Padding(
+        padding: constants.paddings.horizontal + constants.paddings.vertical,
+        child: Form(
+          key: shareThemeFormKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomTextFormField(
+                textCapitalization: TextCapitalization.characters,
+                textEditingController: userIdTextEditingController,
+                labelText: constants.strings.enterUserId.tr,
+                validator: (value) {
+                  if (value == null) return null;
+                  if (value.isEmpty) {
+                    return constants.strings.fieldIsRequired.tr;
+                  }
+                  return null;
+                },
+              ),
+              12.verticalSpace,
+              Row(
+                children: [
+                  Obx(
+                    () => Switch(
+                      inactiveTrackColor: constants.colors.white,
+                      activeTrackColor: constants.colors.success,
+                      inactiveThumbColor: constants.colors.black,
+                      thumbColor: WidgetStateProperty.resolveWith(
+                        (states) => states.contains(WidgetState.selected)
+                            ? constants.colors.white
+                            : constants.colors.black,
+                      ),
+                      trackOutlineColor: WidgetStateProperty.resolveWith(
+                        (states) => states.contains(WidgetState.selected)
+                            ? constants.colors.success
+                            : constants.colors.black,
+                      ),
+                      value: isEditAccess.value,
+                      onChanged: (value) => isEditAccess.toggle(),
+                    ),
+                  ),
+                  8.horizontalSpace,
+                  Text(
+                    constants.strings.allowEditAccess.tr,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              ),
+              12.verticalSpace,
+              CustomPrimaryButton(
+                text: constants.strings.save.tr,
+                onTap: () => addSharedCodes(
+                  shareableCode: shareableCode,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  Future<void> addSharedCodes({
+    required final String shareableCode,
+  }) async {
+    if (!shareThemeFormKey.currentState!.validate()) return;
+    final HomeController homeController = Get.find<HomeController>();
+    final SharedCodesToUserRepository sharedCodesToUserRepository =
+        SharedCodesToUserRepository.instance;
+    final myUserThemes = await homeController.getUserThemes();
+    final hasContainsMyUserTheme = myUserThemes
+        .map((userTheme) =>
+            userTheme.createdBy == userIdTextEditingController.text)
+        .toList();
+    if (hasContainsMyUserTheme.contains(true)) {
+      return SnackbarType.error.show(
+        message: constants.strings.youCantShareYourOwnTheme.tr,
+      );
+    }
+    await sharedCodesToUserRepository.addSharedCodes(
+      sharedUser: userIdTextEditingController.text,
+      themeEditAccess: isEditAccess.value,
+      shareableCode: shareableCode,
     );
     Get.back();
     SnackbarType.success.show(
-      message: constants.strings.copied.tr,
+      message: constants.strings.themeCreated.tr,
     );
   }
 
@@ -365,8 +480,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                               if (selectedFilterItem.value == value) return;
                               selectedFilterItem.value = value ?? "";
                               filterBadgeCount.value = 1;
-                              futureUserThemes.value =
-                                  filterUserThemes(theme.id);
+                              futureUserThemes.value = filterUserThemes(
+                                theme.id,
+                              );
                             },
                           );
                         },
@@ -416,10 +532,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   Future<List<UserThemeModel>> getSharedUserThemes() async {
     final UserThemesRepository userThemesRepository =
         UserThemesRepository.instance;
-    final sharedCodes = await getSharedCodesToUsers();
-    if (sharedCodes == null) return [];
+    final sharedCodesToUserModel = await getSharedCodesToUsers();
+    if (sharedCodesToUserModel == null) return [];
+    final List<String> sharedCodes = sharedCodesToUserModel
+        .map((sharedCodesToUser) => sharedCodesToUser.themeShareCode)
+        .toList();
+    hasEditAccessList.value = sharedCodesToUserModel
+        .map((sharedCodesToUser) => sharedCodesToUser.themeEditAccess)
+        .toList();
     final userThemes = await userThemesRepository.getUserThemesByShareableCode(
-      shareableCodes: sharedCodes.codes ?? [],
+      shareableCodes: sharedCodes,
     );
     return userThemes;
   }
@@ -448,10 +570,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     LoadingStatus.loaded.showLoadingDialog();
   }
 
-  Future<SharedCodesToUserModel?> getSharedCodesToUsers() async {
-    final SharedCodesToUserRepository sharedCodesToUserRepository =
-        SharedCodesToUserRepository.instance;
-
-    return await sharedCodesToUserRepository.getSharedCodesToUsers();
+  Future<List<SharedCodesToUserModel>?> getSharedCodesToUsers() async {
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return null;
+    return await sharedCodesToUserRepository.getSharedCodesToUsers(
+      userId: user.id,
+    );
   }
 }

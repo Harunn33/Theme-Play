@@ -9,17 +9,22 @@ class CustomUserThemeItem extends StatelessWidget {
   final HomeController controller;
   final UserThemeModel userTheme;
   final bool hasEditAccess;
+  final bool hasShareTheme;
   const CustomUserThemeItem({
     super.key,
     required this.controller,
     required this.userTheme,
     this.hasEditAccess = false,
+    this.hasShareTheme = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Bounceable(
-      onTap: () => controller.navigateToThemeScreen(userTheme),
+      onTap: () => controller.navigateToThemeScreen(
+        userTheme: userTheme,
+        hasEditAccess: hasEditAccess,
+      ),
       child: Container(
         padding: controller.constants.paddings.horizontal +
             controller.constants.paddings.vertical * 2,
@@ -46,6 +51,7 @@ class CustomUserThemeItem extends StatelessWidget {
                     ctx,
                     userTheme: userTheme,
                     hasEditAccess: hasEditAccess,
+                    hasShareTheme: hasShareTheme,
                   ),
                   child: Icon(
                     Icons.more_vert_outlined,

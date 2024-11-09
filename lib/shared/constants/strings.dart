@@ -12,8 +12,8 @@ final class AppStrings {
   String get noResultFound => "noResultFound";
   String get yes => "yes";
   String get no => "no";
-  String get copyCode => "copyCode";
-  String get copied => "copied";
+  String get shareTheme => "shareTheme";
+  String get enterUserId => "enterUserId";
   String get fieldIsRequired => "fieldIsRequired";
 
   // Account page
@@ -52,8 +52,10 @@ final class AppStrings {
   String get anniversary => "anniversary";
   String get lover => "lover";
   String get filterThemes => "filterThemes";
-  String get enterThemeCode => "enterThemeCode";
-  String get codeMustBeAtLeast11 => "codeMustBeAtLeast11";
+  String get allowEditAccess => "allowEditAccess";
+  String get themeEditAccess => "themeEditAccess";
+  String get themeEditSharedAccessDialogQuestion =>
+      "themeEditSharedAccessDialogQuestion";
   // Home page showcase messages
   String get homeShowcaseSearchMessage => "homeShowcaseSearchMessage";
   String get homeShowcaseFilterMessage => "homeShowcaseFilterMessage";
@@ -63,7 +65,7 @@ final class AppStrings {
   String get homeShowcaseMyThemesMessage => "homeShowcaseMyThemesMessage";
   String get homeShowcaseSharedThemesMessage =>
       "homeShowcaseSharedThemesMessage";
-  String get homeShowcaseCopyCodeMessage => "homeShowcaseCopyCodeMessage";
+  String get homeShowcaseShareThemeMessage => "homeShowcaseShareThemeMessage";
   String get homeShowcaseEditThemeMessage => "homeShowcaseEditThemeMessage";
   String get homeShowcaseDeleteThemeMessage => "homeShowcaseDeleteThemeMessage";
 

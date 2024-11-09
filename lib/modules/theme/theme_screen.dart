@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/base/base_scaffold.dart';
 import 'package:theme_play/modules/theme/theme_controller.dart';
+import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
@@ -23,8 +24,10 @@ class ThemeScreen extends GetView<ThemeController> {
           backgroundColor: controller.constants.colors.hexToColor(
             controller.userThemeModel.value.style.titleStyle.color,
           ),
-          onPressed: () => controller.navigateToEditThemeScreen(),
-          child: const Icon(Icons.edit),
+          onPressed: () => controller.navigateToEditThemeScreen(context),
+          child: AppIcons.icEdit.svgWithAttiributes(
+            color: controller.constants.colors.white,
+          ),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

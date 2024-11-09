@@ -17,8 +17,13 @@ final class UserThemesRepository implements IUserThemesRepository {
 
   @override
   Future<List<UserThemeModel>> getUserThemes() async {
-    final response = await _supabaseService.fetchData(
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return [];
+    final response = await _supabaseService.fetchDataWithFilter(
       tableName: TableName.userThemes,
+      filterColumn: FilterByColumn.createdBy,
+      filterValue: user.id,
     );
     return response.map((e) => UserThemeModel.fromJson(e)).toList();
   }
@@ -34,8 +39,9 @@ final class UserThemesRepository implements IUserThemesRepository {
         filterColumn: FilterByColumn.shareableCode,
         filterValue: code,
       );
-      userThemes
-          .addAll(response.map((e) => UserThemeModel.fromJson(e)).toList());
+      userThemes.addAll(
+        response.map((e) => UserThemeModel.fromJson(e)).toList(),
+      );
     }
     return userThemes;
   }

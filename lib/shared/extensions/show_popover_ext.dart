@@ -63,7 +63,7 @@ extension ShowPopoverExt on BuildContext {
           );
         },
       ),
-    ).timeout(const Duration(milliseconds: 100), onTimeout: () {
+    ).timeout(const Duration(milliseconds: 300), onTimeout: () {
       if (isShowcase) {
         final showcaseService = ShowcaseService.instance;
         showcaseService.show(

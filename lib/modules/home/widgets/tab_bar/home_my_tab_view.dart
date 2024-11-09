@@ -31,6 +31,7 @@ class HomeMyTabView extends StatelessWidget {
                   controller: controller,
                   userTheme: userTheme,
                   hasEditAccess: true,
+                  hasShareTheme: true,
                 );
               },
               separatorBuilder: (_, __) => 12.verticalSpace,

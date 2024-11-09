@@ -27,9 +27,11 @@ class HomeSharedToMeView extends StatelessWidget {
                   controller.constants.paddings.vertical * 2,
               itemBuilder: (_, index) {
                 final userTheme = sharedUserThemeList[index];
+                final editAccess = controller.hasEditAccessList[index];
                 return CustomUserThemeItem(
                   controller: controller,
                   userTheme: userTheme,
+                  hasEditAccess: editAccess,
                 );
               },
               separatorBuilder: (_, __) => 12.verticalSpace,
