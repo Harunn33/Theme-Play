@@ -78,4 +78,27 @@ final class SharedCodesToUserRepository
     if (response.isEmpty) return null;
     return response.map((e) => SharedCodesToUserModel.fromJson(e)).toList();
   }
+
+  @override
+  Future<void> removeSharedCodes({
+    required final String shareableCode,
+    required final String userId,
+    final FilterByColumn filterByColumn = FilterByColumn.sharedUser,
+  }) async {
+    LoadingStatus.loading.showLoadingDialog();
+    final baseResp = await _supabaseService.baseFetchData(
+      tableName: TableName.sharedCodesToUser,
+    );
+    await baseResp
+        .delete()
+        .eq(
+          filterByColumn.value,
+          userId,
+        )
+        .eq(
+          FilterByColumn.themeShareCode.value,
+          shareableCode,
+        );
+    LoadingStatus.loaded.showLoadingDialog();
+  }
 }

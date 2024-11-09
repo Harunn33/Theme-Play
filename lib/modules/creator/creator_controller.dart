@@ -92,6 +92,7 @@ class CreatorController extends GetxController {
       Routes.theme,
       arguments: {
         "model": model.obs,
+        "has_edit_access": true,
       },
     );
     clearDataOnThePage();

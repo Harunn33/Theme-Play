@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
@@ -14,9 +15,7 @@ import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
 import 'package:theme_play/modules/theme/helpers/theme_screen_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/index.dart';
-import 'package:theme_play/shared/enums/app_icons.dart';
 import 'package:theme_play/shared/enums/index.dart';
-import 'package:theme_play/shared/enums/showcase_item.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
 import 'package:theme_play/shared/widgets/index.dart';
@@ -331,17 +330,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
+  String _decodeUserID(String encodedUuid) {
+    final bytes = base64Decode(encodedUuid); // Encode edilmiş veriyi decode et
+    return utf8.decode(bytes); // Orijinal UUID stringini elde et
+  }
+
   Future<void> addSharedCodes({
     required final String shareableCode,
   }) async {
     if (!shareThemeFormKey.currentState!.validate()) return;
+    final decodedUID = _decodeUserID(userIdTextEditingController.text.trim());
     final HomeController homeController = Get.find<HomeController>();
     final SharedCodesToUserRepository sharedCodesToUserRepository =
         SharedCodesToUserRepository.instance;
     final myUserThemes = await homeController.getUserThemes();
     final hasContainsMyUserTheme = myUserThemes
-        .map((userTheme) =>
-            userTheme.createdBy == userIdTextEditingController.text)
+        .map((userTheme) => userTheme.createdBy == decodedUID)
         .toList();
     if (hasContainsMyUserTheme.contains(true)) {
       return SnackbarType.error.show(
@@ -349,13 +353,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       );
     }
     await sharedCodesToUserRepository.addSharedCodes(
-      sharedUser: userIdTextEditingController.text,
+      sharedUser: decodedUID,
       themeEditAccess: isEditAccess.value,
       shareableCode: shareableCode,
     );
     Get.back();
     SnackbarType.success.show(
-      message: constants.strings.themeCreated.tr,
+      message: constants.strings.themeShared.tr,
     );
   }
 
@@ -397,7 +401,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                   bgColor: constants.colors.powderBlue,
                   borderRadius: 8,
                   textColor: constants.colors.black,
-                  onTap: () => deleteUserTheme(userTheme.id!),
+                  onTap: () => deleteUserTheme(
+                    themeId: userTheme.id ?? "",
+                    shareableCode: userTheme.shareableCode,
+                  ),
                 ),
               ],
             ),
@@ -559,13 +566,45 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     return await userThemesRepository.filterUserThemes(query: query);
   }
 
-  Future<void> deleteUserTheme(String themeId) async {
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
+  Future<void> deleteUserTheme({
+    final String themeId = "",
+    final String shareableCode = "",
+  }) async {
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return;
+    if (tabController.index == 1) {
+      return _deleteSharedThemeForMe(
+        shareableCode: shareableCode,
+        sharedUser: user.id,
+      );
+    }
+    final userThemesRepository = UserThemesRepository.instance;
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
     LoadingStatus.loading.showLoadingDialog();
     await userThemesRepository.deleteUserTheme(themeId: themeId);
+    await sharedCodesToUserRepository.removeSharedCodes(
+      shareableCode: shareableCode,
+      filterByColumn: FilterByColumn.sharingUser,
+      userId: user.id,
+    );
     Get.back();
     refreshMyThemesTab();
+    refreshSharedThemesTab();
+    LoadingStatus.loaded.showLoadingDialog();
+  }
+
+  Future<void> _deleteSharedThemeForMe({
+    required final String shareableCode,
+    required final String sharedUser,
+  }) async {
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    LoadingStatus.loading.showLoadingDialog();
+    await sharedCodesToUserRepository.removeSharedCodes(
+      shareableCode: shareableCode,
+      userId: sharedUser,
+    );
+    Get.back();
     refreshSharedThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
   }

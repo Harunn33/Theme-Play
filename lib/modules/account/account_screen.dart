@@ -28,6 +28,10 @@ class AccountScreen extends GetView<AccountController> {
                     onTap: controller.redirectionToEditProfile,
                     user: user,
                     profilePhotoUrl: controller.profilePhotoUrl,
+                    onTapCopyUid: () => controller.onTapCopyUid(
+                      uid: user.id,
+                    ),
+                    encodedUid: controller.truncateUID(user.id),
                   ),
                   12.verticalSpace,
                   Text(

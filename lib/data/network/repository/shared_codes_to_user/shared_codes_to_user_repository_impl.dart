@@ -10,4 +10,9 @@ abstract class ISharedCodesToUserRepository {
   Future<List<SharedCodesToUserModel>?> getSharedCodesToUsers({
     required final String userId,
   });
+
+  Future<void> removeSharedCodes({
+    required final String shareableCode,
+    required final String userId,
+  });
 }

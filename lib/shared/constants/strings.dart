@@ -21,6 +21,7 @@ final class AppStrings {
   String get general => "general";
   String get changeLanguage => "changeLanguage";
   String get signOut => "signOut";
+  String get copiedUid => "copiedUid";
 
   // Edit profile page
   String get fullName => "fullName";
@@ -86,5 +87,5 @@ final class AppStrings {
 
   // Snackbar messages
   String get profileUpdated => "profileUpdated";
-  String get themeCreated => "themeCreated";
+  String get themeShared => "themeShared";
 }
