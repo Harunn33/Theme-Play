@@ -17,4 +17,5 @@ abstract class Routes {
   static const creator = '/creator';
   static const theme = '/theme';
   static const editTheme = '/editTheme';
+  static const notifications = '/notifications';
 }

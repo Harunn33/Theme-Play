@@ -12,6 +12,12 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
       appBar: GeneralAppBar(
         title: controller.constants.strings.appName,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_outlined),
+            onPressed: controller.navigateToNotificationScreen,
+          ),
+        ],
       ),
       resizeToAvoidBottomInset: false,
       body: Column(

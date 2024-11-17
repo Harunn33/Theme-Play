@@ -12,6 +12,7 @@ import 'package:theme_play/data/network/repository/shared_codes_to_user/index.da
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
+import 'package:theme_play/data/network/services/one_signal/index.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
 import 'package:theme_play/modules/theme/helpers/theme_screen_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
@@ -94,6 +95,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onReady() {
     super.onReady();
     initializeShowcase();
+  }
+
+  void navigateToNotificationScreen() {
+    Get.toNamed(Routes.notifications);
   }
 
   void initializeShowcase() {
@@ -364,6 +369,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         message: constants.strings.youCantShareYourOwnTheme.tr,
       );
     }
+    final oneSignalService = OneSignalService.instance;
+
     await sharedCodesToUserRepository.addSharedCodes(
       sharedUser: decodedUID,
       themeEditAccess: isEditAccess.value,
@@ -372,6 +379,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     Get.back();
     SnackbarType.success.show(
       message: constants.strings.themeShared.tr,
+    );
+    await oneSignalService.sendNotificationByUserId(
+      title: 'Tema Paylaşımı',
+      content: 'Sana bir tema paylaşıldı',
+      userId: decodedUID,
     );
   }
 

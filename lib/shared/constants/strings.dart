@@ -84,6 +84,9 @@ final class AppStrings {
   String get subtitle => 'subtitle';
   String get mainMessage => 'mainMessage';
 
+  // Notification page
+  String get notifications => 'notifications';
+
   // Snackbar messages
   String get profileUpdated => 'profileUpdated';
   String get themeCreated => 'themeCreated';

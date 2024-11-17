@@ -56,5 +56,6 @@
   "homeShowcaseSharedThemesMessage": "Themes shared with you",
   "homeShowcaseShareThemeMessage": "You can share the theme you created here",
   "homeShowcaseEditThemeMessage": "You can edit the theme you created here",
-  "homeShowcaseDeleteThemeMessage": "You can delete the theme you created here"
+  "homeShowcaseDeleteThemeMessage": "You can delete the theme you created here",
+  "notifications": "Notifications"
 }

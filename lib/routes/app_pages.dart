@@ -6,6 +6,7 @@ import 'package:theme_play/modules/edit_profile/index.dart';
 import 'package:theme_play/modules/edit_theme/index.dart';
 import 'package:theme_play/modules/home/index.dart';
 import 'package:theme_play/modules/nav_bar/index.dart';
+import 'package:theme_play/modules/notification_screen/index.dart';
 import 'package:theme_play/modules/sign_in/index.dart';
 import 'package:theme_play/modules/splash/index.dart';
 import 'package:theme_play/modules/theme/index.dart';
@@ -69,6 +70,11 @@ final class AppPages {
       name: Routes.editTheme,
       page: () => const EditThemeScreen(),
       binding: EditThemeBinding(),
+    ),
+    GetPage(
+      name: Routes.notifications,
+      page: () => const NotificationScreen(),
+      binding: NotificationBinding(),
     ),
   ];
 }

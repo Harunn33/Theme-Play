@@ -16,3 +16,4 @@ analyzer:
     use_string_buffers: ignore
     use_setters_to_change_properties: ignore
     sort_pub_dependencies: ignore
+    one_member_abstracts: ignore

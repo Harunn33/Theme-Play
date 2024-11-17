@@ -43,6 +43,10 @@ dependencies:
   async: ^2.11.0
   # Animation
   animated_text_kit: ^4.2.2
+  # Push Notification
+  onesignal_flutter: ^5.2.7
+  # Network
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
