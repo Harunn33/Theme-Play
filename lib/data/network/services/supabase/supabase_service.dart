@@ -55,7 +55,10 @@ final class SupabaseService implements ISupabaseService {
     required TableName tableName,
   }) async {
     try {
-      final response = await client.from(tableName.value).select();
+      final response = await client.from(tableName.value).select().order(
+            FilterByColumn.createdAt.value,
+            ascending: false,
+          );
       return response;
     } catch (e) {
       throw Exception(e);

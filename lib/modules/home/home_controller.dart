@@ -7,12 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/models/index.dart';
+import 'package:theme_play/data/network/repository/notifications/notifications_repository.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
-import 'package:theme_play/data/network/services/one_signal/index.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
 import 'package:theme_play/modules/theme/helpers/theme_screen_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
@@ -235,7 +235,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       children: [
         if (hasShareTheme)
           PopoverModel(
-            onTap: () => shareTheme(
+            onTap: () => onTapShareTheme(
               context,
               shareableCode: userTheme.shareableCode,
             ),
@@ -269,7 +269,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
-  void shareTheme(
+  void onTapShareTheme(
     BuildContext context, {
     required String shareableCode,
   }) {
@@ -329,7 +329,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
               12.verticalSpace,
               CustomPrimaryButton(
                 text: constants.strings.save.tr,
-                onTap: () => addSharedCodes(
+                onTap: () => handleShareTheme(
                   shareableCode: shareableCode,
                 ),
               ),
@@ -353,10 +353,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  Future<void> addSharedCodes({
+  Future<void> handleShareTheme({
     required String shareableCode,
   }) async {
     if (!shareThemeFormKey.currentState!.validate()) return;
+    LoadingStatus.loading.showLoadingDialog();
     final decodedUID = _decodeUserID(userIdTextEditingController.text.trim());
     final homeController = Get.find<HomeController>();
     final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
@@ -369,8 +370,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         message: constants.strings.youCantShareYourOwnTheme.tr,
       );
     }
-    final oneSignalService = OneSignalService.instance;
-
+    final notificationsRepository = NotificationsRepository.instance;
+    await notificationsRepository.sendNotificationByUserId(
+      userId: decodedUID,
+    );
     await sharedCodesToUserRepository.addSharedCodes(
       sharedUser: decodedUID,
       themeEditAccess: isEditAccess.value,
@@ -379,11 +382,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     Get.back();
     SnackbarType.success.show(
       message: constants.strings.themeShared.tr,
-    );
-    await oneSignalService.sendNotificationByUserId(
-      title: 'Tema Paylaşımı',
-      content: 'Sana bir tema paylaşıldı',
-      userId: decodedUID,
     );
   }
 

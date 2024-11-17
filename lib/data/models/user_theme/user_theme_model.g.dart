@@ -17,8 +17,7 @@ _$UserThemeModelImpl _$$UserThemeModelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$UserThemeModelImplToJson(
-  _$UserThemeModelImpl instance,
-) =>
+        _$UserThemeModelImpl instance) =>
     <String, dynamic>{
       'shareable_code': instance.shareableCode,
       'created_by': instance.createdBy,

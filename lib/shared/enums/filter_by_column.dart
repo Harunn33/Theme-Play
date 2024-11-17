@@ -6,7 +6,8 @@ enum FilterByColumn {
   shareableCode('shareable_code'),
   sharedUser('shared_user'),
   sharingUser('sharing_user'),
-  themeShareCode('theme_share_code');
+  themeShareCode('theme_share_code'),
+  createdAt('created_at');
 
   const FilterByColumn(this.value);
   final String value;

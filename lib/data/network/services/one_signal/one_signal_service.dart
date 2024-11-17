@@ -3,9 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:theme_play/data/network/repository/profile/index.dart';
-import 'package:theme_play/data/network/services/dio/dio_service.dart';
 import 'package:theme_play/routes/app_pages.dart';
-import 'package:theme_play/shared/extensions/index.dart';
 
 part 'one_signal_service_impl.dart';
 
@@ -46,40 +44,5 @@ final class OneSignalService implements IOneSignalService {
         }
       });
     });
-  }
-
-  @override
-  Future<void> sendNotificationByUserId({
-    required String title,
-    required String content,
-    required String userId,
-  }) async {
-    try {
-      final dioService = DioService.instance;
-      await dioService.post(
-        dotenv.env['SEND_NOTIFICATIONS_PATH'].toString(),
-        data: {
-          'app_id': oneSignalAppId,
-          'target_channel': 'push',
-          'headings': {'en': title},
-          'contents': {'en': content},
-          'data': {
-            'theme_shared': true,
-          },
-          'filters': [
-            {
-              'field': 'tag',
-              'key': 'user_id',
-              'relation': '=',
-              'value': userId,
-            },
-          ],
-        },
-      );
-    } catch (e) {
-      rethrow;
-    } finally {
-      LoadingStatus.loaded.showLoadingDialog();
-    }
   }
 }

@@ -24,6 +24,9 @@ final class AppColors {
   Color get success => const Color(0xFF4CAF50);
   Color get info => const Color(0xFFB0E0E6);
 
+  // Other Colors
+  Color get millionGrey => const Color(0xFF999999);
+
   Color hexToColor(String hexCode) {
     final hexColor = hexCode.replaceAll('#', '');
     return Color(int.parse('FF$hexColor', radix: 16));

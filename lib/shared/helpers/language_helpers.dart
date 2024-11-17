@@ -23,7 +23,7 @@ final class LanguageHelpers {
     if (supportedLanguages.contains(deviceLanguageCode)) {
       return deviceLanguageCode;
     }
-    return 'en';
+    return 'tr';
   }
 
   static String _getDefaultCountryCode() {
@@ -34,7 +34,7 @@ final class LanguageHelpers {
     if (supportedCountries.contains(deviceCountryCode)) {
       return deviceCountryCode;
     }
-    return 'US';
+    return 'TR';
   }
 
   static String _getCurrentLanguageCode() {
