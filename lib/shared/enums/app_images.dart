@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 enum AppImages {
-  appLogo("app_logo"),
-  paintRoller("paint_roller");
+  appLogo('app_logo'),
+  paintRoller('paint_roller');
 
-  final String value;
   const AppImages(this.value);
+  final String value;
 
   Image get png => Image.asset(
-        "assets/images/$value.png",
+        'assets/images/$value.png',
       );
 }
 
@@ -18,7 +18,7 @@ extension AppImagesExtension on AppImages {
     double? height,
   }) {
     return Image.asset(
-      "assets/images/$value.png",
+      'assets/images/$value.png',
       color: color,
       height: height,
     );

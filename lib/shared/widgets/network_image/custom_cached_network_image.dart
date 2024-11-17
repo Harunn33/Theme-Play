@@ -4,6 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 
 class CustomCachedNetworkImage extends StatelessWidget {
+  const CustomCachedNetworkImage({
+    required this.url,
+    required this.width,
+    super.key,
+    this.height,
+    this.shape = BoxShape.circle,
+    this.errorDefaultImage,
+    this.fit = BoxFit.cover,
+    this.borderRadius,
+  });
   final String url;
   final double width;
   final double? height;
@@ -11,16 +21,6 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final String? errorDefaultImage;
   final BoxFit? fit;
   final BorderRadius? borderRadius;
-  const CustomCachedNetworkImage({
-    super.key,
-    required this.url,
-    required this.width,
-    this.height,
-    this.shape = BoxShape.circle,
-    this.errorDefaultImage,
-    this.fit = BoxFit.cover,
-    this.borderRadius,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
               ),
             );
           },
-          imageUrl: errorDefaultImage ?? "",
+          imageUrl: errorDefaultImage ?? '',
         );
       },
       progressIndicatorBuilder: (context, url, progress) {

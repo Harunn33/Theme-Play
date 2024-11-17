@@ -7,7 +7,7 @@ import 'package:theme_play/shared/extensions/index.dart';
 extension BottomSheetExt on BuildContext {
   void showBottomSheet({
     required Widget child,
-    final bool isDismissible = true,
+    bool isDismissible = true,
     double? height,
   }) {
     Get.bottomSheet(

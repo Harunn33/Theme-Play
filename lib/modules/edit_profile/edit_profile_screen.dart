@@ -30,8 +30,8 @@ class EditProfileScreen extends GetView<EditProfileController>
                 onSuccess: (user) {
                   if (user == null) return const SizedBox.shrink();
                   controller.nameController.text =
-                      user.userMetadata?["full_name"];
-                  controller.emailController.text = user.email ?? "";
+                      user.userMetadata?['full_name'];
+                  controller.emailController.text = user.email ?? '';
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

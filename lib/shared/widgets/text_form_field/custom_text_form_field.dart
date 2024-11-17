@@ -4,6 +4,17 @@ import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  CustomTextFormField({
+    required this.textEditingController,
+    required this.labelText,
+    super.key,
+    this.readOnly = false,
+    this.validator,
+    this.maxLines = 1,
+    this.maxLength,
+    this.textCapitalization = TextCapitalization.none,
+    this.focusedBorderColor,
+  });
   final TextEditingController textEditingController;
   final String labelText;
   final bool readOnly;
@@ -13,21 +24,10 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLength;
   final TextCapitalization textCapitalization;
   final Color? focusedBorderColor;
-  CustomTextFormField({
-    super.key,
-    required this.textEditingController,
-    required this.labelText,
-    this.readOnly = false,
-    this.validator,
-    this.maxLines = 1,
-    this.maxLength,
-    this.textCapitalization = TextCapitalization.none,
-    this.focusedBorderColor,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const AppColors colors = AppColors.instance;
+    const colors = AppColors.instance;
     return TextFormField(
       readOnly: readOnly,
       enabled: !readOnly,

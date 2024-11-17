@@ -1,7 +1,6 @@
 import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/supabase/index.dart';
-import 'package:theme_play/shared/enums/filter_by_column.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
 
@@ -17,12 +16,12 @@ final class SharedCodesToUserRepository
 
   @override
   Future<void> addSharedCodes({
-    required final String shareableCode,
-    required final String sharedUser,
-    required final bool themeEditAccess,
+    required String shareableCode,
+    required String sharedUser,
+    required bool themeEditAccess,
   }) async {
     LoadingStatus.loading.showLoadingDialog();
-    final ProfileRepository profileRepository = ProfileRepository.instance;
+    final profileRepository = ProfileRepository.instance;
     final user = await profileRepository.getProfile();
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
     final sharedCodesToUsers = await getSharedCodesToUsers(
@@ -33,8 +32,7 @@ final class SharedCodesToUserRepository
     );
 
     if (hasAlreadyShared == null || !hasAlreadyShared) {
-      final SharedCodesToUserModel sharedCodesToUserModel =
-          SharedCodesToUserModel(
+      final sharedCodesToUserModel = SharedCodesToUserModel(
         createdAt: DateTime.now().toIso8601String(),
         sharingUser: user.id,
         sharedUser: sharedUser,
@@ -53,7 +51,7 @@ final class SharedCodesToUserRepository
     );
     await baseResp
         .update({
-          "theme_edit_access": themeEditAccess,
+          'theme_edit_access': themeEditAccess,
         })
         .eq(
           FilterByColumn.sharedUser.value,
@@ -68,7 +66,7 @@ final class SharedCodesToUserRepository
 
   @override
   Future<List<SharedCodesToUserModel>?> getSharedCodesToUsers({
-    required final String userId,
+    required String userId,
   }) async {
     final response = await _supabaseService.fetchDataWithFilter(
       tableName: TableName.sharedCodesToUser,
@@ -76,14 +74,14 @@ final class SharedCodesToUserRepository
       filterValue: userId,
     );
     if (response.isEmpty) return null;
-    return response.map((e) => SharedCodesToUserModel.fromJson(e)).toList();
+    return response.map(SharedCodesToUserModel.fromJson).toList();
   }
 
   @override
   Future<void> removeSharedCodes({
-    required final String shareableCode,
-    required final String userId,
-    final FilterByColumn filterByColumn = FilterByColumn.sharedUser,
+    required String shareableCode,
+    required String userId,
+    FilterByColumn filterByColumn = FilterByColumn.sharedUser,
   }) async {
     LoadingStatus.loading.showLoadingDialog();
     final baseResp = await _supabaseService.baseFetchData(

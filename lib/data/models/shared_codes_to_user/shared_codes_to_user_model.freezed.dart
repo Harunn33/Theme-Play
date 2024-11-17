@@ -21,18 +21,18 @@ SharedCodesToUserModel _$SharedCodesToUserModelFromJson(
 
 /// @nodoc
 mixin _$SharedCodesToUserModel {
+  @JsonKey(name: 'created_at')
+  String get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sharing_user')
+  String get sharingUser => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shared_user')
+  String get sharedUser => throw _privateConstructorUsedError;
+  @JsonKey(name: 'theme_share_code')
+  String get themeShareCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'theme_edit_access')
+  bool get themeEditAccess => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
   String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "created_at")
-  String get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "sharing_user")
-  String get sharingUser => throw _privateConstructorUsedError;
-  @JsonKey(name: "shared_user")
-  String get sharedUser => throw _privateConstructorUsedError;
-  @JsonKey(name: "theme_share_code")
-  String get themeShareCode => throw _privateConstructorUsedError;
-  @JsonKey(name: "theme_edit_access")
-  bool get themeEditAccess => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,12 +47,12 @@ abstract class $SharedCodesToUserModelCopyWith<$Res> {
       _$SharedCodesToUserModelCopyWithImpl<$Res, SharedCodesToUserModel>;
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: false) String? id,
-      @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "sharing_user") String sharingUser,
-      @JsonKey(name: "shared_user") String sharedUser,
-      @JsonKey(name: "theme_share_code") String themeShareCode,
-      @JsonKey(name: "theme_edit_access") bool themeEditAccess});
+      {@JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'sharing_user') String sharingUser,
+      @JsonKey(name: 'shared_user') String sharedUser,
+      @JsonKey(name: 'theme_share_code') String themeShareCode,
+      @JsonKey(name: 'theme_edit_access') bool themeEditAccess,
+      @JsonKey(includeToJson: false) String? id});
 }
 
 /// @nodoc
@@ -69,18 +69,14 @@ class _$SharedCodesToUserModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? createdAt = null,
     Object? sharingUser = null,
     Object? sharedUser = null,
     Object? themeShareCode = null,
     Object? themeEditAccess = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -101,6 +97,10 @@ class _$SharedCodesToUserModelCopyWithImpl<$Res,
           ? _value.themeEditAccess
           : themeEditAccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -115,12 +115,12 @@ abstract class _$$SharedCodesToUserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: false) String? id,
-      @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "sharing_user") String sharingUser,
-      @JsonKey(name: "shared_user") String sharedUser,
-      @JsonKey(name: "theme_share_code") String themeShareCode,
-      @JsonKey(name: "theme_edit_access") bool themeEditAccess});
+      {@JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'sharing_user') String sharingUser,
+      @JsonKey(name: 'shared_user') String sharedUser,
+      @JsonKey(name: 'theme_share_code') String themeShareCode,
+      @JsonKey(name: 'theme_edit_access') bool themeEditAccess,
+      @JsonKey(includeToJson: false) String? id});
 }
 
 /// @nodoc
@@ -136,18 +136,14 @@ class __$$SharedCodesToUserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? createdAt = null,
     Object? sharingUser = null,
     Object? sharedUser = null,
     Object? themeShareCode = null,
     Object? themeEditAccess = null,
+    Object? id = freezed,
   }) {
     return _then(_$SharedCodesToUserModelImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -168,6 +164,10 @@ class __$$SharedCodesToUserModelImplCopyWithImpl<$Res>
           ? _value.themeEditAccess
           : themeEditAccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -176,38 +176,38 @@ class __$$SharedCodesToUserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
   const _$SharedCodesToUserModelImpl(
-      {@JsonKey(includeToJson: false) this.id,
-      @JsonKey(name: "created_at") required this.createdAt,
-      @JsonKey(name: "sharing_user") required this.sharingUser,
-      @JsonKey(name: "shared_user") required this.sharedUser,
-      @JsonKey(name: "theme_share_code") required this.themeShareCode,
-      @JsonKey(name: "theme_edit_access") required this.themeEditAccess});
+      {@JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'sharing_user') required this.sharingUser,
+      @JsonKey(name: 'shared_user') required this.sharedUser,
+      @JsonKey(name: 'theme_share_code') required this.themeShareCode,
+      @JsonKey(name: 'theme_edit_access') required this.themeEditAccess,
+      @JsonKey(includeToJson: false) this.id});
 
   factory _$SharedCodesToUserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SharedCodesToUserModelImplFromJson(json);
 
   @override
-  @JsonKey(includeToJson: false)
-  final String? id;
-  @override
-  @JsonKey(name: "created_at")
+  @JsonKey(name: 'created_at')
   final String createdAt;
   @override
-  @JsonKey(name: "sharing_user")
+  @JsonKey(name: 'sharing_user')
   final String sharingUser;
   @override
-  @JsonKey(name: "shared_user")
+  @JsonKey(name: 'shared_user')
   final String sharedUser;
   @override
-  @JsonKey(name: "theme_share_code")
+  @JsonKey(name: 'theme_share_code')
   final String themeShareCode;
   @override
-  @JsonKey(name: "theme_edit_access")
+  @JsonKey(name: 'theme_edit_access')
   final bool themeEditAccess;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? id;
 
   @override
   String toString() {
-    return 'SharedCodesToUserModel(id: $id, createdAt: $createdAt, sharingUser: $sharingUser, sharedUser: $sharedUser, themeShareCode: $themeShareCode, themeEditAccess: $themeEditAccess)';
+    return 'SharedCodesToUserModel(createdAt: $createdAt, sharingUser: $sharingUser, sharedUser: $sharedUser, themeShareCode: $themeShareCode, themeEditAccess: $themeEditAccess, id: $id)';
   }
 
   @override
@@ -215,7 +215,6 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SharedCodesToUserModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.sharingUser, sharingUser) ||
@@ -225,13 +224,14 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
             (identical(other.themeShareCode, themeShareCode) ||
                 other.themeShareCode == themeShareCode) &&
             (identical(other.themeEditAccess, themeEditAccess) ||
-                other.themeEditAccess == themeEditAccess));
+                other.themeEditAccess == themeEditAccess) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, sharingUser,
-      sharedUser, themeShareCode, themeEditAccess);
+  int get hashCode => Object.hash(runtimeType, createdAt, sharingUser,
+      sharedUser, themeShareCode, themeEditAccess, id);
 
   @JsonKey(ignore: true)
   @override
@@ -250,35 +250,35 @@ class _$SharedCodesToUserModelImpl implements _SharedCodesToUserModel {
 
 abstract class _SharedCodesToUserModel implements SharedCodesToUserModel {
   const factory _SharedCodesToUserModel(
-      {@JsonKey(includeToJson: false) final String? id,
-      @JsonKey(name: "created_at") required final String createdAt,
-      @JsonKey(name: "sharing_user") required final String sharingUser,
-      @JsonKey(name: "shared_user") required final String sharedUser,
-      @JsonKey(name: "theme_share_code") required final String themeShareCode,
-      @JsonKey(name: "theme_edit_access")
-      required final bool themeEditAccess}) = _$SharedCodesToUserModelImpl;
+      {@JsonKey(name: 'created_at') required final String createdAt,
+      @JsonKey(name: 'sharing_user') required final String sharingUser,
+      @JsonKey(name: 'shared_user') required final String sharedUser,
+      @JsonKey(name: 'theme_share_code') required final String themeShareCode,
+      @JsonKey(name: 'theme_edit_access') required final bool themeEditAccess,
+      @JsonKey(includeToJson: false)
+      final String? id}) = _$SharedCodesToUserModelImpl;
 
   factory _SharedCodesToUserModel.fromJson(Map<String, dynamic> json) =
       _$SharedCodesToUserModelImpl.fromJson;
 
   @override
-  @JsonKey(includeToJson: false)
-  String? get id;
-  @override
-  @JsonKey(name: "created_at")
+  @JsonKey(name: 'created_at')
   String get createdAt;
   @override
-  @JsonKey(name: "sharing_user")
+  @JsonKey(name: 'sharing_user')
   String get sharingUser;
   @override
-  @JsonKey(name: "shared_user")
+  @JsonKey(name: 'shared_user')
   String get sharedUser;
   @override
-  @JsonKey(name: "theme_share_code")
+  @JsonKey(name: 'theme_share_code')
   String get themeShareCode;
   @override
-  @JsonKey(name: "theme_edit_access")
+  @JsonKey(name: 'theme_edit_access')
   bool get themeEditAccess;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$SharedCodesToUserModelImplCopyWith<_$SharedCodesToUserModelImpl>

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/data/models/user_theme/user_theme_model.dart';
@@ -21,11 +23,13 @@ class ThemeController extends GetxController {
     if (!hasEditAccess) {
       return ThemeScreenHelpers.instance.editThemeAccessControlDialog(context);
     }
-    Get.toNamed(
-      Routes.editTheme,
-      arguments: {
-        "model": userThemeModel,
-      },
+    unawaited(
+      Get.toNamed(
+        Routes.editTheme,
+        arguments: {
+          'model': userThemeModel,
+        },
+      ),
     );
   }
 }

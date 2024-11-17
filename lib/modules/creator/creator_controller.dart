@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -33,9 +34,9 @@ class CreatorController extends GetxController {
   }
 
   Future<List<ThemeModel>> getThemes() async {
-    final ThemesRepository themesRepository = ThemesRepository.instance;
+    final themesRepository = ThemesRepository.instance;
     final themes = await themesRepository.getThemes();
-    for (var theme in themes) {
+    for (final theme in themes) {
       themeListIcons.add(
         await getThemeIcon(theme.id),
       );
@@ -44,8 +45,8 @@ class CreatorController extends GetxController {
   }
 
   Future<String> getThemeIcon(String themeId) async {
-    final ThemesRepository themesRepository = ThemesRepository.instance;
-    return await themesRepository.getThemeIcon(
+    final themesRepository = ThemesRepository.instance;
+    return themesRepository.getThemeIcon(
       themeId: themeId,
     );
   }
@@ -56,7 +57,7 @@ class CreatorController extends GetxController {
   }
 
   Future<void> createUserTheme({
-    required final List<ThemeModel> themeList,
+    required List<ThemeModel> themeList,
   }) async {
     if (selectedThemeIndex.value == -1) {
       return SnackbarType.error.show(
@@ -65,12 +66,11 @@ class CreatorController extends GetxController {
     }
     if (!formKey.currentState!.validate()) return;
     LoadingStatus.loading.showLoadingDialog();
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
-    final ProfileRepository profileRepository = ProfileRepository.instance;
+    final userThemesRepository = UserThemesRepository.instance;
+    final profileRepository = ProfileRepository.instance;
     final user = await profileRepository.getProfile();
     if (user == null) return LoadingStatus.loaded.showLoadingDialog();
-    UserThemeModel model = UserThemeModel(
+    var model = UserThemeModel(
       shareableCode: _generateRandomCode(11),
       themeId: themeList[selectedThemeIndex.value].id,
       style: themeList[selectedThemeIndex.value].style,
@@ -82,29 +82,31 @@ class CreatorController extends GetxController {
     );
     final userThemes = await userThemesRepository.getUserThemes();
     model = userThemes.last;
-    final HomeController homeController = Get.find<HomeController>();
+    final homeController = Get.find<HomeController>();
     homeController.refreshMyThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
     SnackbarType.success.show(
       message: constants.strings.themeCreated.tr,
     );
-    Get.toNamed(
-      Routes.theme,
-      arguments: {
-        "model": model.obs,
-        "has_edit_access": true,
-      },
+    unawaited(
+      Get.toNamed(
+        Routes.theme,
+        arguments: {
+          'model': model.obs,
+          'has_edit_access': true,
+        },
+      ),
     );
     clearDataOnThePage();
   }
 
   /// Random id generator from created theme
   String _generateRandomCode(int length) {
-    const String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    final Random random = Random();
-    String code = '';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+    var code = '';
 
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       code += chars[random.nextInt(chars.length)];
     }
 

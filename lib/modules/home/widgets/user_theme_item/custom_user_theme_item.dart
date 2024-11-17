@@ -6,17 +6,17 @@ import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 
 class CustomUserThemeItem extends StatelessWidget {
+  const CustomUserThemeItem({
+    required this.controller,
+    required this.userTheme,
+    super.key,
+    this.hasEditAccess = false,
+    this.hasShareTheme = false,
+  });
   final HomeController controller;
   final UserThemeModel userTheme;
   final bool hasEditAccess;
   final bool hasShareTheme;
-  const CustomUserThemeItem({
-    super.key,
-    required this.controller,
-    required this.userTheme,
-    this.hasEditAccess = false,
-    this.hasShareTheme = false,
-  });
 
   @override
   Widget build(BuildContext context) {

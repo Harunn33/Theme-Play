@@ -8,6 +8,15 @@ import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/buttons/index.dart';
 
 class AnimatedSearchBar extends StatelessWidget {
+  AnimatedSearchBar({
+    required this.isExpanded,
+    required this.textEditingController,
+    required this.animationController,
+    super.key,
+    this.onChanged,
+    this.onTapSearchButton,
+    this.onTapClearButton,
+  });
   final RxBool isExpanded;
   final TextEditingController textEditingController;
   final AnimationController animationController;
@@ -15,19 +24,10 @@ class AnimatedSearchBar extends StatelessWidget {
   final VoidCallback? onTapSearchButton;
   final VoidCallback? onTapClearButton;
   final FocusNode focusNode = FocusNode();
-  AnimatedSearchBar({
-    super.key,
-    required this.isExpanded,
-    required this.textEditingController,
-    required this.animationController,
-    this.onChanged,
-    this.onTapSearchButton,
-    this.onTapClearButton,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const constants = ConstantsInstances.instance;
+    final constants = ConstantsInstances.instance;
     return Obx(
       () => AnimatedContainer(
         duration: 500.milliseconds,

@@ -16,25 +16,25 @@ final class LanguageHelpers {
   static String get defaultCountryCode => _getDefaultCountryCode();
 
   static String _getDefaultLanguageCode() {
-    final deviceLanguageCode = Platform.localeName.split("_").first;
-    final List<String> supportedLanguages =
+    final deviceLanguageCode = Platform.localeName.split('_').first;
+    final supportedLanguages =
         AppLangs.languages.map((e) => e.languageCode).toList();
 
     if (supportedLanguages.contains(deviceLanguageCode)) {
       return deviceLanguageCode;
     }
-    return "en";
+    return 'en';
   }
 
   static String _getDefaultCountryCode() {
-    final deviceCountryCode = Platform.localeName.split("_").last;
-    final List<String> supportedCountries =
+    final deviceCountryCode = Platform.localeName.split('_').last;
+    final supportedCountries =
         AppLangs.languages.map((e) => e.countryCode).toList();
 
     if (supportedCountries.contains(deviceCountryCode)) {
       return deviceCountryCode;
     }
-    return "US";
+    return 'US';
   }
 
   static String _getCurrentLanguageCode() {
@@ -55,9 +55,9 @@ final class LanguageHelpers {
   String get currentCountryCode => _getCurrentCountryCode();
 
   String convertedCurrentLang({
-    required final Map<String, dynamic> texts,
+    required Map<String, dynamic> texts,
   }) {
     final currentLanguage = _getCurrentLanguageCode();
-    return texts[currentLanguage] ?? "";
+    return texts[currentLanguage].toString();
   }
 }

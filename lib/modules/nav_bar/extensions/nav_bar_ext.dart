@@ -7,7 +7,7 @@ import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/enums/app_icons.dart';
 
 extension NavBarExt on NavBarPages {
-  static const ConstantsInstances _constants = ConstantsInstances.instance;
+  static final ConstantsInstances _constants = ConstantsInstances.instance;
   String get title {
     switch (this) {
       case NavBarPages.home:

@@ -3,9 +3,9 @@ import 'package:theme_play/shared/constants/paddings.dart';
 import 'package:theme_play/shared/constants/strings.dart';
 
 final class ConstantsInstances {
-  const ConstantsInstances._();
+  ConstantsInstances._();
 
-  static const ConstantsInstances instance = ConstantsInstances._();
+  static ConstantsInstances instance = ConstantsInstances._();
 
   // General Instances
   final AppColors colors = AppColors.instance;

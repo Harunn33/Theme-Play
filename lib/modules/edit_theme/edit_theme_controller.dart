@@ -11,7 +11,7 @@ class EditThemeController extends GetxController {
 
   final LanguageHelpers languageHelpers = LanguageHelpers.instance;
 
-  Rx<UserThemeModel> userThemeModel = Get.arguments["model"];
+  final Rx<UserThemeModel> userThemeModel = Get.arguments['model'];
 
   Future<void> editUserTheme() async {
     final userThemesRepository = UserThemesRepository.instance;
@@ -20,7 +20,9 @@ class EditThemeController extends GetxController {
       userThemeModel: userThemeModel.value,
     );
     final homeController = Get.find<HomeController>();
-    homeController.refreshMyThemesTab();
+    homeController
+      ..refreshMyThemesTab()
+      ..refreshSharedThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
   }
 }

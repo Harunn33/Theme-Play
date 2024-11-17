@@ -6,25 +6,23 @@ import 'package:theme_play/modules/edit_theme/enums/index.dart';
 import 'package:theme_play/modules/edit_theme/extensions/index.dart';
 import 'package:theme_play/shared/constants/constants_instances.dart';
 import 'package:theme_play/shared/extensions/index.dart';
-import 'package:theme_play/shared/helpers/language_helpers.dart';
 
 class CustomEditableWidget extends StatelessWidget {
-  final ConstantsInstances constants = ConstantsInstances.instance;
-  final LanguageHelpers languageHelpers = LanguageHelpers.instance;
+  const CustomEditableWidget({
+    required this.child,
+    required this.userThemeModel,
+    super.key,
+    this.editableWidgetType = EditableWidgetType.name,
+    this.isDismissible = true,
+  });
   final Widget child;
   final UserThemeModel userThemeModel;
   final EditableWidgetType editableWidgetType;
   final bool isDismissible;
-  const CustomEditableWidget({
-    super.key,
-    required this.child,
-    required this.userThemeModel,
-    this.editableWidgetType = EditableWidgetType.name,
-    this.isDismissible = true,
-  });
 
   @override
   Widget build(BuildContext context) {
+    final constants = ConstantsInstances.instance;
     return Bounceable(
       onTap: () => context.showBottomSheet(
         isDismissible: isDismissible,

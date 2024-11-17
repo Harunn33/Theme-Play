@@ -21,9 +21,9 @@ ThemeModel _$ThemeModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ThemeModel {
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "created_at")
+  @JsonKey(name: 'created_at')
   String get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "updated_at")
+  @JsonKey(name: 'updated_at')
   String get updatedAt => throw _privateConstructorUsedError;
   Map<String, String> get type => throw _privateConstructorUsedError;
   ThemeStyleModel get style => throw _privateConstructorUsedError;
@@ -42,8 +42,8 @@ abstract class $ThemeModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "updated_at") String updatedAt,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'updated_at') String updatedAt,
       Map<String, String> type,
       ThemeStyleModel style});
 
@@ -112,8 +112,8 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @JsonKey(name: "created_at") String createdAt,
-      @JsonKey(name: "updated_at") String updatedAt,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'updated_at') String updatedAt,
       Map<String, String> type,
       ThemeStyleModel style});
 
@@ -168,8 +168,8 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
 class _$ThemeModelImpl implements _ThemeModel {
   const _$ThemeModelImpl(
       {required this.id,
-      @JsonKey(name: "created_at") required this.createdAt,
-      @JsonKey(name: "updated_at") required this.updatedAt,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt,
       required final Map<String, String> type,
       required this.style})
       : _type = type;
@@ -180,10 +180,10 @@ class _$ThemeModelImpl implements _ThemeModel {
   @override
   final String id;
   @override
-  @JsonKey(name: "created_at")
+  @JsonKey(name: 'created_at')
   final String createdAt;
   @override
-  @JsonKey(name: "updated_at")
+  @JsonKey(name: 'updated_at')
   final String updatedAt;
   final Map<String, String> _type;
   @override
@@ -237,8 +237,8 @@ class _$ThemeModelImpl implements _ThemeModel {
 abstract class _ThemeModel implements ThemeModel {
   const factory _ThemeModel(
       {required final String id,
-      @JsonKey(name: "created_at") required final String createdAt,
-      @JsonKey(name: "updated_at") required final String updatedAt,
+      @JsonKey(name: 'created_at') required final String createdAt,
+      @JsonKey(name: 'updated_at') required final String updatedAt,
       required final Map<String, String> type,
       required final ThemeStyleModel style}) = _$ThemeModelImpl;
 
@@ -248,10 +248,10 @@ abstract class _ThemeModel implements ThemeModel {
   @override
   String get id;
   @override
-  @JsonKey(name: "created_at")
+  @JsonKey(name: 'created_at')
   String get createdAt;
   @override
-  @JsonKey(name: "updated_at")
+  @JsonKey(name: 'updated_at')
   String get updatedAt;
   @override
   Map<String, String> get type;

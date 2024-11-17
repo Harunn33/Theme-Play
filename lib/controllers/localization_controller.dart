@@ -7,12 +7,11 @@ import 'package:theme_play/shared/enums/local_storage_keys.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
 
 class LocalizationController extends GetxController implements GetxService {
-  final LocalStorageService localStorage;
-  final RxString lang = "".obs;
-
   LocalizationController({required this.localStorage}) {
     loadCurrentLanguage();
   }
+  final LocalStorageService localStorage;
+  final RxString lang = ''.obs;
 
   @override
   void onInit() {
@@ -35,7 +34,7 @@ class LocalizationController extends GetxController implements GetxService {
 
   List<LanguageModel> get languages => _languages;
 
-  void loadCurrentLanguage() async {
+  Future<void> loadCurrentLanguage() async {
     _locale = Locale(
       LanguageHelpers.instance.currentLanguageCode,
       localStorage.retrieveData(LocalStorageKeys.countryCode.name) ??
@@ -65,14 +64,14 @@ class LocalizationController extends GetxController implements GetxService {
     update();
   }
 
-  void saveLanguage(Locale locale) async {
+  Future<void> saveLanguage(Locale locale) async {
     localStorage.saveData(
       LocalStorageKeys.languageCode.name,
       locale.languageCode,
     );
     localStorage.saveData(
       LocalStorageKeys.countryCode.name,
-      locale.countryCode!,
+      locale.countryCode,
     );
   }
 }

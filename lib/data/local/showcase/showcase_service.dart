@@ -14,8 +14,8 @@ final class ShowcaseService implements IShowcaseService {
   @override
   void show(
     BuildContext context, {
-    required final List<GlobalKey<State<StatefulWidget>>> widgetIds,
-    required final List<ShowcaseItem> showcaseItems,
+    required List<GlobalKey<State<StatefulWidget>>> widgetIds,
+    required List<ShowcaseItem> showcaseItems,
   }) {
     final hasShownBefore = isDone(
       showcaseItems: showcaseItems,
@@ -23,14 +23,16 @@ final class ShowcaseService implements IShowcaseService {
     if (hasShownBefore.every((element) => element)) {
       return;
     }
+    final localWidgetIds = <GlobalKey<State<StatefulWidget>>>[];
+    final localShowcaseItems = <ShowcaseItem>[];
     for (var i = 0; i < hasShownBefore.length; i++) {
-      if (hasShownBefore[i]) {
-        widgetIds.removeAt(i);
-        showcaseItems.removeAt(i);
+      if (!hasShownBefore[i]) {
+        localWidgetIds.add(widgetIds[i]);
+        localShowcaseItems.add(showcaseItems[i]);
       }
     }
-    ShowCaseWidget.of(context).startShowCase(widgetIds);
-    _saveShowcase(showcaseItems: showcaseItems);
+    ShowCaseWidget.of(context).startShowCase(localWidgetIds);
+    _saveShowcase(showcaseItems: localShowcaseItems);
   }
 
   @override
@@ -40,11 +42,11 @@ final class ShowcaseService implements IShowcaseService {
 
   @override
   List<bool> isDone({
-    required final List<ShowcaseItem> showcaseItems,
+    required List<ShowcaseItem> showcaseItems,
   }) {
     final localStorageService = LocalStorageService.instance;
     final hasShownBeforeList = <bool>[];
-    for (var showcaseItem in showcaseItems) {
+    for (final showcaseItem in showcaseItems) {
       if (localStorageService.retrieveData(showcaseItem.name) ?? false) {
         hasShownBeforeList.add(true);
       } else {
@@ -55,10 +57,10 @@ final class ShowcaseService implements IShowcaseService {
   }
 
   void _saveShowcase({
-    required final List<ShowcaseItem> showcaseItems,
+    required List<ShowcaseItem> showcaseItems,
   }) {
     final localStorageService = LocalStorageService.instance;
-    for (var showcaseItem in showcaseItems) {
+    for (final showcaseItem in showcaseItems) {
       localStorageService.saveData(showcaseItem.name, true);
     }
   }

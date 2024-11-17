@@ -32,7 +32,7 @@ final class SupabaseService implements ISupabaseService {
     ).then((value) => _client = value.client);
     client.auth.onAuthStateChange.listen((event) async {
       if (event.event == AuthChangeEvent.signedOut) {
-        Get.offAllNamed(Routes.signIn);
+        unawaited(Get.offAllNamed(Routes.signIn));
       }
     });
   }
@@ -41,7 +41,7 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<SupabaseQueryBuilder> baseFetchData({
-    required final TableName tableName,
+    required TableName tableName,
   }) async {
     try {
       return client.from(tableName.value);
@@ -52,11 +52,10 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<PostgrestList> fetchData({
-    required final TableName tableName,
+    required TableName tableName,
   }) async {
     try {
-      final PostgrestList response =
-          await client.from(tableName.value).select("*");
+      final response = await client.from(tableName.value).select();
       return response;
     } catch (e) {
       throw Exception(e);
@@ -65,8 +64,8 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<void> insertData({
-    required final TableName tableName,
-    required final Map<String, dynamic> data,
+    required TableName tableName,
+    required Map<String, dynamic> data,
   }) async {
     try {
       await client.from(tableName.value).insert(data);
@@ -79,10 +78,10 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<void> updateData({
-    required final TableName tableName,
-    required final Map<String, dynamic> data,
-    required final FilterByColumn filterColumn,
-    required final String value,
+    required TableName tableName,
+    required Map<String, dynamic> data,
+    required FilterByColumn filterColumn,
+    required String value,
   }) async {
     try {
       await client.from(tableName.value).update(data).eq(
@@ -98,9 +97,9 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<void> deleteData({
-    required final TableName tableName,
-    required final FilterByColumn column,
-    required final String value,
+    required TableName tableName,
+    required FilterByColumn column,
+    required String value,
   }) async {
     try {
       await client.from(tableName.value).delete().eq(
@@ -116,11 +115,11 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<String> fetchImagesFromStorage({
-    required final BucketName bucketName,
-    required final String path,
-    final bool isUpload = false,
-    final Uint8List? data,
-    final String? imageExtension,
+    required BucketName bucketName,
+    required String path,
+    bool isUpload = false,
+    Uint8List? data,
+    String? imageExtension,
   }) async {
     try {
       if (isUpload) {
@@ -147,28 +146,56 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<void> removeImageFromStorage({
-    required final BucketName bucketName,
-    required final List<String> imagePaths,
+    required BucketName bucketName,
+    required List<String> imagePaths,
   }) async {
     try {
       await client.storage.from(bucketName.value).remove(imagePaths);
     } catch (e) {
+      LoadingStatus.loaded.showLoadingDialog();
       throw Exception(e);
+    }
+  }
+
+  @override
+  Future<void> removeFolderFromStorage({
+    required BucketName bucketName,
+    required String folderPath,
+  }) async {
+    try {
+      // List the files in the folder
+      final response = await client.storage.from(bucketName.value).list(
+            path: folderPath,
+          );
+
+      if (response.isNotEmpty) {
+        for (final file in response) {
+          // Remove each file
+          final filePath = '$folderPath/${file.name}';
+          await removeImageFromStorage(
+            bucketName: bucketName,
+            imagePaths: [filePath],
+          );
+        }
+      }
+    } catch (e) {
+      throw Exception(e);
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
     }
   }
 
   @override
   Future<PostgrestList> fetchDataWithSearch({
     required TableName tableName,
-    required final FilterByColumn searchColumn,
+    required FilterByColumn searchColumn,
     required String searchValue,
   }) async {
     try {
-      final PostgrestList response =
-          await client.from(tableName.value).select("*").textSearch(
-                searchColumn.value,
-                "${searchValue.replaceAll(" ", "_")}:*",
-              );
+      final response = await client.from(tableName.value).select().textSearch(
+            searchColumn.value,
+            "${searchValue.replaceAll(" ", "_")}:*",
+          );
       return response;
     } catch (e) {
       throw Exception(e);
@@ -178,15 +205,14 @@ final class SupabaseService implements ISupabaseService {
   @override
   Future<PostgrestList> fetchDataWithFilter({
     required TableName tableName,
-    required final FilterByColumn filterColumn,
+    required FilterByColumn filterColumn,
     required String filterValue,
   }) async {
     try {
-      final PostgrestList response =
-          await client.from(tableName.value).select("*").eq(
-                filterColumn.value,
-                filterValue,
-              );
+      final response = await client.from(tableName.value).select().eq(
+            filterColumn.value,
+            filterValue,
+          );
       return response;
     } catch (e) {
       throw Exception(e);
@@ -195,8 +221,8 @@ final class SupabaseService implements ISupabaseService {
 
   @override
   Future<void> signIn({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   }) async {
     try {
       await client.auth.signInWithPassword(
@@ -205,16 +231,16 @@ final class SupabaseService implements ISupabaseService {
       );
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
-      throw Exception("AuthException to sign in: $e");
+      throw Exception('AuthException to sign in: $e');
     } catch (e) {
-      throw Exception("Failed to sign in: $e");
+      throw Exception('Failed to sign in: $e');
     }
   }
 
   @override
   Future<void> signUp({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   }) async {
     try {
       await client.auth.signUp(
@@ -223,9 +249,9 @@ final class SupabaseService implements ISupabaseService {
       );
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
-      throw Exception("AuthException to sign up: $e");
+      throw Exception('AuthException to sign up: $e');
     } catch (e) {
-      throw Exception("Failed to sign up: $e");
+      throw Exception('Failed to sign up: $e');
     }
   }
 
@@ -235,9 +261,9 @@ final class SupabaseService implements ISupabaseService {
       await client.auth.signOut();
       await _signOutWithGoogle();
     } on AuthApiException catch (e) {
-      throw Exception("AuthApiException to sign out: $e");
+      throw Exception('AuthApiException to sign out: $e');
     } catch (e) {
-      throw Exception("Failed to sign out: $e");
+      throw Exception('Failed to sign out: $e');
     }
   }
 
@@ -247,16 +273,16 @@ final class SupabaseService implements ISupabaseService {
       await client.auth.resetPasswordForEmail(email);
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
-      throw Exception("AuthException to sign up: $e");
+      throw Exception('AuthException to sign up: $e');
     } catch (e) {
       SnackbarType.error.show(message: e.toString());
-      throw Exception("Failed to reset password: $e");
+      throw Exception('Failed to reset password: $e');
     }
   }
 
   @override
   Future<void> signInWithProvider({
-    required final SignInType provider,
+    required SignInType provider,
   }) async {
     LoadingStatus.loading.showLoadingDialog();
     // final rawNonce = _client.auth.generateRawNonce();
@@ -265,7 +291,7 @@ final class SupabaseService implements ISupabaseService {
     // String? nonce = rawNonce;
 
     if (provider == SignInType.google) {
-      final Map<String, dynamic> resp = await _signInWithGoogle();
+      final resp = await _signInWithGoogle();
       idToken = resp['idToken'];
       accessToken = resp['accessToken'];
     }
@@ -275,7 +301,7 @@ final class SupabaseService implements ISupabaseService {
     // }
 
     if (idToken == null) {
-      throw 'No ID Token found.';
+      throw Exception('No id token found.');
     }
     try {
       await client.auth.signInWithIdToken(
@@ -284,21 +310,20 @@ final class SupabaseService implements ISupabaseService {
         accessToken: accessToken,
         // nonce: rawNonce,
       );
-      Get.offAllNamed(Routes.navBar);
+      unawaited(Get.offAllNamed(Routes.navBar));
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
-      throw Exception("AuthException to sign in with provider: $e");
+      throw Exception('AuthException to sign in with provider: $e');
     } catch (e) {
-      throw Exception("Failed to sign in with provider: $e");
+      throw Exception('Failed to sign in with provider: $e');
     } finally {
       LoadingStatus.loaded.showLoadingDialog();
     }
   }
 
-  @override
   Future<Map<String, dynamic>> _signInWithGoogle() async {
     /// Web Client ID that you registered with Google Cloud.
-    final String? webClientId = dotenv.env["WEB_CLIENT_ID"];
+    final webClientId = dotenv.env['WEB_CLIENT_ID'];
 
     /// iOS Client ID that you registered with Google Cloud.
     // final String? iosClientId = dotenv.env["IOS_CLIENT_ID"];
@@ -306,7 +331,7 @@ final class SupabaseService implements ISupabaseService {
     // Google sign in on Android will work without providing the Android
     // Client ID registered on Google Cloud.
 
-    final GoogleSignIn googleSignIn = GoogleSignIn(
+    final googleSignIn = GoogleSignIn(
       // clientId: iosClientId,
       serverClientId: webClientId,
     );
@@ -316,7 +341,7 @@ final class SupabaseService implements ISupabaseService {
     final idToken = googleAuth.idToken;
 
     if (accessToken == null) {
-      throw 'No Access Token found.';
+      throw Exception('No access token found.');
     }
 
     LocalStorageService.instance.saveData(
@@ -330,9 +355,8 @@ final class SupabaseService implements ISupabaseService {
     };
   }
 
-  @override
   Future<void> _signOutWithGoogle() async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
   }
 }

@@ -23,10 +23,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
 
   Future<void> removeImages(
     XFile image, {
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   }) async {
     _imagePaths.remove(image);
-    if (image.path.contains("https://")) {
+    if (image.path.contains('https://')) {
       final storageRepository = StorageRepository.instance;
       LoadingStatus.loading.showLoadingDialog();
       await storageRepository.removeImage(
@@ -41,9 +41,9 @@ extension EditableWidgetTypeExt on EditableWidgetType {
   }
 
   Widget getBottomSheetByEditableWidgetType({
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   }) {
-    const ConstantsInstances constants = ConstantsInstances.instance;
+    final constants = ConstantsInstances.instance;
     switch (this) {
       case EditableWidgetType.name:
         final nameController = TextEditingController(
@@ -196,7 +196,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
         );
       case EditableWidgetType.headerSlider:
         _imagePaths.clear();
-        for (var image in userThemeModel.style.sliderStyle.images) {
+        for (final image in userThemeModel.style.sliderStyle.images) {
           _imagePaths.add(XFile(image));
         }
         return Obx(
@@ -230,7 +230,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
                             padding: 8.padRight,
                             child: ClipRRect(
                               borderRadius: 8.radiusAll,
-                              child: image.path.contains("https://")
+                              child: image.path.contains('https://')
                                   ? CustomCachedNetworkImage(
                                       url: image.path,
                                       width: 100.w,
@@ -282,19 +282,17 @@ extension EditableWidgetTypeExt on EditableWidgetType {
             ],
           ),
         );
-      default:
     }
-    return const SizedBox.shrink();
   }
 
   Future<void> saveSliderImages({
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   }) async {
     final userThemesRepository = UserThemesRepository.instance;
 
     final uploadedImages =
         await userThemesRepository.uploadUserThemeSliderImages(
-      themeId: userThemeModel.id ?? "",
+      themeId: userThemeModel.id ?? '',
       images: _imagePaths,
     );
 
@@ -305,7 +303,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
               ? _imagePaths.map((image) => image.path).toList()
               : [
                   ..._imagePaths
-                      .where((image) => image.path.contains("https://"))
+                      .where((image) => image.path.contains('https://'))
                       .map((image) => image.path),
                   ...uploadedImages.map((url) => url),
                 ],
@@ -318,7 +316,7 @@ extension EditableWidgetTypeExt on EditableWidgetType {
   }
 
   Future<void> _onTapSaveButtonFromTextType({
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   }) async {
     final editThemeController = Get.find<EditThemeController>();
     editThemeController.userThemeModel.value = userThemeModel;
@@ -326,12 +324,12 @@ extension EditableWidgetTypeExt on EditableWidgetType {
   }
 
   void pickSliderImage() {
-    final List<String> imageExtensions = <String>['jpg', 'jpeg', 'png'];
+    final imageExtensions = <String>['jpg', 'jpeg', 'png'];
     final imagePickerService = ImagePickerService.instance;
     imagePickerService.pickMultiImages().then((imageList) {
       if (imageList.isEmpty) return;
-      for (var image in imageList) {
-        final String extension = image.path.split('.').last;
+      for (final image in imageList) {
+        final extension = image.path.split('.').last;
         if (imageExtensions.contains(extension)) {
           _imagePaths.add(image);
           continue;
@@ -349,8 +347,10 @@ extension EditableWidgetTypeExt on EditableWidgetType {
     final uri = Uri.parse(url);
     final fullPath = uri.path;
 
-    String filePath = fullPath.replaceFirst(
-        '/storage/v1/object/public/user_themes_slider_images/', '');
+    var filePath = fullPath.replaceFirst(
+      '/storage/v1/object/public/user_themes_slider_images/',
+      '',
+    );
 
     if (filePath.contains('?')) {
       filePath = filePath.split('?')[0];

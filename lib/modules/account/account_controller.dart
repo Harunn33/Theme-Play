@@ -11,7 +11,7 @@ import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 class AccountController extends GetxController {
   final ConstantsInstances constants = ConstantsInstances.instance;
 
-  final RxString profilePhotoUrl = "".obs;
+  final RxString profilePhotoUrl = ''.obs;
 
   late final Rx<Future<User?>> profileInfoFuture = getProfileInfo().obs;
 
@@ -22,17 +22,17 @@ class AccountController extends GetxController {
   }
 
   Future<String> getProfilePhoto() async {
-    final ProfileRepository profileRepository = ProfileRepository.instance;
-    return await profileRepository.getProfilePhoto();
+    final profileRepository = ProfileRepository.instance;
+    return profileRepository.getProfilePhoto();
   }
 
   Future<User?> getProfileInfo() async {
-    final ProfileRepository profileRepository = ProfileRepository.instance;
-    return await profileRepository.getProfile();
+    final profileRepository = ProfileRepository.instance;
+    return profileRepository.getProfile();
   }
 
   Future<void> signOut() async {
-    final AuthRepository authRepository = AuthRepository.instance;
+    final authRepository = AuthRepository.instance;
     await authRepository.signOut();
   }
 
@@ -45,7 +45,7 @@ class AccountController extends GetxController {
   }
 
   void onTapCopyUid({
-    required final String uid,
+    required String uid,
   }) {
     Clipboard.setData(
       ClipboardData(text: _encodeUuid(uid)),

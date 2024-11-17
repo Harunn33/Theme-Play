@@ -3,79 +3,80 @@ part of 'supabase_service.dart';
 /// An interface for Supabase
 abstract class ISupabaseService {
   Future<SupabaseQueryBuilder> baseFetchData({
-    required final TableName tableName,
+    required TableName tableName,
   });
 
   /// Fetch data from a table
   Future<PostgrestList> fetchData({
-    required final TableName tableName,
+    required TableName tableName,
   });
 
   /// Insert data into a table
   Future<void> insertData({
-    required final TableName tableName,
-    required final Map<String, dynamic> data,
+    required TableName tableName,
+    required Map<String, dynamic> data,
   });
 
   /// Update data in a table
   Future<void> updateData({
-    required final TableName tableName,
-    required final Map<String, dynamic> data,
-    required final FilterByColumn filterColumn,
-    required final String value,
+    required TableName tableName,
+    required Map<String, dynamic> data,
+    required FilterByColumn filterColumn,
+    required String value,
   });
 
   /// Delete data from a table
   Future<void> deleteData({
-    required final TableName tableName,
-    required final FilterByColumn column,
-    required final String value,
+    required TableName tableName,
+    required FilterByColumn column,
+    required String value,
   });
 
   Future<String> fetchImagesFromStorage({
-    required final BucketName bucketName,
-    required final String path,
-    final bool isUpload = false,
-    final Uint8List? data,
-    final String? imageExtension,
+    required BucketName bucketName,
+    required String path,
+    bool isUpload = false,
+    Uint8List? data,
+    String? imageExtension,
   });
 
   Future<void> removeImageFromStorage({
-    required final BucketName bucketName,
-    required final List<String> imagePaths,
+    required BucketName bucketName,
+    required List<String> imagePaths,
+  });
+
+  Future<void> removeFolderFromStorage({
+    required BucketName bucketName,
+    required String folderPath,
   });
 
   /// Fetch data from a table with search
   Future<PostgrestList> fetchDataWithSearch({
-    required final TableName tableName,
-    required final FilterByColumn searchColumn,
-    required final String searchValue,
+    required TableName tableName,
+    required FilterByColumn searchColumn,
+    required String searchValue,
   });
 
   /// Fetch data from a table with filter
   Future<PostgrestList> fetchDataWithFilter({
-    required final TableName tableName,
-    required final FilterByColumn filterColumn,
-    required final String filterValue,
+    required TableName tableName,
+    required FilterByColumn filterColumn,
+    required String filterValue,
   });
 
   // Auth
   Future<void> signIn({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   });
 
   Future<void> signInWithProvider({
-    required final SignInType provider,
+    required SignInType provider,
   });
 
-  Future<Map<String, dynamic>> _signInWithGoogle();
-
-  Future<void> _signOutWithGoogle();
-
   Future<void> signUp({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   });
 
   Future<void> signOut();

@@ -4,6 +4,6 @@ import 'package:theme_play/modules/change_language/change_language_controller.da
 class ChangeLanguageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ChangeLanguageController>(() => ChangeLanguageController());
+    Get.lazyPut<ChangeLanguageController>(ChangeLanguageController.new);
   }
 }

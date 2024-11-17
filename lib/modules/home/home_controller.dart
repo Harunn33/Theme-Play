@@ -9,6 +9,7 @@ import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
+import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
@@ -21,7 +22,7 @@ import 'package:theme_play/shared/helpers/language_helpers.dart';
 import 'package:theme_play/shared/widgets/index.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
-  late CancelableOperation _searchOperation;
+  late CancelableOperation<String?> _searchOperation;
   final Duration _searchingDelay = 400.milliseconds;
   final ConstantsInstances constants = ConstantsInstances.instance;
 
@@ -39,7 +40,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   late final AnimationController animationController;
   final RxBool isSearchBarExpanded = false.obs;
 
-  final RxString selectedFilterItem = "".obs;
+  final RxString selectedFilterItem = ''.obs;
   final RxInt filterBadgeCount = 0.obs;
   final RxInt selectedTabIndex = 0.obs;
 
@@ -150,22 +151,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void navigateToThemeScreen({
-    required final UserThemeModel userTheme,
-    required final bool hasEditAccess,
+    required UserThemeModel userTheme,
+    required bool hasEditAccess,
   }) {
     Get.toNamed(
       Routes.theme,
       arguments: {
-        "model": userTheme.obs,
-        "has_edit_access": hasEditAccess,
+        'model': userTheme.obs,
+        'has_edit_access': hasEditAccess,
       },
     );
   }
 
   void _navigateToEditThemeScreen(
     BuildContext context, {
-    required final UserThemeModel userTheme,
-    required final bool hasEditAccess,
+    required UserThemeModel userTheme,
+    required bool hasEditAccess,
   }) {
     Get.back();
     if (!hasEditAccess) {
@@ -174,7 +175,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     Get.toNamed(
       Routes.editTheme,
       arguments: {
-        "model": userTheme.obs,
+        'model': userTheme.obs,
       },
     );
   }
@@ -209,19 +210,23 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void showThemeSettings(
     BuildContext context, {
-    required final UserThemeModel userTheme,
-    final bool hasEditAccess = false,
-    final bool hasShareTheme = false,
+    required UserThemeModel userTheme,
+    bool hasEditAccess = false,
+    bool hasShareTheme = false,
   }) {
+    final showcaseItems = [
+      ShowcaseItem.homeShareThemeCode,
+      ShowcaseItem.homeEditThemeButton,
+      ShowcaseItem.homeDeleteThemeButton,
+    ];
+    if (!hasShareTheme) {
+      showcaseItems.removeAt(0);
+    }
     context.showPopup(
       width: .45.sw,
       iconHeight: 18.h,
       isShowcase: true,
-      showcaseItems: [
-        ShowcaseItem.homeShareThemeCode,
-        ShowcaseItem.homeEditThemeButton,
-        ShowcaseItem.homeDeleteThemeButton,
-      ],
+      showcaseItems: showcaseItems,
       children: [
         if (hasShareTheme)
           PopoverModel(
@@ -261,7 +266,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void shareTheme(
     BuildContext context, {
-    required final String shareableCode,
+    required String shareableCode,
   }) {
     Get.back();
     userIdTextEditingController.clear();
@@ -336,13 +341,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<void> addSharedCodes({
-    required final String shareableCode,
+    required String shareableCode,
   }) async {
     if (!shareThemeFormKey.currentState!.validate()) return;
     final decodedUID = _decodeUserID(userIdTextEditingController.text.trim());
-    final HomeController homeController = Get.find<HomeController>();
-    final SharedCodesToUserRepository sharedCodesToUserRepository =
-        SharedCodesToUserRepository.instance;
+    final homeController = Get.find<HomeController>();
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
     final myUserThemes = await homeController.getUserThemes();
     final hasContainsMyUserTheme = myUserThemes
         .map((userTheme) => userTheme.createdBy == decodedUID)
@@ -365,7 +369,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   void onTapDeleteTheme(
     BuildContext context, {
-    required final UserThemeModel userTheme,
+    required UserThemeModel userTheme,
   }) {
     Get.back();
     context.showDialog(
@@ -393,7 +397,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                   bgColor: constants.colors.orochimaru,
                   borderRadius: 8,
                   textColor: constants.colors.black,
-                  onTap: () => Get.back(),
+                  onTap: Get.back,
                 ),
                 16.horizontalSpace,
                 CustomSecondaryButton(
@@ -402,7 +406,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                   borderRadius: 8,
                   textColor: constants.colors.black,
                   onTap: () => deleteUserTheme(
-                    themeId: userTheme.id ?? "",
+                    themeId: userTheme.id ?? '',
                     shareableCode: userTheme.shareableCode,
                   ),
                 ),
@@ -485,7 +489,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                             groupValue: selectedFilterItem.value,
                             onChanged: (value) {
                               if (selectedFilterItem.value == value) return;
-                              selectedFilterItem.value = value ?? "";
+                              selectedFilterItem.value = value ?? '';
                               filterBadgeCount.value = 1;
                               futureUserThemes.value = filterUserThemes(
                                 theme.id,
@@ -502,7 +506,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                     () => filterBadgeCount.value == 0
                         ? const SizedBox.shrink()
                         : AnimatedSlide(
-                            offset: const Offset(0, 0),
+                            offset: Offset.zero,
                             duration: 3.seconds,
                             child: SizedBox(
                               width: 1.sw,
@@ -526,22 +530,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<List<ThemeModel>> getThemes() async {
-    final ThemesRepository themesRepository = ThemesRepository.instance;
-    return await themesRepository.getThemes();
+    final themesRepository = ThemesRepository.instance;
+    return themesRepository.getThemes();
   }
 
   Future<List<UserThemeModel>> getUserThemes() async {
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
-    return await userThemesRepository.getUserThemes();
+    final userThemesRepository = UserThemesRepository.instance;
+    return userThemesRepository.getUserThemes();
   }
 
   Future<List<UserThemeModel>> getSharedUserThemes() async {
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
+    final userThemesRepository = UserThemesRepository.instance;
     final sharedCodesToUserModel = await getSharedCodesToUsers();
     if (sharedCodesToUserModel == null) return [];
-    final List<String> sharedCodes = sharedCodesToUserModel
+    final sharedCodes = sharedCodesToUserModel
         .map((sharedCodesToUser) => sharedCodesToUser.themeShareCode)
         .toList();
     hasEditAccessList.value = sharedCodesToUserModel
@@ -554,21 +556,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   Future<List<UserThemeModel>> searchUserThemes(String query) async {
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
+    final userThemesRepository = UserThemesRepository.instance;
     clearFilters();
-    return await userThemesRepository.searchUserThemes(query: query);
+    return userThemesRepository.searchUserThemes(query: query);
   }
 
   Future<List<UserThemeModel>> filterUserThemes(String query) async {
-    final UserThemesRepository userThemesRepository =
-        UserThemesRepository.instance;
-    return await userThemesRepository.filterUserThemes(query: query);
+    final userThemesRepository = UserThemesRepository.instance;
+    return userThemesRepository.filterUserThemes(query: query);
   }
 
   Future<void> deleteUserTheme({
-    final String themeId = "",
-    final String shareableCode = "",
+    String themeId = '',
+    String shareableCode = '',
   }) async {
     final profileRepository = ProfileRepository.instance;
     final user = await profileRepository.getProfile();
@@ -581,6 +581,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     }
     final userThemesRepository = UserThemesRepository.instance;
     final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    final storageRepository = StorageRepository.instance;
     LoadingStatus.loading.showLoadingDialog();
     await userThemesRepository.deleteUserTheme(themeId: themeId);
     await sharedCodesToUserRepository.removeSharedCodes(
@@ -592,11 +593,17 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     refreshMyThemesTab();
     refreshSharedThemesTab();
     LoadingStatus.loaded.showLoadingDialog();
+    unawaited(
+      storageRepository.removeFolder(
+        bucketName: BucketName.userThemesSliderImages,
+        folderPath: '${user.id}/$themeId',
+      ),
+    );
   }
 
   Future<void> _deleteSharedThemeForMe({
-    required final String shareableCode,
-    required final String sharedUser,
+    required String shareableCode,
+    required String sharedUser,
   }) async {
     final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
     LoadingStatus.loading.showLoadingDialog();
@@ -614,7 +621,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     final profileRepository = ProfileRepository.instance;
     final user = await profileRepository.getProfile();
     if (user == null) return null;
-    return await sharedCodesToUserRepository.getSharedCodesToUsers(
+    return sharedCodesToUserRepository.getSharedCodesToUsers(
       userId: user.id,
     );
   }

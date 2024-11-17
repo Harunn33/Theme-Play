@@ -12,8 +12,8 @@ class SignInController extends GetxController {
   AppColors get appColors => _appConstants.colors;
 
   Future<void> signInWithGoogle() async {
-    final AuthRepository authRepository = AuthRepository.instance;
-    authRepository.signInWithProvider(
+    final authRepository = AuthRepository.instance;
+    await authRepository.signInWithProvider(
       provider: SignInType.google,
     );
   }

@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:theme_play/data/network/services/supabase/index.dart';
+import 'package:theme_play/data/network/repository/profile/index.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 
@@ -9,15 +10,18 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
-    redirection();
     super.onReady();
+    redirection();
   }
 
   Future<void> redirection() async {
-    final SupabaseClient client = SupabaseService.client;
-    if (client.auth.currentSession == null) {
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) {
       return Get.offAllNamed(Routes.signIn);
     }
-    Get.offAllNamed(Routes.navBar);
+    unawaited(
+      Get.offAllNamed(Routes.navBar),
+    );
   }
 }

@@ -12,23 +12,23 @@ import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
 
 class CustomAccountHeader extends StatelessWidget {
+  const CustomAccountHeader({
+    required this.user,
+    required this.profilePhotoUrl,
+    required this.encodedUid,
+    super.key,
+    this.onTap,
+    this.onTapCopyUid,
+  });
   final VoidCallback? onTap;
   final User user;
   final RxString profilePhotoUrl;
   final VoidCallback? onTapCopyUid;
   final String encodedUid;
-  const CustomAccountHeader({
-    super.key,
-    this.onTap,
-    required this.user,
-    required this.profilePhotoUrl,
-    this.onTapCopyUid,
-    required this.encodedUid,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const AppColors appColors = AppColors.instance;
+    const appColors = AppColors.instance;
     return ListTile(
       onTap: onTap,
       tileColor: appColors.orochimaru.withOpacity(.2),
@@ -45,7 +45,7 @@ class CustomAccountHeader extends StatelessWidget {
         ),
       ),
       title: Text(
-        user.userMetadata?["full_name"],
+        user.userMetadata?['full_name'].toString() ?? '',
         maxLines: 2,
         style: Theme.of(context).textTheme.titleSmall,
       ),
@@ -53,7 +53,7 @@ class CustomAccountHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            user.email ?? "",
+            user.email ?? '',
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelSmall,
           ),

@@ -11,11 +11,11 @@ class CustomFutureBuilder<T> {
 
   Widget toBuild({
     required Widget Function(T? data) onSuccess,
-    final Widget? loadingWidget,
-    final Widget? notFoundWidget,
-    final Widget? emptyWidget,
-    final Widget? onError,
-    final T? data,
+    Widget? loadingWidget,
+    Widget? notFoundWidget,
+    Widget? emptyWidget,
+    Widget? onError,
+    T? data,
   }) =>
       FutureBuilder<T>(
         future: _future,

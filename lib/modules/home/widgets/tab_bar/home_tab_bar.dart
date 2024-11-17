@@ -4,11 +4,11 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 
 class HomeTabBar extends StatelessWidget {
-  final HomeController controller;
   const HomeTabBar({
-    super.key,
     required this.controller,
+    super.key,
   });
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {

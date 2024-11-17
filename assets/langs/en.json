@@ -47,6 +47,7 @@
   "subtitle": "Subtitle",
   "mainMessage": "Content",
   "profileUpdated": "Profile updated successfully",
+  "themeCreated": "Theme created successfully",
   "themeShared": "Theme shared successfully",
   "homeShowcaseSearchMessage": "Search for your own themes",
   "homeShowcaseFilterMessage": "Filter themes by category",

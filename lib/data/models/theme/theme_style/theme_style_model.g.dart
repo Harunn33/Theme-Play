@@ -7,7 +7,8 @@ part of 'theme_style_model.dart';
 // **************************************************************************
 
 _$ThemeStyleModelImpl _$$ThemeStyleModelImplFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$ThemeStyleModelImpl(
       title: json['title'] as String,
       subtitle: json['sub_title'] as String,
@@ -18,13 +19,16 @@ _$ThemeStyleModelImpl _$$ThemeStyleModelImplFromJson(
       textStyle:
           TextStyleModel.fromJson(json['text_style'] as Map<String, dynamic>),
       buttonStyle: ButtonStyleModel.fromJson(
-          json['button_style'] as Map<String, dynamic>),
+        json['button_style'] as Map<String, dynamic>,
+      ),
       sliderStyle: SliderStyleModel.fromJson(
-          json['slider_style'] as Map<String, dynamic>),
+        json['slider_style'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$$ThemeStyleModelImplToJson(
-        _$ThemeStyleModelImpl instance) =>
+  _$ThemeStyleModelImpl instance,
+) =>
     <String, dynamic>{
       'title': instance.title,
       'sub_title': instance.subtitle,
@@ -37,7 +41,8 @@ Map<String, dynamic> _$$ThemeStyleModelImplToJson(
     };
 
 _$TitleStyleModelImpl _$$TitleStyleModelImplFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$TitleStyleModelImpl(
       size: (json['size'] as num).toDouble(),
       color: json['color'] as String,
@@ -46,7 +51,8 @@ _$TitleStyleModelImpl _$$TitleStyleModelImplFromJson(
     );
 
 Map<String, dynamic> _$$TitleStyleModelImplToJson(
-        _$TitleStyleModelImpl instance) =>
+  _$TitleStyleModelImpl instance,
+) =>
     <String, dynamic>{
       'size': instance.size,
       'color': instance.color,
@@ -62,7 +68,8 @@ _$TextStyleModelImpl _$$TextStyleModelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$TextStyleModelImplToJson(
-        _$TextStyleModelImpl instance) =>
+  _$TextStyleModelImpl instance,
+) =>
     <String, dynamic>{
       'size': instance.size,
       'color': instance.color,
@@ -70,21 +77,24 @@ Map<String, dynamic> _$$TextStyleModelImplToJson(
     };
 
 _$ButtonStyleModelImpl _$$ButtonStyleModelImplFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$ButtonStyleModelImpl(
       radius: (json['radius'] as num).toDouble(),
       color: json['color'] as String,
     );
 
 Map<String, dynamic> _$$ButtonStyleModelImplToJson(
-        _$ButtonStyleModelImpl instance) =>
+  _$ButtonStyleModelImpl instance,
+) =>
     <String, dynamic>{
       'radius': instance.radius,
       'color': instance.color,
     };
 
 _$SliderStyleModelImpl _$$SliderStyleModelImplFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _$SliderStyleModelImpl(
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
@@ -95,7 +105,8 @@ _$SliderStyleModelImpl _$$SliderStyleModelImplFromJson(
     );
 
 Map<String, dynamic> _$$SliderStyleModelImplToJson(
-        _$SliderStyleModelImpl instance) =>
+  _$SliderStyleModelImpl instance,
+) =>
     <String, dynamic>{
       'images': instance.images,
       'radius': instance.radius,

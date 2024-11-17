@@ -13,8 +13,8 @@ final class AuthRepository implements IAuthRepository {
 
   @override
   Future<void> signIn({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   }) async {
     await _service.signIn(
       email: email,
@@ -24,8 +24,8 @@ final class AuthRepository implements IAuthRepository {
 
   @override
   Future<void> signUp({
-    required final String email,
-    required final String password,
+    required String email,
+    required String password,
   }) async {
     await _service.signUp(
       password: password,
@@ -45,7 +45,7 @@ final class AuthRepository implements IAuthRepository {
 
   @override
   Future<void> signInWithProvider({
-    required final SignInType provider,
+    required SignInType provider,
   }) async {
     await _service.signInWithProvider(provider: provider);
   }

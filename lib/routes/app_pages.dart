@@ -18,7 +18,7 @@ final class AppPages {
 
   final String initial = Routes.splash;
 
-  final List<GetPage<dynamic>> routes = <GetPage>[
+  final List<GetPage<dynamic>> routes = <GetPage<dynamic>>[
     GetPage(
       name: Routes.splash,
       page: () => const Splash(),

@@ -12,13 +12,13 @@ extension ShowPopoverExt on BuildContext {
   static const AppColors _colors = AppColors.instance;
 
   void showPopup({
-    required final double? width,
-    final double? iconHeight,
-    required final List<PopoverModel> children,
-    final bool isShowcase = false,
-    final List<ShowcaseItem> showcaseItems = const [],
+    required double? width,
+    required List<PopoverModel> children,
+    double? iconHeight,
+    bool isShowcase = false,
+    List<ShowcaseItem> showcaseItems = const [],
   }) {
-    BuildContext showcaseContext = this;
+    var showcaseContext = this;
     showPopover(
       context: this,
       width: width,
@@ -63,16 +63,20 @@ extension ShowPopoverExt on BuildContext {
           );
         },
       ),
-    ).timeout(const Duration(milliseconds: 300), onTimeout: () {
-      if (isShowcase) {
-        final showcaseService = ShowcaseService.instance;
-        showcaseService.show(
-          showcaseContext,
-          widgetIds: children.map((e) => e.showcaseKey ?? GlobalKey()).toList(),
-          showcaseItems: showcaseItems,
-        );
-      }
-      return null;
-    });
+    ).timeout(
+      const Duration(milliseconds: 300),
+      onTimeout: () {
+        if (isShowcase) {
+          final showcaseService = ShowcaseService.instance;
+          showcaseService.show(
+            showcaseContext,
+            widgetIds:
+                children.map((e) => e.showcaseKey ?? GlobalKey()).toList(),
+            showcaseItems: showcaseItems,
+          );
+        }
+        return null;
+      },
+    );
   }
 }

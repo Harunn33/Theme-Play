@@ -1,22 +1,26 @@
-part of "storage_repository.dart";
+part of 'storage_repository.dart';
 
 abstract class IStorageRepository {
   Future<String> getImages({
-    required final String path,
-    required final BucketName bucketName,
+    required String path,
+    required BucketName bucketName,
   });
   Future<void> removeImage({
-    required final List<String> imagePaths,
-    required final BucketName bucketName,
+    required List<String> imagePaths,
+    required BucketName bucketName,
+  });
+  Future<void> removeFolder({
+    required BucketName bucketName,
+    required String folderPath,
   });
   Future<String> uploadImage({
-    required final String path,
-    required final BucketName bucketName,
+    required String path,
+    required BucketName bucketName,
   });
 
   Future<String> uploadMultiImages({
-    required final XFile image,
-    required final String path,
-    required final BucketName bucketName,
+    required XFile image,
+    required String path,
+    required BucketName bucketName,
   });
 }

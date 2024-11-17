@@ -7,11 +7,11 @@ part 'theme_model.g.dart';
 @freezed
 class ThemeModel with _$ThemeModel {
   const factory ThemeModel({
-    required final String id,
-    @JsonKey(name: "created_at") required final String createdAt,
-    @JsonKey(name: "updated_at") required final String updatedAt,
-    required final Map<String, String> type,
-    required final ThemeStyleModel style,
+    required String id,
+    @JsonKey(name: 'created_at') required String createdAt,
+    @JsonKey(name: 'updated_at') required String updatedAt,
+    required Map<String, String> type,
+    required ThemeStyleModel style,
   }) = _ThemeModel;
 
   factory ThemeModel.fromJson(Map<String, Object?> json) =>

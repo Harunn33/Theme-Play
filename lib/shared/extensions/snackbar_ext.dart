@@ -30,8 +30,7 @@ enum SnackbarType {
 }
 
 extension on SnackbarType {
-  static const ConstantsInstances _constantsInstances =
-      ConstantsInstances.instance;
+  static final _constantsInstances = ConstantsInstances.instance;
   Color get color {
     switch (this) {
       case SnackbarType.error:

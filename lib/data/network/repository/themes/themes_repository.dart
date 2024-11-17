@@ -17,17 +17,17 @@ final class ThemesRepository implements IThemesRepository {
     final resp = await _supabaseService.fetchData(
       tableName: TableName.themes,
     );
-    return resp.map((theme) => ThemeModel.fromJson(theme)).toList();
+    return resp.map(ThemeModel.fromJson).toList();
   }
 
   @override
   Future<String> getThemeIcon({
-    required final String themeId,
+    required String themeId,
   }) async {
-    final StorageRepository storageRepository = StorageRepository.instance;
+    final storageRepository = StorageRepository.instance;
     final path = '$themeId/icon';
 
-    String imageUrl = await storageRepository.getImages(
+    final imageUrl = await storageRepository.getImages(
       path: path,
       bucketName: BucketName.themeIcons,
     );

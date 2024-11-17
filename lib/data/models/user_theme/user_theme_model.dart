@@ -7,12 +7,12 @@ part 'user_theme_model.g.dart';
 @freezed
 class UserThemeModel with _$UserThemeModel {
   const factory UserThemeModel({
-    @JsonKey(includeToJson: false) final String? id,
-    @JsonKey(name: "shareable_code") required final String shareableCode,
-    @JsonKey(name: "created_by") required final String createdBy,
-    @JsonKey(name: "theme_id") required final String themeId,
-    required final String name,
-    required final ThemeStyleModel style,
+    @JsonKey(name: 'shareable_code') required String shareableCode,
+    @JsonKey(name: 'created_by') required String createdBy,
+    @JsonKey(name: 'theme_id') required String themeId,
+    required String name,
+    required ThemeStyleModel style,
+    @JsonKey(includeToJson: false) String? id,
   }) = _UserThemeModel;
 
   factory UserThemeModel.fromJson(Map<String, Object?> json) =>

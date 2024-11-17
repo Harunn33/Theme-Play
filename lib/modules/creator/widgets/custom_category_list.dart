@@ -8,13 +8,13 @@ import 'package:theme_play/shared/constants/fonts.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
 
 class CustomCategoryList extends StatelessWidget {
-  final CreatorController controller;
-  final List<ThemeModel> themeList;
   const CustomCategoryList({
-    super.key,
     required this.controller,
     required this.themeList,
+    super.key,
   });
+  final CreatorController controller;
+  final List<ThemeModel> themeList;
 
   @override
   Widget build(BuildContext context) {

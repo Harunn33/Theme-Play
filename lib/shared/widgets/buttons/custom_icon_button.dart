@@ -4,15 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 
 class CustomIconButton extends StatelessWidget {
+  const CustomIconButton({
+    required this.onTap,
+    required this.icon,
+    super.key,
+    this.hasDecoration = false,
+  });
   final VoidCallback? onTap;
   final IconData icon;
   final bool hasDecoration;
-  const CustomIconButton({
-    super.key,
-    required this.onTap,
-    required this.icon,
-    this.hasDecoration = false,
-  });
 
   @override
   Widget build(BuildContext context) {

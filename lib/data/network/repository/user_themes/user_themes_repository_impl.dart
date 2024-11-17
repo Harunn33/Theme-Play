@@ -1,30 +1,30 @@
-part of "user_themes_repository.dart";
+part of 'user_themes_repository.dart';
 
 abstract class IUserThemesRepository {
   Future<List<UserThemeModel>> getUserThemes();
   Future<List<UserThemeModel>> getUserThemesByShareableCode({
-    required final List<String> shareableCodes,
+    required List<String> shareableCodes,
   });
   Future<List<UserThemeModel>> searchUserThemes({
-    required final String query,
+    required String query,
   });
   Future<List<UserThemeModel>> filterUserThemes({
-    required final String query,
+    required String query,
   });
   Future<void> createUserTheme({
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   });
 
   Future<void> editUserTheme({
-    required final UserThemeModel userThemeModel,
+    required UserThemeModel userThemeModel,
   });
 
   Future<void> deleteUserTheme({
-    required final String themeId,
+    required String themeId,
   });
 
   Future<List<String>> uploadUserThemeSliderImages({
-    required final String themeId,
-    required final List<XFile> images,
+    required String themeId,
+    required List<XFile> images,
   });
 }

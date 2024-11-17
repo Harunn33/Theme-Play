@@ -7,11 +7,11 @@ import 'package:theme_play/shared/enums/local_storage_keys.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
 
 class CustomHeaderProfilePhoto extends StatelessWidget {
-  final EditProfileController controller;
   const CustomHeaderProfilePhoto({
-    super.key,
     required this.controller,
+    super.key,
   });
+  final EditProfileController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class CustomHeaderProfilePhoto extends StatelessWidget {
             right: 0,
             top: 0,
             child: Bounceable(
-              onTap: () => controller.uploadProfilePhoto(),
+              onTap: controller.uploadProfilePhoto,
               child: Container(
                 padding: controller.constants.paddings.horizontal +
                     controller.constants.paddings.vertical,

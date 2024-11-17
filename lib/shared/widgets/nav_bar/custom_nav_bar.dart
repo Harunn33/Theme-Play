@@ -4,11 +4,11 @@ import 'package:theme_play/modules/nav_bar/enums/nav_bar_pages.dart';
 import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
 
 class CustomNavBar extends StatelessWidget {
-  final NavBarController controller;
   const CustomNavBar({
-    super.key,
     required this.controller,
+    super.key,
   });
+  final NavBarController controller;
 
   @override
   Widget build(BuildContext context) {

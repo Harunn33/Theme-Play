@@ -20,9 +20,11 @@ final class ProfileRepository implements IProfileRepository {
     try {
       return _client.auth.currentUser;
     } on AuthException catch (e) {
-      throw "Get profile failed with error: ${e.message}";
+      SnackbarType.error.show(message: e.message);
+      throw Exception(e.message);
     } catch (e) {
-      throw "Get profile failed";
+      SnackbarType.error.show(message: 'Get profile failed');
+      throw Exception('Get profile failed');
     }
   }
 
@@ -30,13 +32,14 @@ final class ProfileRepository implements IProfileRepository {
   Future<User?> updateProfile(UserAttributes userModel) async {
     LoadingStatus.loading.showLoadingDialog();
     try {
-      final UserResponse user = await _client.auth.updateUser(userModel);
+      final user = await _client.auth.updateUser(userModel);
       return user.user;
     } on AuthException catch (e) {
       SnackbarType.error.show(message: e.message);
-      throw "Update profile failed with error: ${e.message}";
+      throw Exception(e.message);
     } catch (e) {
-      throw "Update profile failed";
+      SnackbarType.error.show(message: 'Update profile failed');
+      throw Exception('Update profile failed');
     } finally {
       LoadingStatus.loaded.showLoadingDialog();
     }
@@ -44,29 +47,30 @@ final class ProfileRepository implements IProfileRepository {
 
   @override
   Future<String> getProfilePhoto() async {
-    final StorageRepository storageRepository = StorageRepository.instance;
+    final storageRepository = StorageRepository.instance;
     final user = await getProfile();
-    if (user == null) return "";
+    if (user == null) return '';
     final path = '${user.id}/profile';
 
-    String imageUrl = await storageRepository.getImages(
+    final imageUrl = await storageRepository.getImages(
       path: path,
       bucketName: BucketName.profilePhotos,
     );
 
-    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
-      "t": DateTime.now().millisecondsSinceEpoch.toString(),
-    }).toString();
-    return imageUrl;
+    return Uri.parse(imageUrl).replace(
+      queryParameters: {
+        't': DateTime.now().millisecondsSinceEpoch.toString(),
+      },
+    ).toString();
   }
 
   @override
   Future<String> uploadProfilePhoto() async {
-    final StorageRepository storageRepository = StorageRepository.instance;
+    final storageRepository = StorageRepository.instance;
     final user = await getProfile();
-    if (user == null) return "";
+    if (user == null) return '';
     final path = '${user.id}/profile';
-    return await storageRepository.uploadImage(
+    return storageRepository.uploadImage(
       path: path,
       bucketName: BucketName.profilePhotos,
     );

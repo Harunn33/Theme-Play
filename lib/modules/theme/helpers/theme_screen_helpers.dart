@@ -38,7 +38,7 @@ final class ThemeScreenHelpers {
                   bgColor: _constants.colors.orochimaru,
                   borderRadius: 8,
                   textColor: _constants.colors.black,
-                  onTap: () => Get.back(),
+                  onTap: Get.back,
                 ),
                 16.horizontalSpace,
                 CustomSecondaryButton(

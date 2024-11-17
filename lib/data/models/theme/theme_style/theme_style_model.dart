@@ -6,14 +6,14 @@ part 'theme_style_model.g.dart';
 @freezed
 class ThemeStyleModel with _$ThemeStyleModel {
   const factory ThemeStyleModel({
-    required final String title,
-    @JsonKey(name: "sub_title") required final String subtitle,
-    @JsonKey(name: "main_message") required final String mainMessage,
-    @JsonKey(name: "bg_color") required final String bgColor,
-    @JsonKey(name: "title_style") required final TitleStyleModel titleStyle,
-    @JsonKey(name: "text_style") required final TextStyleModel textStyle,
-    @JsonKey(name: "button_style") required final ButtonStyleModel buttonStyle,
-    @JsonKey(name: "slider_style") required final SliderStyleModel sliderStyle,
+    required String title,
+    @JsonKey(name: 'sub_title') required String subtitle,
+    @JsonKey(name: 'main_message') required String mainMessage,
+    @JsonKey(name: 'bg_color') required String bgColor,
+    @JsonKey(name: 'title_style') required TitleStyleModel titleStyle,
+    @JsonKey(name: 'text_style') required TextStyleModel textStyle,
+    @JsonKey(name: 'button_style') required ButtonStyleModel buttonStyle,
+    @JsonKey(name: 'slider_style') required SliderStyleModel sliderStyle,
   }) = _ThemeStyleModel;
 
   factory ThemeStyleModel.fromJson(Map<String, Object?> json) =>
@@ -23,10 +23,10 @@ class ThemeStyleModel with _$ThemeStyleModel {
 @freezed
 class TitleStyleModel with _$TitleStyleModel {
   const factory TitleStyleModel({
-    required final double size,
-    required final String color,
-    @JsonKey(name: "typewriter_animation_duration")
-    required final double typewriterAnimationDuration,
+    required double size,
+    required String color,
+    @JsonKey(name: 'typewriter_animation_duration')
+    required double typewriterAnimationDuration,
   }) = _TitleStyleModel;
 
   factory TitleStyleModel.fromJson(Map<String, Object?> json) =>
@@ -36,10 +36,10 @@ class TitleStyleModel with _$TitleStyleModel {
 @freezed
 class TextStyleModel with _$TextStyleModel {
   const factory TextStyleModel({
-    required final double size,
-    required final String color,
-    @JsonKey(name: "typewriter_animation_duration")
-    required final double typewriterAnimationDuration,
+    required double size,
+    required String color,
+    @JsonKey(name: 'typewriter_animation_duration')
+    required double typewriterAnimationDuration,
   }) = _TextStyleModel;
 
   factory TextStyleModel.fromJson(Map<String, Object?> json) =>
@@ -49,8 +49,8 @@ class TextStyleModel with _$TextStyleModel {
 @freezed
 class ButtonStyleModel with _$ButtonStyleModel {
   const factory ButtonStyleModel({
-    required final double radius,
-    required final String color,
+    required double radius,
+    required String color,
   }) = _ButtonStyleModel;
 
   factory ButtonStyleModel.fromJson(Map<String, Object?> json) =>
@@ -60,11 +60,11 @@ class ButtonStyleModel with _$ButtonStyleModel {
 @freezed
 class SliderStyleModel with _$SliderStyleModel {
   const factory SliderStyleModel({
-    required final List<String> images,
-    required final double radius,
-    @JsonKey(name: "auto_play") required final bool autoPlay,
-    @JsonKey(name: "scroll_direction") required final String scrollDirection,
-    @JsonKey(name: "auto_play_interval") required final int autoPlayInterval,
+    required List<String> images,
+    required double radius,
+    @JsonKey(name: 'auto_play') required bool autoPlay,
+    @JsonKey(name: 'scroll_direction') required String scrollDirection,
+    @JsonKey(name: 'auto_play_interval') required int autoPlayInterval,
   }) = _SliderStyleModel;
 
   factory SliderStyleModel.fromJson(Map<String, Object?> json) =>

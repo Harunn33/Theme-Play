@@ -16,7 +16,7 @@ class SignInScreen extends GetView<SignInController> {
           children: [
             CustomPrimaryButton(
               onTap: () => controller.signInWithGoogle(),
-              text: "Login with Google",
+              text: 'Login with Google',
             ),
           ],
         ),

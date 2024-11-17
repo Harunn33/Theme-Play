@@ -5,19 +5,19 @@ import 'package:theme_play/shared/constants/constants_instances.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 
 class CustomLanguageItem extends StatelessWidget {
+  const CustomLanguageItem({
+    required this.title,
+    super.key,
+    this.onTap,
+    this.isSelected = false,
+  });
   final VoidCallback? onTap;
   final String title;
   final bool isSelected;
-  const CustomLanguageItem({
-    super.key,
-    this.onTap,
-    required this.title,
-    this.isSelected = false,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const ConstantsInstances constants = ConstantsInstances.instance;
+    final constants = ConstantsInstances.instance;
     return Bounceable(
       onTap: isSelected ? null : onTap,
       child: Container(

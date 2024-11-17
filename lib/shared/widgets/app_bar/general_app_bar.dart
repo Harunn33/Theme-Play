@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class GeneralAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
   const GeneralAppBar({
+    this.title = '',
     super.key,
-    required this.title,
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {

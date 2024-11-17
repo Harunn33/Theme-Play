@@ -4,17 +4,17 @@ import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/widgets/editable_widget/index.dart';
 
 class CustomThemeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final ConstantsInstances constantsInstances = ConstantsInstances.instance;
-  final UserThemeModel userThemeModel;
-  final bool isEditingMode;
   const CustomThemeAppBar({
-    super.key,
     required this.userThemeModel,
+    super.key,
     this.isEditingMode = false,
   });
+  final UserThemeModel userThemeModel;
+  final bool isEditingMode;
 
   @override
   Widget build(BuildContext context) {
+    final constantsInstances = ConstantsInstances.instance;
     return AppBar(
       iconTheme: IconThemeData(
         color: constantsInstances.colors.hexToColor(
@@ -34,6 +34,7 @@ class CustomThemeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Text _buildTitle(BuildContext context) {
+    final constantsInstances = ConstantsInstances.instance;
     return Text(
       userThemeModel.name,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(

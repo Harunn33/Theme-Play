@@ -5,22 +5,22 @@ import 'package:theme_play/shared/constants/paddings.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
+  const CustomPrimaryButton({
+    required this.text,
+    super.key,
+    this.onTap,
+    this.bgColor,
+    this.textColor,
+  });
   final VoidCallback? onTap;
   final String text;
   final Color? bgColor;
   final Color? textColor;
-  const CustomPrimaryButton({
-    super.key,
-    this.onTap,
-    required this.text,
-    this.bgColor,
-    this.textColor,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const AppColors appColors = AppColors.instance;
-    const AppPaddings appPaddings = AppPaddings.instance;
+    const appColors = AppColors.instance;
+    const appPaddings = AppPaddings.instance;
     return Bounceable(
       onTap: onTap,
       child: Container(

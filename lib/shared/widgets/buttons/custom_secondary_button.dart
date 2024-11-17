@@ -4,23 +4,23 @@ import 'package:theme_play/shared/constants/paddings.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
 class CustomSecondaryButton extends StatelessWidget {
+  const CustomSecondaryButton({
+    required this.text,
+    required this.bgColor,
+    required this.borderRadius,
+    super.key,
+    this.onTap,
+    this.textColor = Colors.white,
+  });
   final VoidCallback? onTap;
   final String text;
   final Color bgColor;
   final double borderRadius;
   final Color textColor;
-  const CustomSecondaryButton({
-    super.key,
-    this.onTap,
-    required this.text,
-    required this.bgColor,
-    required this.borderRadius,
-    this.textColor = Colors.white,
-  });
 
   @override
   Widget build(BuildContext context) {
-    const AppPaddings appPaddings = AppPaddings.instance;
+    const appPaddings = AppPaddings.instance;
     return Bounceable(
       onTap: onTap,
       child: Container(

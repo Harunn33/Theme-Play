@@ -27,7 +27,7 @@ class ChangeLanguageScreen extends GetView<ChangeLanguageController> {
                   controller.languages.length,
                   (index) {
                     final language = controller.languages[index];
-                    final bool isSelected = localizationController.lang.value ==
+                    final isSelected = localizationController.lang.value ==
                         language.languageCode;
                     return Column(
                       children: [

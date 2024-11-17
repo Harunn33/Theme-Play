@@ -5,11 +5,11 @@ import 'package:theme_play/modules/nav_bar/nav_bar_controller.dart';
 import 'package:theme_play/modules/nav_bar/widgets/custom_fab.dart';
 
 class NavbarScreen extends GetView<NavBarController> {
-  final PreferredSizeWidget? appBar;
   const NavbarScreen({
     super.key,
     this.appBar,
   });
+  final PreferredSizeWidget? appBar;
 
   @override
   Widget build(BuildContext context) {

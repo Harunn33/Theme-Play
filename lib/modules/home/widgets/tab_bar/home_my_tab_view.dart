@@ -6,11 +6,11 @@ import 'package:theme_play/modules/home/widgets/user_theme_item/custom_user_them
 import 'package:theme_play/shared/extensions/future_builder_ext.dart';
 
 class HomeMyTabView extends StatelessWidget {
-  final HomeController controller;
   const HomeMyTabView({
-    super.key,
     required this.controller,
+    super.key,
   });
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {

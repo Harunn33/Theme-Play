@@ -21,19 +21,19 @@ ThemeStyleModel _$ThemeStyleModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ThemeStyleModel {
   String get title => throw _privateConstructorUsedError;
-  @JsonKey(name: "sub_title")
+  @JsonKey(name: 'sub_title')
   String get subtitle => throw _privateConstructorUsedError;
-  @JsonKey(name: "main_message")
+  @JsonKey(name: 'main_message')
   String get mainMessage => throw _privateConstructorUsedError;
-  @JsonKey(name: "bg_color")
+  @JsonKey(name: 'bg_color')
   String get bgColor => throw _privateConstructorUsedError;
-  @JsonKey(name: "title_style")
+  @JsonKey(name: 'title_style')
   TitleStyleModel get titleStyle => throw _privateConstructorUsedError;
-  @JsonKey(name: "text_style")
+  @JsonKey(name: 'text_style')
   TextStyleModel get textStyle => throw _privateConstructorUsedError;
-  @JsonKey(name: "button_style")
+  @JsonKey(name: 'button_style')
   ButtonStyleModel get buttonStyle => throw _privateConstructorUsedError;
-  @JsonKey(name: "slider_style")
+  @JsonKey(name: 'slider_style')
   SliderStyleModel get sliderStyle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,13 +50,13 @@ abstract class $ThemeStyleModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String title,
-      @JsonKey(name: "sub_title") String subtitle,
-      @JsonKey(name: "main_message") String mainMessage,
-      @JsonKey(name: "bg_color") String bgColor,
-      @JsonKey(name: "title_style") TitleStyleModel titleStyle,
-      @JsonKey(name: "text_style") TextStyleModel textStyle,
-      @JsonKey(name: "button_style") ButtonStyleModel buttonStyle,
-      @JsonKey(name: "slider_style") SliderStyleModel sliderStyle});
+      @JsonKey(name: 'sub_title') String subtitle,
+      @JsonKey(name: 'main_message') String mainMessage,
+      @JsonKey(name: 'bg_color') String bgColor,
+      @JsonKey(name: 'title_style') TitleStyleModel titleStyle,
+      @JsonKey(name: 'text_style') TextStyleModel textStyle,
+      @JsonKey(name: 'button_style') ButtonStyleModel buttonStyle,
+      @JsonKey(name: 'slider_style') SliderStyleModel sliderStyle});
 
   $TitleStyleModelCopyWith<$Res> get titleStyle;
   $TextStyleModelCopyWith<$Res> get textStyle;
@@ -165,13 +165,13 @@ abstract class _$$ThemeStyleModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String title,
-      @JsonKey(name: "sub_title") String subtitle,
-      @JsonKey(name: "main_message") String mainMessage,
-      @JsonKey(name: "bg_color") String bgColor,
-      @JsonKey(name: "title_style") TitleStyleModel titleStyle,
-      @JsonKey(name: "text_style") TextStyleModel textStyle,
-      @JsonKey(name: "button_style") ButtonStyleModel buttonStyle,
-      @JsonKey(name: "slider_style") SliderStyleModel sliderStyle});
+      @JsonKey(name: 'sub_title') String subtitle,
+      @JsonKey(name: 'main_message') String mainMessage,
+      @JsonKey(name: 'bg_color') String bgColor,
+      @JsonKey(name: 'title_style') TitleStyleModel titleStyle,
+      @JsonKey(name: 'text_style') TextStyleModel textStyle,
+      @JsonKey(name: 'button_style') ButtonStyleModel buttonStyle,
+      @JsonKey(name: 'slider_style') SliderStyleModel sliderStyle});
 
   @override
   $TitleStyleModelCopyWith<$Res> get titleStyle;
@@ -245,13 +245,13 @@ class __$$ThemeStyleModelImplCopyWithImpl<$Res>
 class _$ThemeStyleModelImpl implements _ThemeStyleModel {
   const _$ThemeStyleModelImpl(
       {required this.title,
-      @JsonKey(name: "sub_title") required this.subtitle,
-      @JsonKey(name: "main_message") required this.mainMessage,
-      @JsonKey(name: "bg_color") required this.bgColor,
-      @JsonKey(name: "title_style") required this.titleStyle,
-      @JsonKey(name: "text_style") required this.textStyle,
-      @JsonKey(name: "button_style") required this.buttonStyle,
-      @JsonKey(name: "slider_style") required this.sliderStyle});
+      @JsonKey(name: 'sub_title') required this.subtitle,
+      @JsonKey(name: 'main_message') required this.mainMessage,
+      @JsonKey(name: 'bg_color') required this.bgColor,
+      @JsonKey(name: 'title_style') required this.titleStyle,
+      @JsonKey(name: 'text_style') required this.textStyle,
+      @JsonKey(name: 'button_style') required this.buttonStyle,
+      @JsonKey(name: 'slider_style') required this.sliderStyle});
 
   factory _$ThemeStyleModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ThemeStyleModelImplFromJson(json);
@@ -259,25 +259,25 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
   @override
   final String title;
   @override
-  @JsonKey(name: "sub_title")
+  @JsonKey(name: 'sub_title')
   final String subtitle;
   @override
-  @JsonKey(name: "main_message")
+  @JsonKey(name: 'main_message')
   final String mainMessage;
   @override
-  @JsonKey(name: "bg_color")
+  @JsonKey(name: 'bg_color')
   final String bgColor;
   @override
-  @JsonKey(name: "title_style")
+  @JsonKey(name: 'title_style')
   final TitleStyleModel titleStyle;
   @override
-  @JsonKey(name: "text_style")
+  @JsonKey(name: 'text_style')
   final TextStyleModel textStyle;
   @override
-  @JsonKey(name: "button_style")
+  @JsonKey(name: 'button_style')
   final ButtonStyleModel buttonStyle;
   @override
-  @JsonKey(name: "slider_style")
+  @JsonKey(name: 'slider_style')
   final SliderStyleModel sliderStyle;
 
   @override
@@ -329,14 +329,14 @@ class _$ThemeStyleModelImpl implements _ThemeStyleModel {
 abstract class _ThemeStyleModel implements ThemeStyleModel {
   const factory _ThemeStyleModel(
       {required final String title,
-      @JsonKey(name: "sub_title") required final String subtitle,
-      @JsonKey(name: "main_message") required final String mainMessage,
-      @JsonKey(name: "bg_color") required final String bgColor,
-      @JsonKey(name: "title_style") required final TitleStyleModel titleStyle,
-      @JsonKey(name: "text_style") required final TextStyleModel textStyle,
-      @JsonKey(name: "button_style")
+      @JsonKey(name: 'sub_title') required final String subtitle,
+      @JsonKey(name: 'main_message') required final String mainMessage,
+      @JsonKey(name: 'bg_color') required final String bgColor,
+      @JsonKey(name: 'title_style') required final TitleStyleModel titleStyle,
+      @JsonKey(name: 'text_style') required final TextStyleModel textStyle,
+      @JsonKey(name: 'button_style')
       required final ButtonStyleModel buttonStyle,
-      @JsonKey(name: "slider_style")
+      @JsonKey(name: 'slider_style')
       required final SliderStyleModel sliderStyle}) = _$ThemeStyleModelImpl;
 
   factory _ThemeStyleModel.fromJson(Map<String, dynamic> json) =
@@ -345,25 +345,25 @@ abstract class _ThemeStyleModel implements ThemeStyleModel {
   @override
   String get title;
   @override
-  @JsonKey(name: "sub_title")
+  @JsonKey(name: 'sub_title')
   String get subtitle;
   @override
-  @JsonKey(name: "main_message")
+  @JsonKey(name: 'main_message')
   String get mainMessage;
   @override
-  @JsonKey(name: "bg_color")
+  @JsonKey(name: 'bg_color')
   String get bgColor;
   @override
-  @JsonKey(name: "title_style")
+  @JsonKey(name: 'title_style')
   TitleStyleModel get titleStyle;
   @override
-  @JsonKey(name: "text_style")
+  @JsonKey(name: 'text_style')
   TextStyleModel get textStyle;
   @override
-  @JsonKey(name: "button_style")
+  @JsonKey(name: 'button_style')
   ButtonStyleModel get buttonStyle;
   @override
-  @JsonKey(name: "slider_style")
+  @JsonKey(name: 'slider_style')
   SliderStyleModel get sliderStyle;
   @override
   @JsonKey(ignore: true)
@@ -379,7 +379,7 @@ TitleStyleModel _$TitleStyleModelFromJson(Map<String, dynamic> json) {
 mixin _$TitleStyleModel {
   double get size => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   double get typewriterAnimationDuration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -397,7 +397,7 @@ abstract class $TitleStyleModelCopyWith<$Res> {
   $Res call(
       {double size,
       String color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       double typewriterAnimationDuration});
 }
 
@@ -446,7 +446,7 @@ abstract class _$$TitleStyleModelImplCopyWith<$Res>
   $Res call(
       {double size,
       String color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       double typewriterAnimationDuration});
 }
 
@@ -488,7 +488,7 @@ class _$TitleStyleModelImpl implements _TitleStyleModel {
   const _$TitleStyleModelImpl(
       {required this.size,
       required this.color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       required this.typewriterAnimationDuration});
 
   factory _$TitleStyleModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -499,7 +499,7 @@ class _$TitleStyleModelImpl implements _TitleStyleModel {
   @override
   final String color;
   @override
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   final double typewriterAnimationDuration;
 
   @override
@@ -544,7 +544,7 @@ abstract class _TitleStyleModel implements TitleStyleModel {
   const factory _TitleStyleModel(
           {required final double size,
           required final String color,
-          @JsonKey(name: "typewriter_animation_duration")
+          @JsonKey(name: 'typewriter_animation_duration')
           required final double typewriterAnimationDuration}) =
       _$TitleStyleModelImpl;
 
@@ -556,7 +556,7 @@ abstract class _TitleStyleModel implements TitleStyleModel {
   @override
   String get color;
   @override
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   double get typewriterAnimationDuration;
   @override
   @JsonKey(ignore: true)
@@ -572,7 +572,7 @@ TextStyleModel _$TextStyleModelFromJson(Map<String, dynamic> json) {
 mixin _$TextStyleModel {
   double get size => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   double get typewriterAnimationDuration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -590,7 +590,7 @@ abstract class $TextStyleModelCopyWith<$Res> {
   $Res call(
       {double size,
       String color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       double typewriterAnimationDuration});
 }
 
@@ -639,7 +639,7 @@ abstract class _$$TextStyleModelImplCopyWith<$Res>
   $Res call(
       {double size,
       String color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       double typewriterAnimationDuration});
 }
 
@@ -681,7 +681,7 @@ class _$TextStyleModelImpl implements _TextStyleModel {
   const _$TextStyleModelImpl(
       {required this.size,
       required this.color,
-      @JsonKey(name: "typewriter_animation_duration")
+      @JsonKey(name: 'typewriter_animation_duration')
       required this.typewriterAnimationDuration});
 
   factory _$TextStyleModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -692,7 +692,7 @@ class _$TextStyleModelImpl implements _TextStyleModel {
   @override
   final String color;
   @override
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   final double typewriterAnimationDuration;
 
   @override
@@ -737,7 +737,7 @@ abstract class _TextStyleModel implements TextStyleModel {
   const factory _TextStyleModel(
           {required final double size,
           required final String color,
-          @JsonKey(name: "typewriter_animation_duration")
+          @JsonKey(name: 'typewriter_animation_duration')
           required final double typewriterAnimationDuration}) =
       _$TextStyleModelImpl;
 
@@ -749,7 +749,7 @@ abstract class _TextStyleModel implements TextStyleModel {
   @override
   String get color;
   @override
-  @JsonKey(name: "typewriter_animation_duration")
+  @JsonKey(name: 'typewriter_animation_duration')
   double get typewriterAnimationDuration;
   @override
   @JsonKey(ignore: true)
@@ -920,11 +920,11 @@ SliderStyleModel _$SliderStyleModelFromJson(Map<String, dynamic> json) {
 mixin _$SliderStyleModel {
   List<String> get images => throw _privateConstructorUsedError;
   double get radius => throw _privateConstructorUsedError;
-  @JsonKey(name: "auto_play")
+  @JsonKey(name: 'auto_play')
   bool get autoPlay => throw _privateConstructorUsedError;
-  @JsonKey(name: "scroll_direction")
+  @JsonKey(name: 'scroll_direction')
   String get scrollDirection => throw _privateConstructorUsedError;
-  @JsonKey(name: "auto_play_interval")
+  @JsonKey(name: 'auto_play_interval')
   int get autoPlayInterval => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -942,9 +942,9 @@ abstract class $SliderStyleModelCopyWith<$Res> {
   $Res call(
       {List<String> images,
       double radius,
-      @JsonKey(name: "auto_play") bool autoPlay,
-      @JsonKey(name: "scroll_direction") String scrollDirection,
-      @JsonKey(name: "auto_play_interval") int autoPlayInterval});
+      @JsonKey(name: 'auto_play') bool autoPlay,
+      @JsonKey(name: 'scroll_direction') String scrollDirection,
+      @JsonKey(name: 'auto_play_interval') int autoPlayInterval});
 }
 
 /// @nodoc
@@ -1002,9 +1002,9 @@ abstract class _$$SliderStyleModelImplCopyWith<$Res>
   $Res call(
       {List<String> images,
       double radius,
-      @JsonKey(name: "auto_play") bool autoPlay,
-      @JsonKey(name: "scroll_direction") String scrollDirection,
-      @JsonKey(name: "auto_play_interval") int autoPlayInterval});
+      @JsonKey(name: 'auto_play') bool autoPlay,
+      @JsonKey(name: 'scroll_direction') String scrollDirection,
+      @JsonKey(name: 'auto_play_interval') int autoPlayInterval});
 }
 
 /// @nodoc
@@ -1055,9 +1055,9 @@ class _$SliderStyleModelImpl implements _SliderStyleModel {
   const _$SliderStyleModelImpl(
       {required final List<String> images,
       required this.radius,
-      @JsonKey(name: "auto_play") required this.autoPlay,
-      @JsonKey(name: "scroll_direction") required this.scrollDirection,
-      @JsonKey(name: "auto_play_interval") required this.autoPlayInterval})
+      @JsonKey(name: 'auto_play') required this.autoPlay,
+      @JsonKey(name: 'scroll_direction') required this.scrollDirection,
+      @JsonKey(name: 'auto_play_interval') required this.autoPlayInterval})
       : _images = images;
 
   factory _$SliderStyleModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -1074,13 +1074,13 @@ class _$SliderStyleModelImpl implements _SliderStyleModel {
   @override
   final double radius;
   @override
-  @JsonKey(name: "auto_play")
+  @JsonKey(name: 'auto_play')
   final bool autoPlay;
   @override
-  @JsonKey(name: "scroll_direction")
+  @JsonKey(name: 'scroll_direction')
   final String scrollDirection;
   @override
-  @JsonKey(name: "auto_play_interval")
+  @JsonKey(name: 'auto_play_interval')
   final int autoPlayInterval;
 
   @override
@@ -1132,9 +1132,9 @@ abstract class _SliderStyleModel implements SliderStyleModel {
   const factory _SliderStyleModel(
       {required final List<String> images,
       required final double radius,
-      @JsonKey(name: "auto_play") required final bool autoPlay,
-      @JsonKey(name: "scroll_direction") required final String scrollDirection,
-      @JsonKey(name: "auto_play_interval")
+      @JsonKey(name: 'auto_play') required final bool autoPlay,
+      @JsonKey(name: 'scroll_direction') required final String scrollDirection,
+      @JsonKey(name: 'auto_play_interval')
       required final int autoPlayInterval}) = _$SliderStyleModelImpl;
 
   factory _SliderStyleModel.fromJson(Map<String, dynamic> json) =
@@ -1145,13 +1145,13 @@ abstract class _SliderStyleModel implements SliderStyleModel {
   @override
   double get radius;
   @override
-  @JsonKey(name: "auto_play")
+  @JsonKey(name: 'auto_play')
   bool get autoPlay;
   @override
-  @JsonKey(name: "scroll_direction")
+  @JsonKey(name: 'scroll_direction')
   String get scrollDirection;
   @override
-  @JsonKey(name: "auto_play_interval")
+  @JsonKey(name: 'auto_play_interval')
   int get autoPlayInterval;
   @override
   @JsonKey(ignore: true)

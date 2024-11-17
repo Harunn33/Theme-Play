@@ -7,11 +7,11 @@ import 'package:theme_play/shared/widgets/buttons/custom_icon_button.dart';
 import 'package:theme_play/shared/widgets/search_bar/custom_animated_search_bar.dart';
 
 class HomeHeader extends StatelessWidget {
-  final HomeController controller;
   const HomeHeader({
-    super.key,
     required this.controller,
+    super.key,
   });
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {

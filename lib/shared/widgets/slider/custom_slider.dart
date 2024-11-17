@@ -7,11 +7,11 @@ import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
 
 class CustomSlider extends StatelessWidget {
-  final SliderStyleModel sliderStyle;
   const CustomSlider({
-    super.key,
     required this.sliderStyle,
+    super.key,
   });
+  final SliderStyleModel sliderStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class CustomSlider extends StatelessWidget {
         autoPlayAnimationDuration: 500.milliseconds,
         enlargeCenterPage: true,
         viewportFraction: .93,
-        scrollDirection: sliderStyle.scrollDirection != "h"
+        scrollDirection: sliderStyle.scrollDirection != 'h'
             ? Axis.vertical
             : Axis.horizontal,
       ),

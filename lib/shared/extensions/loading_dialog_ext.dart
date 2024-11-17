@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/colors.dart';
+import 'package:theme_play/shared/constants/colors.dart';
 
 enum LoadingStatus { loading, loaded }
 
@@ -19,7 +19,6 @@ extension LoadingDialogExt on LoadingStatus {
         ),
         barrierDismissible: false,
         barrierColor: AppColors.instance.black.withOpacity(.4),
-        useSafeArea: true,
       );
       return;
     }

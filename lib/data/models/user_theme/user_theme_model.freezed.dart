@@ -20,16 +20,16 @@ UserThemeModel _$UserThemeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserThemeModel {
-  @JsonKey(includeToJson: false)
-  String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "shareable_code")
+  @JsonKey(name: 'shareable_code')
   String get shareableCode => throw _privateConstructorUsedError;
-  @JsonKey(name: "created_by")
+  @JsonKey(name: 'created_by')
   String get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: "theme_id")
+  @JsonKey(name: 'theme_id')
   String get themeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ThemeStyleModel get style => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,12 +44,12 @@ abstract class $UserThemeModelCopyWith<$Res> {
       _$UserThemeModelCopyWithImpl<$Res, UserThemeModel>;
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: false) String? id,
-      @JsonKey(name: "shareable_code") String shareableCode,
-      @JsonKey(name: "created_by") String createdBy,
-      @JsonKey(name: "theme_id") String themeId,
+      {@JsonKey(name: 'shareable_code') String shareableCode,
+      @JsonKey(name: 'created_by') String createdBy,
+      @JsonKey(name: 'theme_id') String themeId,
       String name,
-      ThemeStyleModel style});
+      ThemeStyleModel style,
+      @JsonKey(includeToJson: false) String? id});
 
   $ThemeStyleModelCopyWith<$Res> get style;
 }
@@ -67,18 +67,14 @@ class _$UserThemeModelCopyWithImpl<$Res, $Val extends UserThemeModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? shareableCode = null,
     Object? createdBy = null,
     Object? themeId = null,
     Object? name = null,
     Object? style = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       shareableCode: null == shareableCode
           ? _value.shareableCode
           : shareableCode // ignore: cast_nullable_to_non_nullable
@@ -99,6 +95,10 @@ class _$UserThemeModelCopyWithImpl<$Res, $Val extends UserThemeModel>
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as ThemeStyleModel,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -120,12 +120,12 @@ abstract class _$$UserThemeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: false) String? id,
-      @JsonKey(name: "shareable_code") String shareableCode,
-      @JsonKey(name: "created_by") String createdBy,
-      @JsonKey(name: "theme_id") String themeId,
+      {@JsonKey(name: 'shareable_code') String shareableCode,
+      @JsonKey(name: 'created_by') String createdBy,
+      @JsonKey(name: 'theme_id') String themeId,
       String name,
-      ThemeStyleModel style});
+      ThemeStyleModel style,
+      @JsonKey(includeToJson: false) String? id});
 
   @override
   $ThemeStyleModelCopyWith<$Res> get style;
@@ -142,18 +142,14 @@ class __$$UserThemeModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? shareableCode = null,
     Object? createdBy = null,
     Object? themeId = null,
     Object? name = null,
     Object? style = null,
+    Object? id = freezed,
   }) {
     return _then(_$UserThemeModelImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
       shareableCode: null == shareableCode
           ? _value.shareableCode
           : shareableCode // ignore: cast_nullable_to_non_nullable
@@ -174,6 +170,10 @@ class __$$UserThemeModelImplCopyWithImpl<$Res>
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as ThemeStyleModel,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -182,36 +182,36 @@ class __$$UserThemeModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserThemeModelImpl implements _UserThemeModel {
   const _$UserThemeModelImpl(
-      {@JsonKey(includeToJson: false) this.id,
-      @JsonKey(name: "shareable_code") required this.shareableCode,
-      @JsonKey(name: "created_by") required this.createdBy,
-      @JsonKey(name: "theme_id") required this.themeId,
+      {@JsonKey(name: 'shareable_code') required this.shareableCode,
+      @JsonKey(name: 'created_by') required this.createdBy,
+      @JsonKey(name: 'theme_id') required this.themeId,
       required this.name,
-      required this.style});
+      required this.style,
+      @JsonKey(includeToJson: false) this.id});
 
   factory _$UserThemeModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserThemeModelImplFromJson(json);
 
   @override
-  @JsonKey(includeToJson: false)
-  final String? id;
-  @override
-  @JsonKey(name: "shareable_code")
+  @JsonKey(name: 'shareable_code')
   final String shareableCode;
   @override
-  @JsonKey(name: "created_by")
+  @JsonKey(name: 'created_by')
   final String createdBy;
   @override
-  @JsonKey(name: "theme_id")
+  @JsonKey(name: 'theme_id')
   final String themeId;
   @override
   final String name;
   @override
   final ThemeStyleModel style;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? id;
 
   @override
   String toString() {
-    return 'UserThemeModel(id: $id, shareableCode: $shareableCode, createdBy: $createdBy, themeId: $themeId, name: $name, style: $style)';
+    return 'UserThemeModel(shareableCode: $shareableCode, createdBy: $createdBy, themeId: $themeId, name: $name, style: $style, id: $id)';
   }
 
   @override
@@ -219,20 +219,20 @@ class _$UserThemeModelImpl implements _UserThemeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserThemeModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.shareableCode, shareableCode) ||
                 other.shareableCode == shareableCode) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.themeId, themeId) || other.themeId == themeId) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.style, style) || other.style == style));
+            (identical(other.style, style) || other.style == style) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, shareableCode, createdBy, themeId, name, style);
+      runtimeType, shareableCode, createdBy, themeId, name, style, id);
 
   @JsonKey(ignore: true)
   @override
@@ -251,32 +251,32 @@ class _$UserThemeModelImpl implements _UserThemeModel {
 
 abstract class _UserThemeModel implements UserThemeModel {
   const factory _UserThemeModel(
-      {@JsonKey(includeToJson: false) final String? id,
-      @JsonKey(name: "shareable_code") required final String shareableCode,
-      @JsonKey(name: "created_by") required final String createdBy,
-      @JsonKey(name: "theme_id") required final String themeId,
+      {@JsonKey(name: 'shareable_code') required final String shareableCode,
+      @JsonKey(name: 'created_by') required final String createdBy,
+      @JsonKey(name: 'theme_id') required final String themeId,
       required final String name,
-      required final ThemeStyleModel style}) = _$UserThemeModelImpl;
+      required final ThemeStyleModel style,
+      @JsonKey(includeToJson: false) final String? id}) = _$UserThemeModelImpl;
 
   factory _UserThemeModel.fromJson(Map<String, dynamic> json) =
       _$UserThemeModelImpl.fromJson;
 
   @override
-  @JsonKey(includeToJson: false)
-  String? get id;
-  @override
-  @JsonKey(name: "shareable_code")
+  @JsonKey(name: 'shareable_code')
   String get shareableCode;
   @override
-  @JsonKey(name: "created_by")
+  @JsonKey(name: 'created_by')
   String get createdBy;
   @override
-  @JsonKey(name: "theme_id")
+  @JsonKey(name: 'theme_id')
   String get themeId;
   @override
   String get name;
   @override
   ThemeStyleModel get style;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$UserThemeModelImplCopyWith<_$UserThemeModelImpl> get copyWith =>

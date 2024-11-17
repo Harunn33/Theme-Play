@@ -19,7 +19,7 @@ class EditProfileController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
 
-  final RxString profilePhotoUrl = "".obs;
+  final RxString profilePhotoUrl = ''.obs;
 
   @override
   Future<void> onInit() async {
@@ -32,15 +32,15 @@ class EditProfileController extends GetxController {
   }
 
   Future<User?> updateProfile() async {
-    final ProfileRepository profileRepository = ProfileRepository.instance;
+    final profileRepository = ProfileRepository.instance;
 
-    final UserAttributes userAttributes = UserAttributes(
+    final userAttributes = UserAttributes(
       email: emailController.text,
       data: {
-        "full_name": nameController.value.text.trim(),
+        'full_name': nameController.value.text.trim(),
       },
     );
-    final User? user = await profileRepository.updateProfile(userAttributes);
+    final user = await profileRepository.updateProfile(userAttributes);
     if (user != null) {
       accountController.profileInfoFuture.value = Future.value(user);
     }
@@ -52,7 +52,7 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> uploadProfilePhoto() async {
-    final ProfileRepository profileRepository = ProfileRepository.instance;
+    final profileRepository = ProfileRepository.instance;
     final imageUrl = await profileRepository.uploadProfilePhoto();
     if (imageUrl.isNotEmpty) {
       profilePhotoUrl.value = imageUrl;
@@ -60,7 +60,7 @@ class EditProfileController extends GetxController {
     }
   }
 
-  void handleSaveChanges() async {
+  Future<void> handleSaveChanges() async {
     if (formKey.currentState?.validate() ?? false) {
       await updateProfile();
     }

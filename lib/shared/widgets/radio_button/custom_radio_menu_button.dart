@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomRadioMenuButton<T> extends StatelessWidget {
+  const CustomRadioMenuButton({
+    required this.value,
+    required this.groupValue,
+    super.key,
+    this.onChanged,
+  });
   final void Function(T?)? onChanged;
   final T value;
   final T groupValue;
-  const CustomRadioMenuButton({
-    super.key,
-    this.onChanged,
-    required this.value,
-    required this.groupValue,
-  });
 
   @override
   Widget build(BuildContext context) {

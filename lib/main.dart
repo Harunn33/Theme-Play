@@ -6,11 +6,11 @@ import 'package:theme_play/controllers/localization_controller.dart';
 import 'package:theme_play/init/di.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/app_translations.dart';
-import 'package:theme_play/shared/constants/langs.dart';
 import 'package:theme_play/shared/constants/strings.dart';
+import 'package:theme_play/shared/helpers/language_helpers.dart';
 import 'package:theme_play/shared/themes/themes.dart';
 
-Future<void> main() async {
+void main() async {
   await DependencyInjection.instance.init();
   runApp(const MyApp());
 }
@@ -20,35 +20,40 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final Size designSize = Size(constraints.maxWidth, constraints.maxHeight);
-      return ScreenUtilInit(
-        designSize: designSize,
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) {
-          return GetBuilder<LocalizationController>(
-            builder: (localizationController) {
-              return GetMaterialApp(
-                title: AppStrings.instance.appName,
-                translations: AppTranslations(
-                  languages: DependencyInjection.languages,
-                ),
-                fallbackLocale: Locale(
-                  AppLangs.languages.first.languageCode,
-                  AppLangs.languages.first.countryCode,
-                ),
-                locale: localizationController.locale,
-                debugShowCheckedModeBanner: false,
-                theme: CustomTheme.instance.lightTheme,
-                initialRoute: AppPages.instance.initial,
-                getPages: AppPages.instance.routes,
-                initialBinding: ConnectionBinding(),
-              );
-            },
-          );
-        },
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final designSize = Size(
+          constraints.maxWidth,
+          constraints.maxHeight,
+        );
+        return ScreenUtilInit(
+          designSize: designSize,
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, __) {
+            return GetBuilder<LocalizationController>(
+              builder: (localizationController) {
+                return GetMaterialApp(
+                  title: AppStrings.instance.appName,
+                  translations: AppTranslations(
+                    languages: DependencyInjection.languages,
+                  ),
+                  fallbackLocale: Locale(
+                    LanguageHelpers.instance.currentLanguageCode,
+                    LanguageHelpers.instance.currentCountryCode,
+                  ),
+                  locale: localizationController.locale,
+                  debugShowCheckedModeBanner: false,
+                  theme: CustomTheme.instance.lightTheme,
+                  initialRoute: AppPages.instance.initial,
+                  getPages: AppPages.instance.routes,
+                  initialBinding: ConnectionBinding(),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }

@@ -6,15 +6,15 @@ import 'package:theme_play/shared/enums/app_icons.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 
 class CustomAccountTile extends StatelessWidget {
+  const CustomAccountTile({
+    required this.title,
+    required this.icon,
+    super.key,
+    this.onTap,
+  });
   final String title;
   final VoidCallback? onTap;
   final AppIcons icon;
-  const CustomAccountTile({
-    super.key,
-    required this.title,
-    this.onTap,
-    required this.icon,
-  });
 
   @override
   Widget build(BuildContext context) {

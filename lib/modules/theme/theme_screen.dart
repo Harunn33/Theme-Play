@@ -39,7 +39,7 @@ class ThemeScreen extends GetView<ThemeController> {
                 padding: 12.padTop +
                     (controller.userThemeModel.value.style.sliderStyle
                                 .scrollDirection ==
-                            "h"
+                            'h'
                         ? EdgeInsets.zero
                         : controller.constants.paddings.horizontal),
                 child: CustomSlider(

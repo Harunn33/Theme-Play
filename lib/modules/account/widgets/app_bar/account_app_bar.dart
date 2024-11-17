@@ -8,7 +8,7 @@ class AccountAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ConstantsInstances appConstants = ConstantsInstances.instance;
+    final appConstants = ConstantsInstances.instance;
     return AppBar(
       leadingWidth: 1.sw,
       leading: Padding(

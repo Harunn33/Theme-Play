@@ -14,9 +14,7 @@ class CreatorScreen extends GetView<CreatorController> with ValidatorsMixin {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBar: const GeneralAppBar(
-        title: "",
-      ),
+      appBar: const GeneralAppBar(),
       backgroundColor: controller.constants.colors.powderBlue,
       body: Container(
         decoration: BoxDecoration(

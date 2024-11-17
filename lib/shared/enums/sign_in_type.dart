@@ -12,8 +12,6 @@ extension SignInProviderExt on SignInType {
         return OAuthProvider.google;
       case SignInType.apple:
         return OAuthProvider.apple;
-      default:
-        throw Exception('Provider not found');
     }
   }
 }

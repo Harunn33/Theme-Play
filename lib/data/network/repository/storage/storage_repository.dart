@@ -20,10 +20,10 @@ final class StorageRepository implements IStorageRepository {
 
   @override
   Future<String> getImages({
-    required final String path,
-    required final BucketName bucketName,
+    required String path,
+    required BucketName bucketName,
   }) async {
-    String imageUrl = await _supabaseService.fetchImagesFromStorage(
+    final imageUrl = await _supabaseService.fetchImagesFromStorage(
       bucketName: bucketName,
       path: path,
     );
@@ -32,8 +32,8 @@ final class StorageRepository implements IStorageRepository {
 
   @override
   Future<void> removeImage({
-    required final List<String> imagePaths,
-    required final BucketName bucketName,
+    required List<String> imagePaths,
+    required BucketName bucketName,
   }) async {
     await _supabaseService.removeImageFromStorage(
       imagePaths: imagePaths,
@@ -42,46 +42,59 @@ final class StorageRepository implements IStorageRepository {
   }
 
   @override
+  Future<void> removeFolder({
+    required BucketName bucketName,
+    required String folderPath,
+  }) async {
+    await _supabaseService.removeFolderFromStorage(
+      bucketName: bucketName,
+      folderPath: folderPath,
+    );
+  }
+
+  @override
   Future<String> uploadImage({
-    required final String path,
-    required final BucketName bucketName,
+    required String path,
+    required BucketName bucketName,
   }) async {
     final image = await imagePickerService.pickImage();
-    if (image == null) return "";
+    if (image == null) return '';
     LoadingStatus.loading.showLoadingDialog();
     final imageBytes = await image.readAsBytes();
-    String imageUrl = await _supabaseService.fetchImagesFromStorage(
+    var imageUrl = await _supabaseService.fetchImagesFromStorage(
       bucketName: bucketName,
       path: path,
       isUpload: true,
       data: imageBytes,
       imageExtension: image.path.split('.').last.toLowerCase(),
     );
-    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
-      "t": DateTime.now().millisecondsSinceEpoch.toString(),
-    }).toString();
+    imageUrl = Uri.parse(imageUrl).replace(
+      queryParameters: {
+        't': DateTime.now().millisecondsSinceEpoch.toString(),
+      },
+    ).toString();
     LoadingStatus.loaded.showLoadingDialog();
     return imageUrl;
   }
 
   @override
   Future<String> uploadMultiImages({
-    required final XFile image,
-    required final String path,
-    required final BucketName bucketName,
+    required XFile image,
+    required String path,
+    required BucketName bucketName,
   }) async {
     final imageBytes = await image.readAsBytes();
-    String imageUrl = await _supabaseService.fetchImagesFromStorage(
+    final imageUrl = await _supabaseService.fetchImagesFromStorage(
       bucketName: bucketName,
       path: path,
       isUpload: true,
       data: imageBytes,
       imageExtension: image.path.split('.').last.toLowerCase(),
     );
-    imageUrl = Uri.parse(imageUrl).replace(queryParameters: {
-      "t": DateTime.now().millisecondsSinceEpoch.toString(),
-    }).toString();
-
-    return imageUrl;
+    return Uri.parse(imageUrl).replace(
+      queryParameters: {
+        't': DateTime.now().millisecondsSinceEpoch.toString(),
+      },
+    ).toString();
   }
 }

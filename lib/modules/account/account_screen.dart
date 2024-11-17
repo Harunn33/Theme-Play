@@ -52,9 +52,8 @@ class AccountScreen extends GetView<AccountController> {
                   ),
                   const Spacer(),
                   Align(
-                    alignment: Alignment.center,
                     child: Text(
-                      "v.${controller.constants.strings.appVersion}",
+                      'v.${controller.constants.strings.appVersion}',
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
