@@ -336,8 +336,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   String _decodeUserID(String encodedUuid) {
-    final bytes = base64Decode(encodedUuid); // Encode edilmiş veriyi decode et
-    return utf8.decode(bytes); // Orijinal UUID stringini elde et
+    try {
+      final bytes =
+          base64Decode(encodedUuid); // Encode edilmiş veriyi decode et
+      return utf8.decode(bytes); // Orijinal UUID stringini elde et
+    } on FormatException catch (e) {
+      SnackbarType.error.show(
+        message: e.message,
+      );
+      rethrow;
+    }
   }
 
   Future<void> addSharedCodes({
@@ -423,6 +431,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     if (filterBadgeCount.value == 0) return;
     filterBadgeCount.value = 0;
     futureUserThemes.value = getUserThemes();
+    Get.back();
   }
 
   Future<void> showFilters(BuildContext context) async {

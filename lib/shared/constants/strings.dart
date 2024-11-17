@@ -52,7 +52,6 @@ final class AppStrings {
   String get birthday => 'birthday';
   String get anniversary => 'anniversary';
   String get lover => 'lover';
-  String get filterThemes => 'filterThemes';
   String get allowEditAccess => 'allowEditAccess';
   String get themeEditAccess => 'themeEditAccess';
   String get themeEditSharedAccessDialogQuestion =>

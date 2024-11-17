@@ -51,10 +51,12 @@ abstract class ISupabaseService {
   });
 
   /// Fetch data from a table with search
-  Future<PostgrestList> fetchDataWithSearch({
+  Future<PostgrestList> fetchDataWithSearchByUserId({
     required TableName tableName,
     required FilterByColumn searchColumn,
+    required FilterByColumn userIdColumn,
     required String searchValue,
+    required String userId,
   });
 
   /// Fetch data from a table with filter
@@ -62,6 +64,17 @@ abstract class ISupabaseService {
     required TableName tableName,
     required FilterByColumn filterColumn,
     required String filterValue,
+  });
+
+  /// Fetch data from a table with 2 filters
+  /// [firstFilterColumn] and [secondFilterColumn] are the columns to filter by
+  /// [firstFilterValue] and [secondFilterValue] are the values to filter by
+  Future<PostgrestList> fetchDataWithTwoFilters({
+    required TableName tableName,
+    required FilterByColumn firstFilterColumn,
+    required String firstFilterValue,
+    required FilterByColumn secondFilterColumn,
+    required String secondFilterValue,
   });
 
   // Auth

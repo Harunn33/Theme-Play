@@ -69,8 +69,9 @@ final class SupabaseService implements ISupabaseService {
   }) async {
     try {
       await client.from(tableName.value).insert(data);
-    } catch (e) {
-      throw Exception(e);
+    } on PostgrestException catch (e) {
+      SnackbarType.error.show(message: e.details.toString());
+      rethrow;
     } finally {
       LoadingStatus.loaded.showLoadingDialog();
     }
@@ -186,15 +187,21 @@ final class SupabaseService implements ISupabaseService {
   }
 
   @override
-  Future<PostgrestList> fetchDataWithSearch({
+  Future<PostgrestList> fetchDataWithSearchByUserId({
     required TableName tableName,
     required FilterByColumn searchColumn,
+    required FilterByColumn userIdColumn,
     required String searchValue,
+    required String userId,
   }) async {
     try {
-      final response = await client.from(tableName.value).select().textSearch(
+      final response = await client
+          .from(tableName.value)
+          .select()
+          .eq(userIdColumn.value, userId)
+          .ilike(
             searchColumn.value,
-            "${searchValue.replaceAll(" ", "_")}:*",
+            '%$searchValue%',
           );
       return response;
     } catch (e) {
@@ -213,6 +220,26 @@ final class SupabaseService implements ISupabaseService {
             filterColumn.value,
             filterValue,
           );
+      return response;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<PostgrestList> fetchDataWithTwoFilters({
+    required TableName tableName,
+    required FilterByColumn firstFilterColumn,
+    required String firstFilterValue,
+    required FilterByColumn secondFilterColumn,
+    required String secondFilterValue,
+  }) async {
+    try {
+      final response = await client
+          .from(tableName.value)
+          .select()
+          .eq(firstFilterColumn.value, firstFilterValue)
+          .eq(secondFilterColumn.value, secondFilterValue);
       return response;
     } catch (e) {
       throw Exception(e);

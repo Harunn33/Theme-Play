@@ -50,10 +50,15 @@ final class UserThemesRepository implements IUserThemesRepository {
   Future<List<UserThemeModel>> searchUserThemes({
     required String query,
   }) async {
-    final response = await _supabaseService.fetchDataWithSearch(
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return [];
+    final response = await _supabaseService.fetchDataWithSearchByUserId(
       tableName: TableName.userThemes,
       searchColumn: FilterByColumn.name,
       searchValue: query,
+      userId: user.id,
+      userIdColumn: FilterByColumn.createdBy,
     );
     return response.map(UserThemeModel.fromJson).toList();
   }
@@ -62,10 +67,15 @@ final class UserThemesRepository implements IUserThemesRepository {
   Future<List<UserThemeModel>> filterUserThemes({
     required String query,
   }) async {
-    final response = await _supabaseService.fetchDataWithFilter(
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return [];
+    final response = await _supabaseService.fetchDataWithTwoFilters(
       tableName: TableName.userThemes,
-      filterColumn: FilterByColumn.themeId,
-      filterValue: query,
+      firstFilterColumn: FilterByColumn.createdBy,
+      firstFilterValue: user.id,
+      secondFilterColumn: FilterByColumn.themeId,
+      secondFilterValue: query,
     );
     return response.map(UserThemeModel.fromJson).toList();
   }

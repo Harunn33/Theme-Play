@@ -1,8 +1,10 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/models/index.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
+import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 
 part 'shared_codes_to_user_repository_impl.dart';
 
@@ -46,21 +48,26 @@ final class SharedCodesToUserRepository
       LoadingStatus.loaded.showLoadingDialog();
       return;
     }
-    final baseResp = await _supabaseService.baseFetchData(
-      tableName: TableName.sharedCodesToUser,
-    );
-    await baseResp
-        .update({
-          'theme_edit_access': themeEditAccess,
-        })
-        .eq(
-          FilterByColumn.sharedUser.value,
-          sharedUser,
-        )
-        .eq(
-          FilterByColumn.themeShareCode.value,
-          shareableCode,
-        );
+    try {
+      final baseResp = await _supabaseService.baseFetchData(
+        tableName: TableName.sharedCodesToUser,
+      );
+      await baseResp
+          .update({
+            'theme_edit_access': themeEditAccess,
+          })
+          .eq(
+            FilterByColumn.sharedUser.value,
+            sharedUser,
+          )
+          .eq(
+            FilterByColumn.themeShareCode.value,
+            shareableCode,
+          );
+    } on PostgrestException catch (e) {
+      SnackbarType.error.show(message: e.details.toString());
+      rethrow;
+    }
     LoadingStatus.loaded.showLoadingDialog();
   }
 
