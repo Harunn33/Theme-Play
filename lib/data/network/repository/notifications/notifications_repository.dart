@@ -4,6 +4,7 @@ import 'package:theme_play/data/models/notification/notification_model.dart';
 import 'package:theme_play/data/models/notification/req/create_notification_model.dart';
 import 'package:theme_play/data/models/string_fill_parameter/string_fill_parameter_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
+import 'package:theme_play/data/network/repository/shared_codes_to_user/shared_codes_to_user_repository.dart';
 import 'package:theme_play/data/network/services/dio/dio_service.dart';
 import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/modules/notification_screen/enum/notification_type.dart';
@@ -48,6 +49,7 @@ final class NotificationsRepository implements INotificationsRepository {
     if (user == null) return;
     final fullName = user.userMetadata?['full_name'].toString();
     final notification = NotificationModel(
+      sharedUser: userId,
       title: WordTranslation(
         en: AppStrings.instance.themeSharedNotifTitleEn,
         tr: AppStrings.instance.themeSharedNotifTitleTr,
@@ -68,7 +70,7 @@ final class NotificationsRepository implements INotificationsRepository {
           ),
         ),
       ),
-      createdBy: userId,
+      createdBy: user.id,
       type: NotificationType.themeShared.value,
     );
     final createNotifModel = CreateNotificationModel(
@@ -84,6 +86,70 @@ final class NotificationsRepository implements INotificationsRepository {
           key: 'user_id',
           relation: '=',
           value: userId,
+        ),
+      ],
+      targetChannels: 'push',
+    );
+    await _createNotification(notification: notification);
+    await dioService.post(
+      dotenv.env['SEND_NOTIFICATIONS_PATH'].toString(),
+      data: createNotifModel.toJson(),
+    );
+  }
+
+  @override
+  Future<void> sendThemeEditAccessRequestNotification({
+    required String createdBy,
+    required String themeName,
+  }) async {
+    final dioService = DioService.instance;
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return;
+    final fullName = user.userMetadata?['full_name'].toString();
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    final sharedableThemes =
+        await sharedCodesToUserRepository.getSharedCodesToUsers(
+      userId: user.id,
+    );
+    if (sharedableThemes == null || sharedableThemes.isEmpty) return;
+    final notification = NotificationModel(
+      themeShareCode: sharedableThemes.first.themeShareCode,
+      sharedUser: sharedableThemes.first.sharingUser,
+      title: WordTranslation(
+        en: AppStrings.instance.themeEditAccessNotifTitleEn,
+        tr: AppStrings.instance.themeEditAccessNotifTitleTr,
+      ),
+      content: WordTranslation(
+        en: AppStrings.instance.themeEditAccessNotifSubtitleEn.fillPlaceholders(
+          model: StringFillParameterModel(
+            fullName: fullName,
+            themeName: themeName,
+          ),
+        ),
+        tr: AppStrings.instance.themeEditAccessNotifSubtitleTr.fillPlaceholders(
+          model: StringFillParameterModel(
+            fullName: fullName,
+            themeName: themeName,
+          ),
+        ),
+      ),
+      createdBy: user.id,
+      type: NotificationType.themeEditAccess.value,
+    );
+    final createNotifModel = CreateNotificationModel(
+      data: const AdditionalDataModel(
+        themeEditAccess: true,
+      ),
+      appId: dotenv.env['ONESIGNAL_APP_ID'].toString(),
+      headings: notification.title,
+      contents: notification.content,
+      filters: [
+        NotifFiltersParametersItemModel(
+          field: 'tag',
+          key: 'user_id',
+          relation: '=',
+          value: createdBy,
         ),
       ],
       targetChannels: 'push',

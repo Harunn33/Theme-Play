@@ -35,8 +35,9 @@ class NotifFiltersParametersItemModel with _$NotifFiltersParametersItemModel {
 @freezed
 class AdditionalDataModel with _$AdditionalDataModel {
   const factory AdditionalDataModel({
-    @JsonKey(name: 'theme_shared', defaultValue: false)
-    required bool themeShared,
+    @JsonKey(name: 'theme_shared', defaultValue: false) bool? themeShared,
+    @JsonKey(name: 'theme_edit_access', defaultValue: false)
+    bool? themeEditAccess,
   }) = _AdditionalDataModel;
 
   factory AdditionalDataModel.fromJson(Map<String, Object?> json) =>

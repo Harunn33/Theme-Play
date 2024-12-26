@@ -25,6 +25,10 @@ mixin _$NotificationModel {
   WordTranslation get title => throw _privateConstructorUsedError;
   WordTranslation get content => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shared_user')
+  String? get sharedUser => throw _privateConstructorUsedError;
+  @JsonKey(name: 'theme_share_code')
+  String? get themeShareCode => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, name: 'created_at')
   String? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
@@ -47,6 +51,8 @@ abstract class $NotificationModelCopyWith<$Res> {
       WordTranslation title,
       WordTranslation content,
       String type,
+      @JsonKey(name: 'shared_user') String? sharedUser,
+      @JsonKey(name: 'theme_share_code') String? themeShareCode,
       @JsonKey(includeToJson: false, name: 'created_at') String? createdAt,
       @JsonKey(includeToJson: false) String? id});
 
@@ -71,6 +77,8 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? title = null,
     Object? content = null,
     Object? type = null,
+    Object? sharedUser = freezed,
+    Object? themeShareCode = freezed,
     Object? createdAt = freezed,
     Object? id = freezed,
   }) {
@@ -91,6 +99,14 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      sharedUser: freezed == sharedUser
+          ? _value.sharedUser
+          : sharedUser // ignore: cast_nullable_to_non_nullable
+              as String?,
+      themeShareCode: freezed == themeShareCode
+          ? _value.themeShareCode
+          : themeShareCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -132,6 +148,8 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
       WordTranslation title,
       WordTranslation content,
       String type,
+      @JsonKey(name: 'shared_user') String? sharedUser,
+      @JsonKey(name: 'theme_share_code') String? themeShareCode,
       @JsonKey(includeToJson: false, name: 'created_at') String? createdAt,
       @JsonKey(includeToJson: false) String? id});
 
@@ -156,6 +174,8 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? content = null,
     Object? type = null,
+    Object? sharedUser = freezed,
+    Object? themeShareCode = freezed,
     Object? createdAt = freezed,
     Object? id = freezed,
   }) {
@@ -176,6 +196,14 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      sharedUser: freezed == sharedUser
+          ? _value.sharedUser
+          : sharedUser // ignore: cast_nullable_to_non_nullable
+              as String?,
+      themeShareCode: freezed == themeShareCode
+          ? _value.themeShareCode
+          : themeShareCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -196,6 +224,8 @@ class _$NotificationModelImpl implements _NotificationModel {
       required this.title,
       required this.content,
       required this.type,
+      @JsonKey(name: 'shared_user') this.sharedUser,
+      @JsonKey(name: 'theme_share_code') this.themeShareCode,
       @JsonKey(includeToJson: false, name: 'created_at') this.createdAt,
       @JsonKey(includeToJson: false) this.id});
 
@@ -212,6 +242,12 @@ class _$NotificationModelImpl implements _NotificationModel {
   @override
   final String type;
   @override
+  @JsonKey(name: 'shared_user')
+  final String? sharedUser;
+  @override
+  @JsonKey(name: 'theme_share_code')
+  final String? themeShareCode;
+  @override
   @JsonKey(includeToJson: false, name: 'created_at')
   final String? createdAt;
   @override
@@ -220,7 +256,7 @@ class _$NotificationModelImpl implements _NotificationModel {
 
   @override
   String toString() {
-    return 'NotificationModel(createdBy: $createdBy, title: $title, content: $content, type: $type, createdAt: $createdAt, id: $id)';
+    return 'NotificationModel(createdBy: $createdBy, title: $title, content: $content, type: $type, sharedUser: $sharedUser, themeShareCode: $themeShareCode, createdAt: $createdAt, id: $id)';
   }
 
   @override
@@ -233,6 +269,10 @@ class _$NotificationModelImpl implements _NotificationModel {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.sharedUser, sharedUser) ||
+                other.sharedUser == sharedUser) &&
+            (identical(other.themeShareCode, themeShareCode) ||
+                other.themeShareCode == themeShareCode) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.id, id) || other.id == id));
@@ -240,8 +280,8 @@ class _$NotificationModelImpl implements _NotificationModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, createdBy, title, content, type, createdAt, id);
+  int get hashCode => Object.hash(runtimeType, createdBy, title, content, type,
+      sharedUser, themeShareCode, createdAt, id);
 
   @JsonKey(ignore: true)
   @override
@@ -264,6 +304,8 @@ abstract class _NotificationModel implements NotificationModel {
           required final WordTranslation title,
           required final WordTranslation content,
           required final String type,
+          @JsonKey(name: 'shared_user') final String? sharedUser,
+          @JsonKey(name: 'theme_share_code') final String? themeShareCode,
           @JsonKey(includeToJson: false, name: 'created_at')
           final String? createdAt,
           @JsonKey(includeToJson: false) final String? id}) =
@@ -281,6 +323,12 @@ abstract class _NotificationModel implements NotificationModel {
   WordTranslation get content;
   @override
   String get type;
+  @override
+  @JsonKey(name: 'shared_user')
+  String? get sharedUser;
+  @override
+  @JsonKey(name: 'theme_share_code')
+  String? get themeShareCode;
   @override
   @JsonKey(includeToJson: false, name: 'created_at')
   String? get createdAt;

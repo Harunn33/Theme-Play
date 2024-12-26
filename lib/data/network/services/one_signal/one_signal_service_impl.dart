@@ -4,4 +4,7 @@ part of 'one_signal_service.dart';
 abstract class IOneSignalService {
   /// Initialize OneSignal
   Future<void> initializeOneSignal();
+
+  /// Add click notification
+  Future<void> addClickNotification();
 }

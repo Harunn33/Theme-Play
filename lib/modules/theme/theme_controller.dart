@@ -21,7 +21,11 @@ class ThemeController extends GetxController {
 
   Future<void> navigateToEditThemeScreen(BuildContext context) async {
     if (!hasEditAccess) {
-      return ThemeScreenHelpers.instance.editThemeAccessControlDialog(context);
+      return ThemeScreenHelpers.instance.editThemeAccessControlDialog(
+        context,
+        createdBy: userThemeModel.value.createdBy,
+        themeName: userThemeModel.value.name,
+      );
     }
     unawaited(
       Get.toNamed(

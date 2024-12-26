@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/data/models/notification/notification_model.dart';
+import 'package:theme_play/modules/notification_screen/enum/notification_type.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/constants/paddings.dart';
+import 'package:theme_play/shared/enums/index.dart';
 import 'package:theme_play/shared/helpers/date_time_helpers.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
+
+part '../notification_card_trailing/notification_card_trailing.dart';
 
 class NotificationCard extends StatelessWidget {
   const NotificationCard({
     required this.notificationModel,
     super.key,
     this.onTap,
+    this.onTapReject,
+    this.onTapAccept,
   });
   final VoidCallback? onTap;
   final NotificationModel notificationModel;
+  final VoidCallback? onTapReject;
+  final VoidCallback? onTapAccept;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +55,11 @@ class NotificationCard extends StatelessWidget {
                 ),
           ),
         ],
+      ),
+      trailing: _NotificationCardTrailing(
+        notificationType: notificationModel.type,
+        rejectOnTap: onTapReject,
+        acceptOnTap: onTapAccept,
       ),
     );
   }

@@ -8,4 +8,10 @@ abstract class INotificationsRepository {
     required String userId,
     required String themeName,
   });
+
+  /// Send theme edit access request notification
+  Future<void> sendThemeEditAccessRequestNotification({
+    required String createdBy,
+    required String themeName,
+  });
 }

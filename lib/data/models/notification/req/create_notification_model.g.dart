@@ -55,10 +55,12 @@ _$AdditionalDataModelImpl _$$AdditionalDataModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AdditionalDataModelImpl(
       themeShared: json['theme_shared'] as bool? ?? false,
+      themeEditAccess: json['theme_edit_access'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$AdditionalDataModelImplToJson(
         _$AdditionalDataModelImpl instance) =>
     <String, dynamic>{
       'theme_shared': instance.themeShared,
+      'theme_edit_access': instance.themeEditAccess,
     };

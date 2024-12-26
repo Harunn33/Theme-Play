@@ -14,6 +14,8 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
       content:
           WordTranslation.fromJson(json['content'] as Map<String, dynamic>),
       type: json['type'] as String,
+      sharedUser: json['shared_user'] as String?,
+      themeShareCode: json['theme_share_code'] as String?,
       createdAt: json['created_at'] as String?,
       id: json['id'] as String?,
     );
@@ -25,6 +27,8 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
       'title': instance.title,
       'content': instance.content,
       'type': instance.type,
+      'shared_user': instance.sharedUser,
+      'theme_share_code': instance.themeShareCode,
     };
 
 _$WordTranslationImpl _$$WordTranslationImplFromJson(

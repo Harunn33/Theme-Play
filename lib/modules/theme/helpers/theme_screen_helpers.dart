@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:theme_play/data/network/repository/notifications/notifications_repository.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/buttons/custom_secondary_button.dart';
@@ -12,7 +13,11 @@ final class ThemeScreenHelpers {
 
   final _constants = ConstantsInstances.instance;
 
-  void editThemeAccessControlDialog(BuildContext context) {
+  void editThemeAccessControlDialog(
+    BuildContext context, {
+    required String createdBy,
+    required String themeName,
+  }) {
     context.showDialog(
       child: Padding(
         padding: _constants.paddings.horizontal + _constants.paddings.vertical,
@@ -46,13 +51,35 @@ final class ThemeScreenHelpers {
                   bgColor: _constants.colors.powderBlue,
                   borderRadius: 8,
                   textColor: _constants.colors.black,
-                  onTap: () {},
+                  onTap: () => requestThemeEditAccess(
+                    createdBy: createdBy,
+                    themeName: themeName,
+                  ).then(
+                    (_) {
+                      Get.back();
+                      SnackbarType.success.show(
+                        message: _constants.strings.requestedThemeEditAccess.tr,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> requestThemeEditAccess({
+    required String createdBy,
+    required String themeName,
+  }) async {
+    final notificationsRepository = NotificationsRepository.instance;
+
+    await notificationsRepository.sendThemeEditAccessRequestNotification(
+      createdBy: createdBy,
+      themeName: themeName,
     );
   }
 }

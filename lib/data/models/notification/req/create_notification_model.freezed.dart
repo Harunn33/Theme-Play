@@ -527,7 +527,9 @@ AdditionalDataModel _$AdditionalDataModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AdditionalDataModel {
   @JsonKey(name: 'theme_shared', defaultValue: false)
-  bool get themeShared => throw _privateConstructorUsedError;
+  bool? get themeShared => throw _privateConstructorUsedError;
+  @JsonKey(name: 'theme_edit_access', defaultValue: false)
+  bool? get themeEditAccess => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -542,7 +544,9 @@ abstract class $AdditionalDataModelCopyWith<$Res> {
       _$AdditionalDataModelCopyWithImpl<$Res, AdditionalDataModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'theme_shared', defaultValue: false) bool themeShared});
+      {@JsonKey(name: 'theme_shared', defaultValue: false) bool? themeShared,
+      @JsonKey(name: 'theme_edit_access', defaultValue: false)
+      bool? themeEditAccess});
 }
 
 /// @nodoc
@@ -558,13 +562,18 @@ class _$AdditionalDataModelCopyWithImpl<$Res, $Val extends AdditionalDataModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeShared = null,
+    Object? themeShared = freezed,
+    Object? themeEditAccess = freezed,
   }) {
     return _then(_value.copyWith(
-      themeShared: null == themeShared
+      themeShared: freezed == themeShared
           ? _value.themeShared
           : themeShared // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      themeEditAccess: freezed == themeEditAccess
+          ? _value.themeEditAccess
+          : themeEditAccess // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -578,7 +587,9 @@ abstract class _$$AdditionalDataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'theme_shared', defaultValue: false) bool themeShared});
+      {@JsonKey(name: 'theme_shared', defaultValue: false) bool? themeShared,
+      @JsonKey(name: 'theme_edit_access', defaultValue: false)
+      bool? themeEditAccess});
 }
 
 /// @nodoc
@@ -592,13 +603,18 @@ class __$$AdditionalDataModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeShared = null,
+    Object? themeShared = freezed,
+    Object? themeEditAccess = freezed,
   }) {
     return _then(_$AdditionalDataModelImpl(
-      themeShared: null == themeShared
+      themeShared: freezed == themeShared
           ? _value.themeShared
           : themeShared // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      themeEditAccess: freezed == themeEditAccess
+          ? _value.themeEditAccess
+          : themeEditAccess // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -607,19 +623,23 @@ class __$$AdditionalDataModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AdditionalDataModelImpl implements _AdditionalDataModel {
   const _$AdditionalDataModelImpl(
-      {@JsonKey(name: 'theme_shared', defaultValue: false)
-      required this.themeShared});
+      {@JsonKey(name: 'theme_shared', defaultValue: false) this.themeShared,
+      @JsonKey(name: 'theme_edit_access', defaultValue: false)
+      this.themeEditAccess});
 
   factory _$AdditionalDataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AdditionalDataModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'theme_shared', defaultValue: false)
-  final bool themeShared;
+  final bool? themeShared;
+  @override
+  @JsonKey(name: 'theme_edit_access', defaultValue: false)
+  final bool? themeEditAccess;
 
   @override
   String toString() {
-    return 'AdditionalDataModel(themeShared: $themeShared)';
+    return 'AdditionalDataModel(themeShared: $themeShared, themeEditAccess: $themeEditAccess)';
   }
 
   @override
@@ -628,12 +648,14 @@ class _$AdditionalDataModelImpl implements _AdditionalDataModel {
         (other.runtimeType == runtimeType &&
             other is _$AdditionalDataModelImpl &&
             (identical(other.themeShared, themeShared) ||
-                other.themeShared == themeShared));
+                other.themeShared == themeShared) &&
+            (identical(other.themeEditAccess, themeEditAccess) ||
+                other.themeEditAccess == themeEditAccess));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, themeShared);
+  int get hashCode => Object.hash(runtimeType, themeShared, themeEditAccess);
 
   @JsonKey(ignore: true)
   @override
@@ -653,14 +675,19 @@ class _$AdditionalDataModelImpl implements _AdditionalDataModel {
 abstract class _AdditionalDataModel implements AdditionalDataModel {
   const factory _AdditionalDataModel(
       {@JsonKey(name: 'theme_shared', defaultValue: false)
-      required final bool themeShared}) = _$AdditionalDataModelImpl;
+      final bool? themeShared,
+      @JsonKey(name: 'theme_edit_access', defaultValue: false)
+      final bool? themeEditAccess}) = _$AdditionalDataModelImpl;
 
   factory _AdditionalDataModel.fromJson(Map<String, dynamic> json) =
       _$AdditionalDataModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'theme_shared', defaultValue: false)
-  bool get themeShared;
+  bool? get themeShared;
+  @override
+  @JsonKey(name: 'theme_edit_access', defaultValue: false)
+  bool? get themeEditAccess;
   @override
   @JsonKey(ignore: true)
   _$$AdditionalDataModelImplCopyWith<_$AdditionalDataModelImpl> get copyWith =>

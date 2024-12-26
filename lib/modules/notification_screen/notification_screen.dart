@@ -32,6 +32,14 @@ class NotificationScreen extends GetView<NotificationController> {
                   return NotificationCard(
                     notificationModel: notification,
                     onTap: () => controller.onTapNotification(),
+                    onTapReject: () => controller.onTapReject(
+                      sharingUser: notification.sharedUser ?? '',
+                      themeShareCode: notification.themeShareCode ?? '',
+                    ),
+                    onTapAccept: () => controller.onTapAccept(
+                      sharingUser: notification.sharedUser ?? '',
+                      themeShareCode: notification.themeShareCode ?? '',
+                    ),
                   );
                 },
               ),

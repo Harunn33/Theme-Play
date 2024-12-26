@@ -57,5 +57,6 @@
   "homeShowcaseShareThemeMessage": "Oluşturduğunuz temayı buradan paylaşabilirsiniz",
   "homeShowcaseEditThemeMessage": "Oluşturduğunuz temayı buradan düzenleyebilirsiniz",
   "homeShowcaseDeleteThemeMessage": "Oluşturduğunuz temayı buradan silebilirsiniz",
-  "notifications": "Bildirimler"
+  "notifications": "Bildirimler",
+  "requestedThemeEditAccess": "Temayı düzenleme erişimi talep edildi"
 }

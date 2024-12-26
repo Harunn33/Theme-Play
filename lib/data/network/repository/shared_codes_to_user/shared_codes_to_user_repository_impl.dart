@@ -15,4 +15,10 @@ abstract class ISharedCodesToUserRepository {
     required String shareableCode,
     required String userId,
   });
+
+  Future<void> updateEditAccess({
+    required String sharingUser,
+    required String themeShareCode,
+    required bool themeEditAccess,
+  });
 }

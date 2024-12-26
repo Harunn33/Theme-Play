@@ -15,6 +15,12 @@ final class AppStrings {
   String get themeSharedNotifTitleTr => 'Tema Paylaşıldı';
   String get sharedThemeWithYouNotifSubtitleTr =>
       '@fullName sizinle bir tema paylaştı. İnceleyin! (@themeName)';
+  String get themeEditAccessNotifTitleEn => 'Theme Edit Access';
+  String get themeEditAccessNotifSubtitleEn =>
+      '@fullName requested theme edit access. (@themeName)';
+  String get themeEditAccessNotifTitleTr => 'Tema Düzenleme Erişimi';
+  String get themeEditAccessNotifSubtitleTr =>
+      '@fullName tema erişim izni istedi. (@themeName)';
   // General words
   String get noResultFound => 'noResultFound';
   String get yes => 'yes';
@@ -98,4 +104,5 @@ final class AppStrings {
   String get profileUpdated => 'profileUpdated';
   String get themeCreated => 'themeCreated';
   String get themeShared => 'themeShared';
+  String get requestedThemeEditAccess => 'requestedThemeEditAccess';
 }

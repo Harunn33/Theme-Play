@@ -10,6 +10,8 @@ class NotificationModel with _$NotificationModel {
     required WordTranslation title,
     required WordTranslation content,
     required String type,
+    @JsonKey(name: 'shared_user') String? sharedUser,
+    @JsonKey(name: 'theme_share_code') String? themeShareCode,
     @JsonKey(includeToJson: false, name: 'created_at') String? createdAt,
     @JsonKey(includeToJson: false) String? id,
   }) = _NotificationModel;

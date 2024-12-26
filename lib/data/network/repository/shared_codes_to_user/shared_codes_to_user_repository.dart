@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_play/data/models/index.dart';
+import 'package:theme_play/data/models/shared_codes_to_user/req/edit_access_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/shared/enums/index.dart';
@@ -53,9 +54,9 @@ final class SharedCodesToUserRepository
         tableName: TableName.sharedCodesToUser,
       );
       await baseResp
-          .update({
-            'theme_edit_access': themeEditAccess,
-          })
+          .update(
+            EditAccessModel(themeEditAccess: themeEditAccess).toJson(),
+          )
           .eq(
             FilterByColumn.sharedUser.value,
             sharedUser,
@@ -103,6 +104,33 @@ final class SharedCodesToUserRepository
         .eq(
           FilterByColumn.themeShareCode.value,
           shareableCode,
+        );
+    LoadingStatus.loaded.showLoadingDialog();
+  }
+
+  @override
+  Future<void> updateEditAccess({
+    required String sharingUser,
+    required String themeShareCode,
+    required bool themeEditAccess,
+  }) async {
+    LoadingStatus.loading.showLoadingDialog();
+    final editAccessModel = EditAccessModel(
+      themeEditAccess: themeEditAccess,
+    );
+    final baseResp = await _supabaseService.baseFetchData(
+      tableName: TableName.sharedCodesToUser,
+    );
+
+    await baseResp
+        .update(editAccessModel.toJson())
+        .eq(
+          FilterByColumn.sharingUser.value,
+          sharingUser,
+        )
+        .eq(
+          FilterByColumn.themeShareCode.value,
+          themeShareCode,
         );
     LoadingStatus.loaded.showLoadingDialog();
   }

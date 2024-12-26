@@ -13,6 +13,7 @@ import 'package:theme_play/data/network/repository/shared_codes_to_user/index.da
 import 'package:theme_play/data/network/repository/storage/storage_repository.dart';
 import 'package:theme_play/data/network/repository/themes/themes_repository.dart';
 import 'package:theme_play/data/network/repository/user_themes/user_themes_repository.dart';
+import 'package:theme_play/data/network/services/one_signal/one_signal_service.dart';
 import 'package:theme_play/modules/nav_bar/helpers/nav_bar_helpers.dart';
 import 'package:theme_play/modules/theme/helpers/theme_screen_helpers.dart';
 import 'package:theme_play/routes/app_pages.dart';
@@ -95,6 +96,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onReady() {
     super.onReady();
     initializeShowcase();
+    clickNotification();
+  }
+
+  Future<void> clickNotification() async {
+    await OneSignalService.instance.addClickNotification();
   }
 
   void navigateToNotificationScreen() {
@@ -175,7 +181,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }) {
     Get.back();
     if (!hasEditAccess) {
-      return ThemeScreenHelpers.instance.editThemeAccessControlDialog(context);
+      return ThemeScreenHelpers.instance.editThemeAccessControlDialog(
+        context,
+        createdBy: userTheme.createdBy,
+        themeName: userTheme.name,
+      );
     }
     Get.toNamed(
       Routes.editTheme,

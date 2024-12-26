@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:theme_play/data/models/notification/notification_model.dart';
 import 'package:theme_play/data/network/repository/notifications/notifications_repository.dart';
+import 'package:theme_play/data/network/repository/shared_codes_to_user/index.dart';
 import 'package:theme_play/modules/home/home_controller.dart';
 import 'package:theme_play/shared/constants/index.dart';
 import 'package:theme_play/shared/helpers/language_helpers.dart';
@@ -30,5 +31,29 @@ final class NotificationController extends GetxController {
     Get.back();
     final homeController = Get.find<HomeController>();
     homeController.tabController.animateTo(1);
+  }
+
+  Future<void> onTapReject({
+    required String sharingUser,
+    required String themeShareCode,
+  }) async {
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    await sharedCodesToUserRepository.updateEditAccess(
+      sharingUser: sharingUser,
+      themeShareCode: themeShareCode,
+      themeEditAccess: false,
+    );
+  }
+
+  Future<void> onTapAccept({
+    required String sharingUser,
+    required String themeShareCode,
+  }) async {
+    final sharedCodesToUserRepository = SharedCodesToUserRepository.instance;
+    await sharedCodesToUserRepository.updateEditAccess(
+      sharingUser: sharingUser,
+      themeShareCode: themeShareCode,
+      themeEditAccess: true,
+    );
   }
 }

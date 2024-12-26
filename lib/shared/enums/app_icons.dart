@@ -12,7 +12,9 @@ enum AppIcons {
   icCopy('ic_copy'),
   icShare('ic_share'),
   icError('ic_error'),
-  icAvatar('ic_avatar');
+  icAvatar('ic_avatar'),
+  icAccept('ic_accept'),
+  icReject('ic_reject');
 
   const AppIcons(this.value);
   final String value;
