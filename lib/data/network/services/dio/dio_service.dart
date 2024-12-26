@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
 import 'package:theme_play/shared/extensions/snackbar_ext.dart';
 
 part 'dio_service_impl.dart';
@@ -49,6 +50,8 @@ final class DioService implements IDioService {
         message: e.toString(),
       );
       rethrow;
+    } finally {
+      LoadingStatus.loaded.showLoadingDialog();
     }
   }
 }

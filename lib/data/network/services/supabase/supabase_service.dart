@@ -4,10 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/enums/index.dart';
-import 'package:theme_play/shared/enums/local_storage_keys.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 
 part 'supabase_service_impl.dart';
@@ -373,11 +371,6 @@ final class SupabaseService implements ISupabaseService {
     if (accessToken == null) {
       throw Exception('No access token found.');
     }
-
-    LocalStorageService.instance.saveData(
-      LocalStorageKeys.profilePhoto.name,
-      googleUser.photoUrl,
-    );
 
     return {
       'accessToken': accessToken,

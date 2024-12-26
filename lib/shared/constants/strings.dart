@@ -9,6 +9,13 @@ final class AppStrings {
   String get appVersion => '1.0.0';
   String get english => 'English';
   String get turkish => 'Türkçe';
+  String get themeSharedNotifTitleEn => 'Theme Shared';
+  String get sharedThemeWithYouNotifSubtitleEn =>
+      '@fullName shared a theme with you. Check it out! (@themeName)';
+  String get themeSharedNotifTitleTr => 'Tema Paylaşıldı';
+  String get sharedThemeWithYouNotifSubtitleTr =>
+      '@fullName sizinle bir tema paylaştı. İnceleyin! (@themeName)';
+  // General words
   String get noResultFound => 'noResultFound';
   String get yes => 'yes';
   String get no => 'no';

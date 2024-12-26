@@ -26,7 +26,7 @@ class LocalStorageService implements ILocalStorageService {
   @override
   T? retrieveData<T>(String key) {
     final data = _storage.read(key);
-    return data as T;
+    return data as T?;
   }
 
   @override

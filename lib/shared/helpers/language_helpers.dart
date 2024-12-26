@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:theme_play/data/local/local_storage/local_storage_service.dart';
+import 'package:theme_play/data/models/notification/index.dart';
 import 'package:theme_play/shared/constants/langs.dart';
 import 'package:theme_play/shared/enums/local_storage_keys.dart';
 
@@ -55,9 +56,9 @@ final class LanguageHelpers {
   String get currentCountryCode => _getCurrentCountryCode();
 
   String convertedCurrentLang({
-    required Map<String, dynamic> texts,
+    required WordTranslation texts,
   }) {
     final currentLanguage = _getCurrentLanguageCode();
-    return texts[currentLanguage].toString();
+    return currentLanguage == 'en' ? texts.en : texts.tr;
   }
 }

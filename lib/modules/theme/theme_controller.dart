@@ -15,9 +15,9 @@ class ThemeController extends GetxController {
 
   late final bool hasEditAccess = arguments['has_edit_access'];
 
-  final ConstantsInstances constants = ConstantsInstances.instance;
+  final constants = ConstantsInstances.instance;
 
-  final LanguageHelpers languageHelpers = LanguageHelpers.instance;
+  final languageHelpers = LanguageHelpers.instance;
 
   Future<void> navigateToEditThemeScreen(BuildContext context) async {
     if (!hasEditAccess) {

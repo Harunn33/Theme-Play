@@ -25,7 +25,7 @@ mixin _$ThemeModel {
   String get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   String get updatedAt => throw _privateConstructorUsedError;
-  Map<String, String> get type => throw _privateConstructorUsedError;
+  WordTranslation get type => throw _privateConstructorUsedError;
   ThemeStyleModel get style => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,9 +44,10 @@ abstract class $ThemeModelCopyWith<$Res> {
       {String id,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      Map<String, String> type,
+      WordTranslation type,
       ThemeStyleModel style});
 
+  $WordTranslationCopyWith<$Res> get type;
   $ThemeStyleModelCopyWith<$Res> get style;
 }
 
@@ -85,12 +86,20 @@ class _$ThemeModelCopyWithImpl<$Res, $Val extends ThemeModel>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
               as ThemeStyleModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WordTranslationCopyWith<$Res> get type {
+    return $WordTranslationCopyWith<$Res>(_value.type, (value) {
+      return _then(_value.copyWith(type: value) as $Val);
+    });
   }
 
   @override
@@ -114,9 +123,11 @@ abstract class _$$ThemeModelImplCopyWith<$Res>
       {String id,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      Map<String, String> type,
+      WordTranslation type,
       ThemeStyleModel style});
 
+  @override
+  $WordTranslationCopyWith<$Res> get type;
   @override
   $ThemeStyleModelCopyWith<$Res> get style;
 }
@@ -152,9 +163,9 @@ class __$$ThemeModelImplCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
-          ? _value._type
+          ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       style: null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
@@ -170,9 +181,8 @@ class _$ThemeModelImpl implements _ThemeModel {
       {required this.id,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
-      required final Map<String, String> type,
-      required this.style})
-      : _type = type;
+      required this.type,
+      required this.style});
 
   factory _$ThemeModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ThemeModelImplFromJson(json);
@@ -185,14 +195,8 @@ class _$ThemeModelImpl implements _ThemeModel {
   @override
   @JsonKey(name: 'updated_at')
   final String updatedAt;
-  final Map<String, String> _type;
   @override
-  Map<String, String> get type {
-    if (_type is EqualUnmodifiableMapView) return _type;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_type);
-  }
-
+  final WordTranslation type;
   @override
   final ThemeStyleModel style;
 
@@ -211,14 +215,14 @@ class _$ThemeModelImpl implements _ThemeModel {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other._type, _type) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.style, style) || other.style == style));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, updatedAt,
-      const DeepCollectionEquality().hash(_type), style);
+  int get hashCode =>
+      Object.hash(runtimeType, id, createdAt, updatedAt, type, style);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +243,7 @@ abstract class _ThemeModel implements ThemeModel {
       {required final String id,
       @JsonKey(name: 'created_at') required final String createdAt,
       @JsonKey(name: 'updated_at') required final String updatedAt,
-      required final Map<String, String> type,
+      required final WordTranslation type,
       required final ThemeStyleModel style}) = _$ThemeModelImpl;
 
   factory _ThemeModel.fromJson(Map<String, dynamic> json) =
@@ -254,7 +258,7 @@ abstract class _ThemeModel implements ThemeModel {
   @JsonKey(name: 'updated_at')
   String get updatedAt;
   @override
-  Map<String, String> get type;
+  WordTranslation get type;
   @override
   ThemeStyleModel get style;
   @override

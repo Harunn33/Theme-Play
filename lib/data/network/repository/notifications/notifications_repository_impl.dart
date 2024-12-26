@@ -6,5 +6,6 @@ abstract class INotificationsRepository {
   /// Send notification
   Future<void> sendNotificationByUserId({
     required String userId,
+    required String themeName,
   });
 }

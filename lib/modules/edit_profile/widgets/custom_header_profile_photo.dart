@@ -3,7 +3,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/modules/edit_profile/edit_profile_controller.dart';
-import 'package:theme_play/shared/enums/local_storage_keys.dart';
+import 'package:theme_play/shared/enums/app_icons.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
 
 class CustomHeaderProfilePhoto extends StatelessWidget {
@@ -26,8 +26,11 @@ class CustomHeaderProfilePhoto extends StatelessWidget {
               url: controller.profilePhotoUrl.value,
               width: 150,
               height: 150,
-              errorDefaultImage: controller.localStorageService.retrieveData(
-                LocalStorageKeys.profilePhoto.name,
+              errorWidget: Padding(
+                padding: controller.constants.paddings.all * 3,
+                child: AppIcons.icAvatar.svgWithAttiributes(
+                  color: controller.constants.colors.millionGrey,
+                ),
               ),
             ),
           ),

@@ -1,12 +1,14 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:theme_play/data/models/notification/index.dart';
 import 'package:theme_play/data/models/notification/notification_model.dart';
+import 'package:theme_play/data/models/string_fill_parameter/string_fill_parameter_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/dio/dio_service.dart';
 import 'package:theme_play/data/network/services/supabase/index.dart';
 import 'package:theme_play/modules/notification_screen/enum/notification_type.dart';
+import 'package:theme_play/shared/constants/strings.dart';
 import 'package:theme_play/shared/enums/index.dart';
-import 'package:theme_play/shared/extensions/loading_dialog_ext.dart';
+import 'package:theme_play/shared/extensions/string_ext.dart';
 
 part 'notifications_repository_impl.dart';
 
@@ -37,50 +39,57 @@ final class NotificationsRepository implements INotificationsRepository {
   @override
   Future<void> sendNotificationByUserId({
     required String userId,
+    required String themeName,
   }) async {
-    try {
-      final dioService = DioService.instance;
-      final profileRepository = ProfileRepository.instance;
-      final user = await profileRepository.getProfile();
-      if (user == null) return;
-      final fullName = user.userMetadata?['full_name'];
-      final notification = NotificationModel(
-        title: {
-          'en': 'Theme Shared',
-          'tr': 'Tema Paylaşıldı',
+    final dioService = DioService.instance;
+    final profileRepository = ProfileRepository.instance;
+    final user = await profileRepository.getProfile();
+    if (user == null) return;
+    final fullName = user.userMetadata?['full_name'].toString();
+    final notification = NotificationModel(
+      title: WordTranslation(
+        en: AppStrings.instance.themeSharedNotifTitleEn,
+        tr: AppStrings.instance.themeSharedNotifTitleTr,
+      ),
+      content: WordTranslation(
+        en: AppStrings.instance.sharedThemeWithYouNotifSubtitleEn
+            .fillPlaceholders(
+          model: StringFillParameterModel(
+            fullName: fullName,
+            themeName: themeName,
+          ),
+        ),
+        tr: AppStrings.instance.sharedThemeWithYouNotifSubtitleTr
+            .fillPlaceholders(
+          model: StringFillParameterModel(
+            fullName: fullName,
+            themeName: themeName,
+          ),
+        ),
+      ),
+      createdBy: userId,
+      type: NotificationType.themeShared.value,
+    );
+    await _createNotification(notification: notification);
+    await dioService.post(
+      dotenv.env['SEND_NOTIFICATIONS_PATH'].toString(),
+      data: {
+        'app_id': dotenv.env['ONESIGNAL_APP_ID'].toString(),
+        'target_channel': 'push',
+        'headings': notification.title,
+        'contents': notification.content,
+        'data': {
+          'theme_shared': true,
         },
-        content: {
-          'en': '$fullName shared a theme with you. Check it out!',
-          'tr': '$fullName sizinle bir tema paylaştı. İnceleyin!',
-        },
-        createdBy: userId,
-        type: NotificationType.themeShared.value,
-      );
-      await _createNotification(notification: notification);
-      await dioService.post(
-        dotenv.env['SEND_NOTIFICATIONS_PATH'].toString(),
-        data: {
-          'app_id': dotenv.env['ONESIGNAL_APP_ID'].toString(),
-          'target_channel': 'push',
-          'headings': notification.title,
-          'contents': notification.content,
-          'data': {
-            'theme_shared': true,
+        'filters': [
+          {
+            'field': 'tag',
+            'key': 'user_id',
+            'relation': '=',
+            'value': userId,
           },
-          'filters': [
-            {
-              'field': 'tag',
-              'key': 'user_id',
-              'relation': '=',
-              'value': userId,
-            },
-          ],
-        },
-      );
-    } catch (e) {
-      rethrow;
-    } finally {
-      LoadingStatus.loaded.showLoadingDialog();
-    }
+        ],
+      },
+    );
   }
 }

@@ -10,8 +10,9 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$NotificationModelImpl(
       createdBy: json['created_by'] as String,
-      title: Map<String, String>.from(json['title'] as Map),
-      content: Map<String, String>.from(json['content'] as Map),
+      title: WordTranslation.fromJson(json['title'] as Map<String, dynamic>),
+      content:
+          WordTranslation.fromJson(json['content'] as Map<String, dynamic>),
       type: json['type'] as String,
       createdAt: json['created_at'] as String?,
       id: json['id'] as String?,
@@ -24,4 +25,18 @@ Map<String, dynamic> _$$NotificationModelImplToJson(
       'title': instance.title,
       'content': instance.content,
       'type': instance.type,
+    };
+
+_$WordTranslationImpl _$$WordTranslationImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WordTranslationImpl(
+      en: json['en'] as String,
+      tr: json['tr'] as String,
+    );
+
+Map<String, dynamic> _$$WordTranslationImplToJson(
+        _$WordTranslationImpl instance) =>
+    <String, dynamic>{
+      'en': instance.en,
+      'tr': instance.tr,
     };

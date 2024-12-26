@@ -3,10 +3,8 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:theme_play/data/local/index.dart';
 import 'package:theme_play/shared/constants/colors.dart';
 import 'package:theme_play/shared/enums/index.dart';
-import 'package:theme_play/shared/enums/local_storage_keys.dart';
 import 'package:theme_play/shared/extensions/border_radius_ext.dart';
 import 'package:theme_play/shared/extensions/index.dart';
 import 'package:theme_play/shared/widgets/network_image/custom_cached_network_image.dart';
@@ -39,8 +37,8 @@ class CustomAccountHeader extends StatelessWidget {
         () => CustomCachedNetworkImage(
           url: profilePhotoUrl.value,
           width: 50,
-          errorDefaultImage: LocalStorageService.instance.retrieveData(
-            LocalStorageKeys.profilePhoto.name,
+          errorWidget: AppIcons.icAvatar.svgWithAttiributes(
+            color: appColors.millionGrey,
           ),
         ),
       ),

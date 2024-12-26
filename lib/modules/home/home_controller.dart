@@ -63,7 +63,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final GlobalKey<FormState> shareThemeFormKey = GlobalKey<FormState>();
   final RxBool isEditAccess = false.obs;
 
-  final RxList<bool> hasEditAccessList = <bool>[].obs;
+  final hasEditAccessList = <bool>[].obs;
 
   @override
   void onInit() {
@@ -238,6 +238,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
             onTap: () => onTapShareTheme(
               context,
               shareableCode: userTheme.shareableCode,
+              themeName: userTheme.name,
             ),
             icon: AppIcons.icShare,
             title: constants.strings.shareTheme.tr,
@@ -272,6 +273,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onTapShareTheme(
     BuildContext context, {
     required String shareableCode,
+    required String themeName,
   }) {
     Get.back();
     userIdTextEditingController.clear();
@@ -331,6 +333,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
                 text: constants.strings.save.tr,
                 onTap: () => handleShareTheme(
                   shareableCode: shareableCode,
+                  themeName: themeName,
                 ),
               ),
             ],
@@ -355,6 +358,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   Future<void> handleShareTheme({
     required String shareableCode,
+    required String themeName,
   }) async {
     if (!shareThemeFormKey.currentState!.validate()) return;
     LoadingStatus.loading.showLoadingDialog();
@@ -373,6 +377,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     final notificationsRepository = NotificationsRepository.instance;
     await notificationsRepository.sendNotificationByUserId(
       userId: decodedUID,
+      themeName: themeName,
     );
     await sharedCodesToUserRepository.addSharedCodes(
       sharedUser: decodedUID,

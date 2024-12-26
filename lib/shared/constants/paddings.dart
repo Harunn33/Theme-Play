@@ -8,4 +8,5 @@ final class AppPaddings {
 
   EdgeInsets get horizontal => 12.padHorizontal;
   EdgeInsets get vertical => 8.padVertical;
+  EdgeInsets get all => 12.padAll;
 }

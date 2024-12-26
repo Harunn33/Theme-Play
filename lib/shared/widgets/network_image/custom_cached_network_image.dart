@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:theme_play/shared/constants/colors.dart';
+import 'package:theme_play/shared/enums/index.dart';
 
 class CustomCachedNetworkImage extends StatelessWidget {
   const CustomCachedNetworkImage({
@@ -10,7 +11,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
     super.key,
     this.height,
     this.shape = BoxShape.circle,
-    this.errorDefaultImage,
+    this.errorWidget,
     this.fit = BoxFit.cover,
     this.borderRadius,
   });
@@ -18,7 +19,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final double width;
   final double? height;
   final BoxShape shape;
-  final String? errorDefaultImage;
+  final Widget? errorWidget;
   final BoxFit? fit;
   final BorderRadius? borderRadius;
 
@@ -42,24 +43,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) {
-        return CachedNetworkImage(
-          width: width.w,
-          height: height?.h,
-          imageBuilder: (context, imageProvider) {
-            return Container(
-              width: width.w,
-              height: height?.h,
-              decoration: BoxDecoration(
-                shape: shape,
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            );
-          },
-          imageUrl: errorDefaultImage ?? '',
-        );
+        return errorWidget ?? AppIcons.icError.svg;
       },
       progressIndicatorBuilder: (context, url, progress) {
         return Center(

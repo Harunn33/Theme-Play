@@ -11,7 +11,7 @@ _$ThemeModelImpl _$$ThemeModelImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
-      type: Map<String, String>.from(json['type'] as Map),
+      type: WordTranslation.fromJson(json['type'] as Map<String, dynamic>),
       style: ThemeStyleModel.fromJson(json['style'] as Map<String, dynamic>),
     );
 

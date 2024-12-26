@@ -10,7 +10,7 @@ final class ThemeScreenHelpers {
 
   static final ThemeScreenHelpers instance = ThemeScreenHelpers._();
 
-  final ConstantsInstances _constants = ConstantsInstances.instance;
+  final _constants = ConstantsInstances.instance;
 
   void editThemeAccessControlDialog(BuildContext context) {
     context.showDialog(

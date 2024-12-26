@@ -22,8 +22,8 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
 mixin _$NotificationModel {
   @JsonKey(name: 'created_by')
   String get createdBy => throw _privateConstructorUsedError;
-  Map<String, String> get title => throw _privateConstructorUsedError;
-  Map<String, String> get content => throw _privateConstructorUsedError;
+  WordTranslation get title => throw _privateConstructorUsedError;
+  WordTranslation get content => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, name: 'created_at')
   String? get createdAt => throw _privateConstructorUsedError;
@@ -44,11 +44,14 @@ abstract class $NotificationModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'created_by') String createdBy,
-      Map<String, String> title,
-      Map<String, String> content,
+      WordTranslation title,
+      WordTranslation content,
       String type,
       @JsonKey(includeToJson: false, name: 'created_at') String? createdAt,
       @JsonKey(includeToJson: false) String? id});
+
+  $WordTranslationCopyWith<$Res> get title;
+  $WordTranslationCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -79,11 +82,11 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -98,6 +101,22 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
               as String?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WordTranslationCopyWith<$Res> get title {
+    return $WordTranslationCopyWith<$Res>(_value.title, (value) {
+      return _then(_value.copyWith(title: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WordTranslationCopyWith<$Res> get content {
+    return $WordTranslationCopyWith<$Res>(_value.content, (value) {
+      return _then(_value.copyWith(content: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -110,11 +129,16 @@ abstract class _$$NotificationModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'created_by') String createdBy,
-      Map<String, String> title,
-      Map<String, String> content,
+      WordTranslation title,
+      WordTranslation content,
       String type,
       @JsonKey(includeToJson: false, name: 'created_at') String? createdAt,
       @JsonKey(includeToJson: false) String? id});
+
+  @override
+  $WordTranslationCopyWith<$Res> get title;
+  @override
+  $WordTranslationCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -141,13 +165,13 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
           : createdBy // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
-          ? _value._title
+          ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       content: null == content
-          ? _value._content
+          ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as WordTranslation,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -169,13 +193,11 @@ class __$$NotificationModelImplCopyWithImpl<$Res>
 class _$NotificationModelImpl implements _NotificationModel {
   const _$NotificationModelImpl(
       {@JsonKey(name: 'created_by') required this.createdBy,
-      required final Map<String, String> title,
-      required final Map<String, String> content,
+      required this.title,
+      required this.content,
       required this.type,
       @JsonKey(includeToJson: false, name: 'created_at') this.createdAt,
-      @JsonKey(includeToJson: false) this.id})
-      : _title = title,
-        _content = content;
+      @JsonKey(includeToJson: false) this.id});
 
   factory _$NotificationModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationModelImplFromJson(json);
@@ -183,22 +205,10 @@ class _$NotificationModelImpl implements _NotificationModel {
   @override
   @JsonKey(name: 'created_by')
   final String createdBy;
-  final Map<String, String> _title;
   @override
-  Map<String, String> get title {
-    if (_title is EqualUnmodifiableMapView) return _title;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_title);
-  }
-
-  final Map<String, String> _content;
+  final WordTranslation title;
   @override
-  Map<String, String> get content {
-    if (_content is EqualUnmodifiableMapView) return _content;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_content);
-  }
-
+  final WordTranslation content;
   @override
   final String type;
   @override
@@ -220,8 +230,8 @@ class _$NotificationModelImpl implements _NotificationModel {
             other is _$NotificationModelImpl &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
-            const DeepCollectionEquality().equals(other._title, _title) &&
-            const DeepCollectionEquality().equals(other._content, _content) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -230,14 +240,8 @@ class _$NotificationModelImpl implements _NotificationModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      createdBy,
-      const DeepCollectionEquality().hash(_title),
-      const DeepCollectionEquality().hash(_content),
-      type,
-      createdAt,
-      id);
+  int get hashCode =>
+      Object.hash(runtimeType, createdBy, title, content, type, createdAt, id);
 
   @JsonKey(ignore: true)
   @override
@@ -257,8 +261,8 @@ class _$NotificationModelImpl implements _NotificationModel {
 abstract class _NotificationModel implements NotificationModel {
   const factory _NotificationModel(
           {@JsonKey(name: 'created_by') required final String createdBy,
-          required final Map<String, String> title,
-          required final Map<String, String> content,
+          required final WordTranslation title,
+          required final WordTranslation content,
           required final String type,
           @JsonKey(includeToJson: false, name: 'created_at')
           final String? createdAt,
@@ -272,9 +276,9 @@ abstract class _NotificationModel implements NotificationModel {
   @JsonKey(name: 'created_by')
   String get createdBy;
   @override
-  Map<String, String> get title;
+  WordTranslation get title;
   @override
-  Map<String, String> get content;
+  WordTranslation get content;
   @override
   String get type;
   @override
@@ -286,5 +290,160 @@ abstract class _NotificationModel implements NotificationModel {
   @override
   @JsonKey(ignore: true)
   _$$NotificationModelImplCopyWith<_$NotificationModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WordTranslation _$WordTranslationFromJson(Map<String, dynamic> json) {
+  return _WordTranslation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WordTranslation {
+  String get en => throw _privateConstructorUsedError;
+  String get tr => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WordTranslationCopyWith<WordTranslation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WordTranslationCopyWith<$Res> {
+  factory $WordTranslationCopyWith(
+          WordTranslation value, $Res Function(WordTranslation) then) =
+      _$WordTranslationCopyWithImpl<$Res, WordTranslation>;
+  @useResult
+  $Res call({String en, String tr});
+}
+
+/// @nodoc
+class _$WordTranslationCopyWithImpl<$Res, $Val extends WordTranslation>
+    implements $WordTranslationCopyWith<$Res> {
+  _$WordTranslationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = null,
+    Object? tr = null,
+  }) {
+    return _then(_value.copyWith(
+      en: null == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String,
+      tr: null == tr
+          ? _value.tr
+          : tr // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WordTranslationImplCopyWith<$Res>
+    implements $WordTranslationCopyWith<$Res> {
+  factory _$$WordTranslationImplCopyWith(_$WordTranslationImpl value,
+          $Res Function(_$WordTranslationImpl) then) =
+      __$$WordTranslationImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String en, String tr});
+}
+
+/// @nodoc
+class __$$WordTranslationImplCopyWithImpl<$Res>
+    extends _$WordTranslationCopyWithImpl<$Res, _$WordTranslationImpl>
+    implements _$$WordTranslationImplCopyWith<$Res> {
+  __$$WordTranslationImplCopyWithImpl(
+      _$WordTranslationImpl _value, $Res Function(_$WordTranslationImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = null,
+    Object? tr = null,
+  }) {
+    return _then(_$WordTranslationImpl(
+      en: null == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String,
+      tr: null == tr
+          ? _value.tr
+          : tr // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WordTranslationImpl implements _WordTranslation {
+  const _$WordTranslationImpl({required this.en, required this.tr});
+
+  factory _$WordTranslationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WordTranslationImplFromJson(json);
+
+  @override
+  final String en;
+  @override
+  final String tr;
+
+  @override
+  String toString() {
+    return 'WordTranslation(en: $en, tr: $tr)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WordTranslationImpl &&
+            (identical(other.en, en) || other.en == en) &&
+            (identical(other.tr, tr) || other.tr == tr));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, en, tr);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WordTranslationImplCopyWith<_$WordTranslationImpl> get copyWith =>
+      __$$WordTranslationImplCopyWithImpl<_$WordTranslationImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WordTranslationImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WordTranslation implements WordTranslation {
+  const factory _WordTranslation(
+      {required final String en,
+      required final String tr}) = _$WordTranslationImpl;
+
+  factory _WordTranslation.fromJson(Map<String, dynamic> json) =
+      _$WordTranslationImpl.fromJson;
+
+  @override
+  String get en;
+  @override
+  String get tr;
+  @override
+  @JsonKey(ignore: true)
+  _$$WordTranslationImplCopyWith<_$WordTranslationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
