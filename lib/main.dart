@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:theme_play/base/connection/connection_binding.dart';
 import 'package:theme_play/controllers/localization_controller.dart';
+import 'package:theme_play/data/network/services/sentry/sentry_service.dart';
 import 'package:theme_play/init/di.dart';
 import 'package:theme_play/routes/app_pages.dart';
 import 'package:theme_play/shared/constants/app_translations.dart';
@@ -12,7 +13,11 @@ import 'package:theme_play/shared/themes/themes.dart';
 
 void main() async {
   await DependencyInjection.instance.init();
-  runApp(const MyApp());
+  await SentryService.instance.initializeSentry(
+    appRunner: () => runApp(
+      const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

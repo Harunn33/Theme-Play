@@ -47,6 +47,8 @@ dependencies:
   onesignal_flutter: ^5.2.7
   # Network
   dio: ^5.7.0
+  # Error Tracking
+  sentry_flutter: ^8.12.0
 
 dev_dependencies:
   flutter_test:

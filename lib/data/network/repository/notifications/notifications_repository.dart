@@ -1,6 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:theme_play/data/models/notification/index.dart';
 import 'package:theme_play/data/models/notification/notification_model.dart';
+import 'package:theme_play/data/models/notification/req/create_notification_model.dart';
 import 'package:theme_play/data/models/string_fill_parameter/string_fill_parameter_model.dart';
 import 'package:theme_play/data/network/repository/profile/profile_repository.dart';
 import 'package:theme_play/data/network/services/dio/dio_service.dart';
@@ -70,26 +71,27 @@ final class NotificationsRepository implements INotificationsRepository {
       createdBy: userId,
       type: NotificationType.themeShared.value,
     );
+    final createNotifModel = CreateNotificationModel(
+      data: const AdditionalDataModel(
+        themeShared: true,
+      ),
+      appId: dotenv.env['ONESIGNAL_APP_ID'].toString(),
+      headings: notification.title,
+      contents: notification.content,
+      filters: [
+        NotifFiltersParametersItemModel(
+          field: 'tag',
+          key: 'user_id',
+          relation: '=',
+          value: userId,
+        ),
+      ],
+      targetChannels: 'push',
+    );
     await _createNotification(notification: notification);
     await dioService.post(
       dotenv.env['SEND_NOTIFICATIONS_PATH'].toString(),
-      data: {
-        'app_id': dotenv.env['ONESIGNAL_APP_ID'].toString(),
-        'target_channel': 'push',
-        'headings': notification.title,
-        'contents': notification.content,
-        'data': {
-          'theme_shared': true,
-        },
-        'filters': [
-          {
-            'field': 'tag',
-            'key': 'user_id',
-            'relation': '=',
-            'value': userId,
-          },
-        ],
-      },
+      data: createNotifModel.toJson(),
     );
   }
 }
